@@ -1,0 +1,129 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/home-page.css">
+
+<body class="main-page">
+    <div class="custom">
+        <img src="~/images/logo-stack.png" alt="Loading..." class="logo" />
+        <img src="~/images/main-page.png" class="centered-image"/>
+        <span class="title">MONOPOLY</span>
+        <div class="buttons">
+            <button class="bottom-button"><a href='/Home/Game'>Join Public Room</a></button>
+            <button class="bottom-button">Join Private Room</button>
+            <button class="bottom-button">Create Private Room</button>
+        </div>
+        <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse profile-button">
+            <partial name="../Shared/_LoginPartial.cshtml"/>
+        </div>
+        <button class="rules-button" onclick="openPopup()">Rules</button>
+    </div>
+
+@*Rules modal*@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalRules">
+    <div class="modal-dialog modal-md" style="max-width: 1000px">
+        <div class="modal-content" style="background-color: #52755F; max-height: calc(100vh - 210px); overflow-y: auto;">
+            <div class="modal-header" style="justify-content: center">
+                <h2 class="modal-title rules-text" style="color: #F5CD6C;">Monopoly rules</h2>
+            </div>
+            <div style="margin:10px" class="text-center">
+                <h4 class="rules-text">Game start</h4>
+                <div class="subrules">
+                    Each player starts the Game with 2000$.
+                </div>
+                <div class="subrules">
+                    Each time you pass through or over the "GO" card, you will receive 200$.
+                </div>
+                <div class="subrules">
+                    If a player rolls a double, he has the right to roll again.
+                    If he rolls a double for three times in a round, the third one is unavailable and the player will go to Jail.
+                </div>
+                <br>
+
+                <h4 class="rules-text">Arrival on unbought street</h4>
+                <div class="subrules">
+                    When a player lands on a street that is unbought he has the posibility to buy the street at the price that is displayed on the card.
+                </div>
+                <br>
+
+                <h4 class="rules-text">Arrival on bought street</h4>
+                <div class="subrules">
+                    When a player lands on a bought street he will pay the rent for that property.
+                </div>
+                <div class="subrules">
+                    The rent is going to double when a player will have a complete color group (a neighborhood).
+                </div>
+                <br>
+
+                <h4 class="rules-text">Jail</h4>
+                <div class="subrules">
+                    A player goes to Jail when he arrive on the "GO TO JAIL" card or when he rolls a double for three times in a row.
+                </div>
+                <div class="subrules">
+                    The player can roll the dice even if he is in Jail, but he is going to use them only when:
+                    <ul>
+                        <li>He already stayed for two rounds.</li>
+                        <li>By paying 20$ if he rolls doubles.</li>
+                        <li>By paying 50$ otherwise.</li>
+                    </ul>
+                </div>
+                <div class="subrules">
+                    A player can make trasactions, collect rents even though he is in Jail.
+                </div>
+                <br>
+
+                <h4 class="rules-text">Buildings</h4>
+                <div class="subrules">
+                    They can be made only on a neighborhood.
+                </div>
+                <br>
+                
+                <h4 class="rules-text">Selling a property</h4>
+                <div class="subrules">
+                    The unbuilt lands, airports, stations and factories can be sold to a player by negociations.
+                </div>
+                <div class="subrules">
+                    The buildings can be sold only to the bank, at half the purchase price.
+                </div>
+                <br>
+
+                <h4 class="rules-text">Mortage</h4>
+                <div class="subrules">
+                    They are made by the bank. The value of the mortage is half the price of the street.
+                </div>
+                <br>
+
+                <h4 class="rules-text">Banckrupcity</h4>
+                <div class="subrules">
+                    A player that can't pay the rent to another player is going to gave in all his properties to the second player and to lose the game.
+                </div>
+                <br>
+
+                <h4 class="rules-text">Winner</h4>
+                <div class="subrules">
+                    When the players are going in banckrupcity, the winner is the one who remains last.
+                </div>
+            </div>
+
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-rules-button" onclick="closePopup()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    function openPopup()
+    {
+        $('#modalRules').modal('show');
+    }
+
+    function closePopup()
+    {
+        $('#modalRules').modal('hide');
+    }
+
+</script>

@@ -1,0 +1,117 @@
+.game-body{
+    background-color: #9BC0AF;
+
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.board{
+    background-color: white;
+
+    height: 98vh;
+    width: 98vh;
+    margin: 1vh;
+}
+
+.top-line{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.bottom-line{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 1vh;
+}
+
+.left-line{
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.right-line{
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.sides{
+    background-color: #9BC0AF;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.top-image{
+    width: 8vh;
+    height: 13vh;
+}
+
+.square-image{
+    width: 13vh;
+    height: 13vh;
+}
+
+.left-image{
+    height: 8vh;
+    width: 13vh;
+}
+
+.card-modal-dialog{
+    max-width: 1000px
+}
+
+.card-modal-content{
+    background-color: #52755F;
+}
+
+.card-modal-title{
+    color: #EBDECB; 
+    font-weight: bold; 
+    text-decoration: underline;
+}
+
+.card-modal-subtitle{
+    color: #EBDECB; 
+    font-weight: bold;
+}
+
+.close-card-button{
+    color: #EBDECB;
+    border-color: #EBDECB;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.close-card-button:hover{
+    color: #52755F;
+    border-color: #52755F;
+    background-color: #EBDECB;
+    font-weight: bold;
+    font-size: x-large;
+}

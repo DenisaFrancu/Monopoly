@@ -1,0 +1,34 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+@inject UserManager<MonopolyUser> UserManager
+
+<h2 class="manage-item-title">Your personal data</h2>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">           
+        <div class="form-group">
+            <label class="manage-label">First Name</label>
+            <div class="form-control" disabled>@UserManager.GetUserAsync(User).Result.FirstName</div>
+        </div>
+        <div class="form-group">
+            <label class="manage-label">Last Name</label>
+            <div class="form-control" disabled>@UserManager.GetUserAsync(User).Result.LastName</div>
+        </div>
+        <div class="form-group">
+            <label class="manage-label">Mail</label>
+            <div class="form-control" disabled>@UserManager.GetUserAsync(User).Result.UserName</div>
+        </div>
+        <p>
+            <a id="delete" asp-page="DeletePersonalData" class="btn confirm-button">Delete account</a>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

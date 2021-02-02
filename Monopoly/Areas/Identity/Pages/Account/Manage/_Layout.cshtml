@@ -1,0 +1,38 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/my-profile.css" />
+</head>
+
+<div class="my-profile-background">
+    <header class="navbar navbar-expand-sm navbar-dark border-bottom box-shadow mb-3 my-profile-header">
+        <a id="delete" href="/" class="btn back-button">Back</a>
+        <h1 class="manage-title">Manage your account</h1>
+        <hr />
+    </header>
+    <div>
+        <div class="manage-options">
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

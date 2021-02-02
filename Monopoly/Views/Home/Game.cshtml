@@ -1,0 +1,106 @@
+@{
+    ViewData["Title"] = "Monopoly";
+}
+
+<link rel="stylesheet" href="~/css/game-page.css">
+
+<div class="game-body">
+    <div class="board">
+        <div class="top-line">
+            <img src="~/images/Board/FreePark.png" class="square-image"/>
+            <img src="~/images/Board/KentuckyAvenue.png" class="top-image" onclick="cardClick('Kentucky Avenue', 'Cost: 220$', '/images/Payments/KentuckyAvenue.png')"/>
+            <img src="~/images/Board/TouristTax.png" class="top-image"/>
+            <img src="~/images/Board/IndianaAvenue.png" class="top-image" onclick="cardClick('Indiana Avenue', 'Cost: 220$', '/images/Payments/IndianaAvenue.png')"/>
+            <img src="~/images/Board/IllinoisAvenue.png" class="top-image" onclick="cardClick('Illinois Avenue', 'Cost: 240$', '/images/Payments/IllinoisAvenue.png')"/>
+            <img src="~/images/Board/B&ORailroad.png" class="top-image" onclick="cardClick('B&O Railroad', 'Cost: 200$', '/images/Payments/B&ORailroad.png')"/>
+            <img src="~/images/Board/AtlanticAvenue.png" class="top-image" onclick="cardClick('Atlantic Avenue', 'Cost: 260$', '/images/Payments/AtlanticAvenue.png')"/>
+            <img src="~/images/Board/VentorAvenue.png" class="top-image" onclick="cardClick('Ventor Avenue', 'Cost: 100$', '/images/Payments/VentorAvenue.png')"/>
+            <img src="~/images/Board/PortlandAirport.png" class="top-image" onclick="cardClick('Portland Airport', 'Cost: 200$', '/images/Payments/PortlandAirport.png')"/>
+            <img src="~/images/Board/MarvinGardens.png" class="top-image" onclick="cardClick('Marvin Gardens', 'Cost: 280$', '/images/Payments/MarvinGardens.png')"/>
+            <img src="~/images/Board/GoToJail.png" class="square-image"/>
+        </div>
+
+        <div class="sides">            
+            <div class="left-line">
+                <img src="~/images/Board/NewYorkAvenue.png" class="left-image" onclick="cardClick('NewYork Avenue', 'Cost: 200$', '/images/Payments/NewYorkAvenue.png')"/>
+                <img src="~/images/Board/TennesseAvenue.png" class="left-image" onclick="cardClick('Tennesse Avenue', 'Cost: 180$', '/images/Payments/TennesseAvenue.png')"/>
+                <img src="~/images/Board/OrlandoAirport.png" class="left-image" onclick="cardClick('Orlando Airport', 'Cost: 200$', '/images/Payments/OrlandoAirport.png')"/>
+                <img src="~/images/Board/StJamesPlace.png" class="left-image" onclick="cardClick('St James Place', 'Cost: 180$', '/images/Payments/StJamesPlace.png')"/>
+                <img src="~/images/Board/PennsylvaniaRailroad.png" class="left-image" onclick="cardClick('Pennsylvania Railroad', 'Cost: 200$', '/images/Payments/PennsylvaniaRailroad.png')"/>
+                <img src="~/images/Board/VirginiaAvenue.png" class="left-image" onclick="cardClick('Virginia Avenue', 'Cost: 160$', '/images/Payments/VirginiaAvenue.png')"/>
+                <img src="~/images/Board/StatesAvenue.png" class="left-image" onclick="cardClick('States Avenue', 'Cost: 150$', '/images/Payments/StatesAvenue.png')"/>
+                <img src="~/images/Board/LocalTax.png" class="left-image"/>
+                <img src="~/images/Board/StCharlesPlace.png" class="left-image" onclick="cardClick('St Charles Place', 'Cost: 150$', '/images/Payments/StCharlesPlace.png')"/>
+            </div>
+
+            <div class="right-line">
+                <img src="~/images/Board/PacificAvenue.png" class="left-image" onclick="cardClick('Pacific Avenue', 'Cost: 300$', '/images/Payments/PacificAvenue.png')"/>
+                <img src="~/images/Board/NorthCarolinaAvenue.png" class="left-image" onclick="cardClick('North Carolina Avenue', 'Cost: 300$', '/images/Payments/NorthCarolinaAvenue.png')"/>
+                <img src="~/images/Board/IndianapolisAirport.png" class="left-image" onclick="cardClick('Indianapolis Airport', 'Cost: 200$', '/images/Payments/IndianapolisAirport.png')"/>
+                <img src="~/images/Board/PennsylvaniaAvenue.png" class="left-image" onclick="cardClick('Pennsylvania Avenue', 'Cost: 320$', '/images/Payments/PennsylvaniaAvenue.png')"/>
+                <img src="~/images/Board/ShortLineRailroad.png" class="left-image" onclick="cardClick('Short Line Railroad', 'Cost: 200$', '/images/Payments/ShortLineRailroad.png')"/>
+                <img src="~/images/Board/BradleyAirport.png" class="left-image" onclick="cardClick('Bradley Airport', 'Cost: 200$', '/images/Payments/BradleyAirport.png')"/>
+                <img src="~/images/Board/ParkPlace.png" class="left-image" onclick="cardClick('Park Place', 'Cost: 350$', '/images/Payments/ParkPlace.png')"/>
+                <img src="~/images/Board/LuxuryTax.png" class="left-image"/>
+                <img src="~/images/Board/Boardwalk.png" class="left-image" onclick="cardClick('Boardwalk', 'Cost: 400$', '/images/Payments/Boardwalk.png')"/>
+            </div>
+        </div>
+
+        <div class="bottom-line">
+            <img src="~/images/Board/Jail.png" class="square-image"/>
+            <img src="~/images/Board/ConnecticutAvenue.png" class="top-image" onclick="cardClick('Connecticut Avenue', 'Cost: 110$', '/images/Payments/ConnecticutAvenue.png')"/>
+            <img src="~/images/Board/VermontAvenue.png" class="top-image" onclick="cardClick('Vermont Avenue', 'Cost: 100$', '/images/Payments/VermontAvenue.png')"/>
+            <img src="~/images/Board/MinneapolisAirport.png" class="top-image" onclick="cardClick('Minneapolis Airport', 'Cost: 200$', '/images/Payments/MinneapolisAirport.png')"/>
+            <img src="~/images/Board/OrientalAvenue.png" class="top-image" onclick="cardClick('Oriental Avenue', 'Cost: 100$', '/images/Payments/OrientalAvenue.png')"/>
+            <img src="~/images/Board/ReadingRailroad.png" class="top-image" onclick="cardClick('Reading Railroad', 'Cost: 200$', '/images/Payments/ReadingRailroad.png')"/>
+            <img src="~/images/Board/IncomeTax.png" class="top-image"/>
+            <img src="~/images/Board/BalticAvenue.png" class="top-image" onclick="cardClick('Baltic Avenue', 'Cost: 60$', '/images/Payments/BalticAvenue.png')"/>
+            <img src="~/images/Board/DenverAirport.png" class="top-image" onclick="cardClick('Denver Airport', 'Cost: 200$', '/images/Payments/DenverAirport.png')"/>
+            <img src="~/images/Board/MediteraneanAvenue.png" class="top-image" onclick="cardClick('Mediteranean Avenue', 'Cost: 60$', '/images/Payments/MediteraneanAvenue.png')"/>
+            <img src="~/images/Board/Start.png" class="square-image"/>
+        </div>
+    </div>
+</div>
+
+@*Card modal*@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="cardModal">
+    <div class="modal-dialog modal-md card-modal-dialog">
+        <div class="modal-content card-modal-content">
+            
+            <div class="modal-header" style="justify-content: center">
+                <h1 class="modal-title rules-text card-modal-title" id="modalTitle"></h1>
+            </div>
+
+            <div style="margin:10px" class="text-center">
+                <h3 class="text-center card-modal-subtitle" id="modalSubtitle"></h3>
+                <img id="modalImage" style="margin: 5px;"/>
+            </div>
+
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-card-button" onclick="closePopup()">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    
+    function cardClick(name, subtitle, picturePath){
+        console.log(name);
+        $('#modalTitle').html(name);
+        $('#modalSubtitle').html(subtitle);
+        $('#modalImage').attr('src', picturePath);
+        openPopup();
+    }
+
+    function openPopup()
+    {
+        $('#cardModal').modal('show');
+    }
+
+    function closePopup()
+    {
+        $('#cardModal').modal('hide');
+    }
+</script>
