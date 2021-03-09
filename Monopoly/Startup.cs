@@ -25,6 +25,8 @@ namespace Monopoly
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddSignalR();
+            services.AddRazorPages().AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +57,11 @@ namespace Monopoly
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            // app.UseSignalR(routes => 
+            // {
+            //     routes.MapHub<GameHub>("gameHub");
+            // });
         }
     }
 }

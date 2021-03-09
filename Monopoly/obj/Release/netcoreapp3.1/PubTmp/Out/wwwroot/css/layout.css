@@ -1,0 +1,107 @@
+.navbar-custom{
+    background-color: #52796F;
+}
+
+.navbar-custom-text{
+    font-size: xx-large;
+    font-weight: bold;
+    color: white;
+}
+
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 7%;
+}
+
+.image{
+    width: 7%;
+    margin-right: 15px;
+}
+
+.layout-body{
+    background-color: #52796F;
+    background-image: url('/images/buildingsOrange.png');
+    background-repeat:no-repeat;
+    background-size:cover;
+}
+
+.card-content-background{
+    background-color: #9BC0AF;
+}
+
+.custom-label{
+    font-size: large;
+    color: #23442F;
+    font-weight: bold;
+}
+
+.custom-input{
+    border: none;
+    border-bottom: 2px solid #23442F;
+    background-color: #9BC0AF;
+    color: #23442F;
+    display: block;
+    width: 100%;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+
+.custom-input:focus{
+    outline: none;
+}
+
+.custom-submit-buttons{
+    margin-top: 10px;
+    background-color: #23442F;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.custom-submit-buttons:hover{
+    background-color: #DB754F;
+    border-color: #DB754F;
+}
+
+.custom-nav-link{
+    color: #DB754F;
+    font-size: xx-large;
+    display: block;
+    padding: .5rem 1rem;
+    text-align: center;
+}
+
+.custom-nav-link:hover{
+    color: #DB754F;
+    text-decoration: underline;
+}
+
+.custom-active-tab{
+    background-color: #9BC0AF;
+    color: #DB754F;
+    font-size: xx-large;
+    font-weight: bold;
+    text-decoration: underline;
+    display: block;
+    padding: .5rem 1rem;
+}
+
+.card-custom{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 3px solid #23442F;
+    border-radius: .25rem;
+}
+
+.icon-margin{
+    margin-top: 5px;
+}

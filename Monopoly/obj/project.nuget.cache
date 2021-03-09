@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "/f8ysBnqhwVIoN/kmMhujEl+a5uLtIf9ej6PTiVtF8TmCyoJ9Db/hx7zcRoRuxXPsBYZYmHLlj6dT55/YnVAhg==",
+  "dgSpecHash": "gkAfhPLutXdPmXM/GCy3rP1cjxJGEbQ2ymyh7y7oywsELSmZCRvu3c7Zn2CAypahD3yBAGjR817PEF0onR21Bw==",
   "success": true,
   "projectFilePath": "D:\\LICENTA\\Monopoly\\Monopoly\\Monopoly.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,8 @@
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.11\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.11.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.11\\microsoft.aspnetcore.identity.ui.3.1.11.nupkg.sha512",
+    "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\3.1.0\\microsoft.aspnetcore.mvc.razor.extensions.3.1.0.nupkg.sha512",
+    "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\3.1.0\\microsoft.aspnetcore.mvc.razor.runtimecompilation.3.1.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",
@@ -36,6 +38,7 @@
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.configuration.binder\\3.1.11\\microsoft.extensions.configuration.binder.3.1.11.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\3.1.11\\microsoft.extensions.dependencyinjection.3.1.11.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\3.1.11\\microsoft.extensions.dependencyinjection.abstractions.3.1.11.nupkg.sha512",
+    "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.dependencymodel\\3.1.0\\microsoft.extensions.dependencymodel.3.1.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\3.1.11\\microsoft.extensions.fileproviders.abstractions.3.1.11.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.fileproviders.embedded\\3.1.11\\microsoft.extensions.fileproviders.embedded.3.1.11.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.extensions.identity.core\\3.1.11\\microsoft.extensions.identity.core.3.1.11.nupkg.sha512",
@@ -162,6 +165,7 @@
     "C:\\Users\\DFrancu\\.nuget\\packages\\system.text.encoding.codepages\\4.5.1\\system.text.encoding.codepages.4.5.1.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512",
+    "C:\\Users\\DFrancu\\.nuget\\packages\\system.text.json\\4.7.0\\system.text.json.4.7.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",

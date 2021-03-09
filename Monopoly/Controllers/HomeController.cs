@@ -14,6 +14,7 @@ namespace Monopoly.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private DiceController _diceController = new DiceController();
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -27,7 +28,12 @@ namespace Monopoly.Controllers
 
         public IActionResult Game()
         {
-            return View();
+            return View(_diceController);
+        }
+
+        public IActionResult RollDice()
+        {
+            return Json(_diceController.GetRolledDice());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
