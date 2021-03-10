@@ -36,6 +36,11 @@ namespace Monopoly.Controllers
             return Json(_diceController.GetRolledDice());
         }
 
+        public IActionResult Chat()
+        {
+            return View("ChatView");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

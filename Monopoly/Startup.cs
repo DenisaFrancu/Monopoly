@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Monopoly.Hubs;
 
 namespace Monopoly
 {
@@ -56,6 +57,7 @@ namespace Monopoly
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
+                endpoints.MapHub<Chat>("/chat");
             });
 
             // app.UseSignalR(routes => 

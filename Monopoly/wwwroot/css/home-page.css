@@ -182,3 +182,55 @@
     font-weight: bold;
     font-size: x-large;
 }
+
+.send-message{
+    display: flex;
+    justify-content: center;
+}
+
+.send-message-title{
+    font-size: large;
+    margin: 10px;
+    color: #F5CD6C;
+    font-weight: bold;
+}
+
+.input-message{
+    border: none;
+    border: 2px solid #F5CD6C;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: large;
+    color: white;
+}
+
+.input-message:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.send-message-button{
+    color: #F5CD6C;
+    font-weight: bold;
+    font-size: large;
+    background-color: transparent;
+}
+
+.send-message-button:hover{
+    color: #F5CD6C;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.send-message-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.message-list{
+    margin: 5px;
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+}
