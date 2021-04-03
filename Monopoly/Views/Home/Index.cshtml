@@ -27,7 +27,8 @@
 
         </div>
         <div class="buttons">
-            <button class="bottom-button"><a href='/Home/Game'>Start Game</a></button>
+            <button class="bottom-button" onclick="startGame()">Start Game</button>
+            @* <button class="bottom-button"><a href='/Home/Game'>Start Game</a></button> *@
             <button class="bottom-button" onclick="openPopup()">Rules</button>
         </div>
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse profile-button">
@@ -150,6 +151,11 @@
     function closePopup()
     {
         $('#modalRules').modal('hide');
+    }
+
+    function startGame()
+    {
+        window.open('Home/Game');
     }
 </script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
