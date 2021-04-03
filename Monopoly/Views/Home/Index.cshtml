@@ -8,18 +8,32 @@
 
 <body class="main-page">
     <div class="custom">
-        <img src="~/images/logo-stack.png" alt="Loading..." class="logo" />
+        
         <img src="~/images/main-page.png" class="centered-image"/>
-        <span class="title">MONOPOLY</span>
+        <div class="chat">
+            <div style="justify-content:center">
+                <h2 class="rules-text" style="color:#F5CD6C;">Monopoly chat</h2>
+            </div>
+            <hr style="border-color:#F5CD6C;background-color:#F5CD6C">
+            <div class="send-message">
+                <div class="send-message-title">Message:</div>
+                <input type="text" id="txtmessage" class="input-message" onkeyup="checkRequiredFields()"/>
+                <button type="button" id="sendBtn" class="btn send-message-button" disabled="true">Send</button>
+            </div>
+            
+            <div class="message-list" id="messagesList">
+                <ul id="ulmessages" style="color:white"></ul>
+            </div>
+
+        </div>
         <div class="buttons">
-            <button class="bottom-button"><a href='/Home/Game'>Join Public Room</a></button>
-            <button class="bottom-button" onclick="openChatPopup()">Join Chat Room</button>
-            <button class="bottom-button">Create Private Room</button>
+            <button class="bottom-button"><a href='/Home/Game'>Start Game</a></button>
+            <button class="bottom-button" onclick="openPopup()">Rules</button>
         </div>
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse profile-button">
+            @* Hello, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName! *@
             <partial name="../Shared/_LoginPartial.cshtml"/>
         </div>
-        <button class="rules-button" onclick="openPopup()">Rules</button>
     </div>
 
 @*Rules modal*@
@@ -116,33 +130,6 @@
     </div>
 </div>
 
-@* Chat modal *@
-<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalChat">
-    <div class="modal-dialog modal-md" style="max-width: 1000px">
-        <div class="modal-content" style="background-color: #52755F; max-height: calc(100vh - 210px); overflow-y: auto;">
-
-            <div class="modal-header" style="justify-content: center">
-                <h2 class="modal-title rules-text" style="color: #F5CD6C;">Monopoly chat</h2>
-            </div>
-            
-            <div class="send-message">
-                <div class="send-message-title">Message:</div>
-                <input type="text" id="txtmessage" class="input-message" onkeyup="checkRequiredFields()"/>
-                <button type="button" id="sendBtn" class="btn send-message-button" disabled="true">Send</button>
-            </div>
-            
-            <div class="message-list" id="messagesList">
-                <ul id="ulmessages" style="color:white"></ul>
-            </div>
-
-
-            <div class="modal-footer" style="justify-content:center">
-                <button type="button" class="btn close-rules-button" onclick="closeChatPopup()">Close</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 </body>
 
 <script>
@@ -163,16 +150,6 @@
     function closePopup()
     {
         $('#modalRules').modal('hide');
-    }
-    
-    function openChatPopup()
-    {
-        $('#modalChat').modal('show');
-    }
-
-    function closeChatPopup()
-    {
-        $('#modalChat').modal('hide');
     }
 </script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>

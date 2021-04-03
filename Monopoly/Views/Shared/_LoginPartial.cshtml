@@ -22,7 +22,8 @@
 {
     <dl>
         <dt>
-            <a  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="profile-button">Hello, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName!</a>
+            @* @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName *@
+            <a  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" class="profile-button">Hello, @UserManager.GetUserName(User)!</a>
         </dt>
         <dt>
             <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

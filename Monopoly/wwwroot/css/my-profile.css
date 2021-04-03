@@ -124,3 +124,17 @@
     font-weight: bold;
     margin: 10px;
 }
+
+.two-factor-background{
+    margin-top: 3%;
+    background-color: #52796F;
+}
+
+.two-factor-title{
+    font-weight: bold;
+    color: #F5CD6C;
+}
+
+.two-factor-content{
+    color: #F5CD6C;
+}

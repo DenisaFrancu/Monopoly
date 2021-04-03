@@ -13,7 +13,6 @@ namespace Monopoly.Controllers
     [Authorize]
     public class DiceController : Controller
     {
-        private int[] diceArray = new int[] {1, 2, 3, 4, 5, 6};
         public string[] diceImage = new string[2];
         private string dicePrefix = "/images/Dices/dice";
         private string diceSuffix = ".png";
@@ -27,11 +26,6 @@ namespace Monopoly.Controllers
             Random random = new Random();
             diceImage[0] = GetDicePath(random.Next(1,7));
             diceImage[1] = GetDicePath(random.Next(1,7));
-            // int[] randomDice = diceArray.OrderBy(x => random.Next()).ToArray();
-            // for (int diceIndex = 0; diceIndex < diceImage.Length; diceIndex++)
-            // {
-            //     diceImage[diceIndex] = GetDicePath(randomDice[diceIndex]);
-            // }
             
             return diceImage;
         }
