@@ -27,9 +27,11 @@
 
         </div>
         <div class="buttons">
-            <button class="bottom-button" onclick="startGame()">Start Game</button>
-            @* <button class="bottom-button"><a href='/Home/Game'>Start Game</a></button> *@
-            <button class="bottom-button" onclick="openPopup()">Rules</button>
+            <button class="bottom-button" onclick="openCreateRoomPopup()">Create Room</button>
+            <button class="bottom-button" onclick="startGame()">Join Public Room</button>
+            <button class="bottom-button" onclick="startGame()">Join Private Room</button>
+            @* <button class="bottom-button" onclick="startGame()">Start Game</button> *@
+            <button class="bottom-button" onclick="openRulesPopup()">Rules</button>
         </div>
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse profile-button">
             @* Hello, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName! *@
@@ -124,9 +126,40 @@
             </div>
 
             <div class="modal-footer" style="justify-content:center">
-                <button type="button" class="btn close-rules-button" onclick="closePopup()">Close</button>
+                <button type="button" class="btn close-rules-button" onclick="closeRulesPopup()">Close</button>
             </div>
 
+        </div>
+    </div>
+</div>
+
+@* Create room modal *@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalCreateRoom">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="background-color: #52755F;">
+            <div class="modal-header text-center" style="justify-content: center">
+                <h2 class="modal-title rules-text" style="color: #F5CD6C;">Create game room</h2>
+            </div>
+            <div style="margin:10px" class="text-center">
+                <h4 style="color:white">Room type:</h4>
+                <select name="roomType" id="roomType" class="room-type">
+                    <option value="public">Public room</option>
+                    <option value="private">Private room</option>
+                </select>
+            </div>
+            <div style="margin:10px" class="text-center" id="roomNameDiv">
+                <h4 style="color:white">Room name*:</h4>
+                <input type="text" id="roomName" class="input-message" onkeyup="checkRoomRequiredFields()"/>
+            </div>
+            <div style="margin:10px" class="text-center" id="roomPasswordDiv">
+                <h4 style="color:white">Room password*:</h4>
+                <input type="password" id="roomPassword" class="input-message" onkeyup="checkRoomRequiredFields()"/>
+            </div>
+            
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-rules-button" onclick="CreateRoom()" id="createRoomButton" disabled="true">Create</button>
+                <button type="button" class="btn close-rules-button" onclick="closeCreateRoomPopup()">Cancel</button>
+            </div>
         </div>
     </div>
 </div>
@@ -134,6 +167,43 @@
 </body>
 
 <script>
+    function openRulesPopup()
+    {
+        $('#modalRules').modal('show');
+    }
+
+    function closeRulesPopup()
+    {
+        $('#modalRules').modal('hide');
+    }
+
+    $('#roomPasswordDiv').hide();
+    $('#roomType').change(function(){
+        if($('#roomType').children("option:selected").val()=="private"){
+            $('#roomPasswordDiv').show();
+        }else{
+            $('#roomPasswordDiv').hide();
+        }
+    });
+
+    function checkRoomRequiredFields()
+    {
+        if($('#roomName').val() != "" && $('#roomType').children("option:selected").val()=="public"){
+            $('#createRoomButton').prop('disabled', false);
+        }else if($('#roomName').val() != "" && $('#roomType').children("option:selected").val()=="private" && $('#roomPassword').val() != ""){
+            $('#createRoomButton').prop('disabled', false);
+        }else {
+            $('#createRoomButton').prop('disabled', true);
+        }
+    }
+
+    function CreateRoom()
+    {
+        console.log("Room type:", $('#roomType').children("option:selected").val());
+        console.log("Room name:", $('#roomName').val());
+        console.log("Room password:", $('#roomPassword').val());
+    }
+    
     function checkRequiredFields()
     {
         if($('#txtmessage').val() != ""){
@@ -143,19 +213,19 @@
         }
     }
 
-    function openPopup()
+    function openCreateRoomPopup()
     {
-        $('#modalRules').modal('show');
+       $('#modalCreateRoom').modal('show'); 
     }
 
-    function closePopup()
+    function closeCreateRoomPopup()
     {
-        $('#modalRules').modal('hide');
+       $('#modalCreateRoom').modal('hide'); 
     }
 
     function startGame()
     {
-        window.open('Home/Game');
+        window.location.href = 'Home/Game';
     }
 </script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>

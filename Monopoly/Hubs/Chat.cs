@@ -19,6 +19,11 @@ namespace Monopoly.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, groupName);
         }
 
+        public async Task RemoveFromGroup(string groupName)
+        {
+            await Groups.RemoveFromGroupAsync(Context.ConnectionId, groupName);
+        }
+
         public async Task SendMessageToGroup(string message, string groupName)
         {
             await Clients.Group(groupName).SendAsync("ReceiveGroupMessage", Context.User.Identity.Name ?? "anonymous", message);

@@ -246,3 +246,18 @@
     background-color: #52755F;
     overflow: hidden;
 }
+
+.room-type{
+    border: 2px solid #F5CD6C;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: large;
+    color: white;
+    width: 45%;
+}
+
+.room-type:focus{
+    outline: none;
+    box-shadow: none;
+}
