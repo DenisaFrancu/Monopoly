@@ -141,7 +141,7 @@
 
 @*Card modal popup when click on image*@
 <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="cardModal">
-    <div class="modal-dialog modal-md card-modal-dialog">
+    <div class="modal-dialog modal-md card-modal-dialog" style="width:60vw">
         <div class="modal-content card-modal-content">
 
             <div class="modal-header" style="justify-content: center">
@@ -150,7 +150,7 @@
 
             <div style="margin:10px" class="text-center">
                 <h3 class="text-center card-modal-subtitle" id="modalSubtitle"></h3>
-                <img id="modalImage" style="margin: 5px;"/>
+                <img id="modalImage" style="margin:5px; width:50vw"/>
             </div>
 
             <div class="modal-footer" style="justify-content:center">
@@ -163,7 +163,6 @@
 
 <script>
     function cardClick(name, subtitle, picturePath){
-        console.log(name);
         $('#modalTitle').html(name);
         $('#modalSubtitle').html(subtitle);
         $('#modalImage').attr('src', picturePath);
