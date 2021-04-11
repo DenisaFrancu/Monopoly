@@ -1,0 +1,112 @@
+@{
+    ViewData["Title"] = "Waiting";
+}
+<link rel="stylesheet" href="~/css/waiting-room.css">
+@using Microsoft.AspNetCore.Identity
+@using Monopoly.Areas.Identity.Data
+
+@inject SignInManager<MonopolyUser> SignInManager
+@inject UserManager<MonopolyUser> UserManager
+
+<body>
+    <div class="centered-div">
+        <h2 class="text-center waiting-room-title">Waiting room</h2>
+        <hr style="border-color:#F5CD6C;background-color:#F5CD6C">
+        <button type="button" class="btn see-players-button" onclick="seePlayers(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)">See current players from this room</button>
+        <button onclick="startGame()" class="start-button" hidden="true" id="startGame">Start<i class='fas fa-angle-double-right'></i></button>
+        <div class="chat">            
+            <div class="send-message">
+                <div class="send-message-title">Message:</div>
+                <input type="text" id="txtmessage" class="input-message" onkeyup="checkRequiredFields()"/>
+                <button type="button" id="sendToGroupBtn" class="btn send-message-button" disabled="true">Send</button>
+            </div>
+            
+            <div class="message-list" id="messagesList">
+                <ul id="ulGroupMessages" style="color:#23442F;font-weight:bold;font-size:medium"></ul>
+            </div>
+        </div>
+    </div>
+</body>
+
+@* Current players *@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalCurrentPlayers">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="background-color: #52755F;">
+            <div class="modal-header text-center" style="justify-content: center">
+                <h2 class="modal-title" style="color: #F5CD6C;">Current players in this room</h2>
+            </div>
+
+            <div style="margin:10px" class="text-center players-list" id="currentPlayersList">
+            </div>
+
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-button" onclick="closeCurrentPlayersPopup()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var intervalId = window.setInterval(function(){
+        $.ajax({
+            url: 'GetPlayersCount',
+            type: 'GET',
+            contentType: 'application/json',
+            data: {
+                player: `@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`
+            },
+            success: function(data) {
+                console.log(data)
+                if(data > 1){
+                    $('#startGame').prop('hidden', false);
+                }else{
+                    $('#startGame').prop('hidden', true);
+                }
+                
+            }
+        }
+        );
+    }, 1000);
+    function startGame()
+    {
+        window.location.href = 'Game';
+    }
+    
+    function seePlayers(player)
+    {
+        $('#modalCurrentPlayers').modal('show'); 
+        $.ajax({
+            url: 'GetPlayersFromRoom',
+            type: 'GET',
+            contentType: 'application/json',
+            data: {
+                player: player
+            },
+            success: function(data) {
+                $("#currentPlayersList").empty();
+                $.each(data, function(){
+                    var text = '<p>'+this+'</p>';
+                    $(text).appendTo('#currentPlayersList');
+                });
+                
+            }
+        }
+        );
+    }
+
+    function closeCurrentPlayersPopup()
+    {
+        $('#modalCurrentPlayers').modal('hide'); 
+    }
+
+    function checkRequiredFields()
+    {
+        if($('#txtmessage').val() != ""){
+            $('#sendToGroupBtn').prop('disabled', false);
+        }else {
+            $('#sendToGroupBtn').prop('disabled', true);
+        }
+    }
+</script>
+<script src="~/lib/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/chat-waiting-room.js"></script>

@@ -261,3 +261,18 @@
     outline: none;
     box-shadow: none;
 }
+
+select.select-public-room{
+    height:100%;
+    overflow:auto;
+    background-color: #52755F;
+    border:none;
+}
+
+.select-public-room:focus{
+    outline: none;
+    box-shadow: none;
+    overflow:auto;
+    background-color: #52755F;
+    border:none;
+}

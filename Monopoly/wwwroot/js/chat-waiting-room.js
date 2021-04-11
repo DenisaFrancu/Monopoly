@@ -4,17 +4,32 @@ var connection = new signalR.HubConnectionBuilder().withUrl("/Chat").build();
     
 document.getElementById("sendToGroupBtn").disabled = true;
 connection.on("ReceiveGroupMessage", function (user, message) {
-    console.log("IN functie");
     var msg = message.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
     var encodedMsg = user + ": " + msg;
     var li = document.createElement("li");
     li.textContent = encodedMsg;
-    console.log("funct", msg);
+    document.getElementById("ulGroupMessages").appendChild(li);
+    updateScroll();
+});
+connection.on("JoinedRoomMessage", function (user, message) {
+    var msg = message.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
+    var encodedMsg = user + " " + msg;
+    var li = document.createElement("li");
+    li.textContent = encodedMsg;
+    console.log("DA")
     document.getElementById("ulGroupMessages").appendChild(li);
     updateScroll();
 });
 connection.start().then(function () {
     connection.invoke('AddToGroup');
+    if (!performance.navigation.type == performance.navigation.TYPE_RELOAD){
+        connection.invoke("SendJoinedRoomMessage").catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
+    if(performance.navigation.type == 2){
+        console.log("back");
+    }
 }).catch(function (err) {
     return console.error(err.toString());
 });

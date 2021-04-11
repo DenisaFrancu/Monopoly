@@ -4,7 +4,13 @@
 
 <link rel="stylesheet" href="~/css/home-page.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+@using Microsoft.AspNetCore.Identity
+@using Monopoly.Areas.Identity.Data
 
+@inject SignInManager<MonopolyUser> SignInManager
+@inject UserManager<MonopolyUser> UserManager
+
+@model Monopoly.ViewModels.HomeViewModel;
 
 <body class="main-page">
     <div class="custom">
@@ -28,13 +34,11 @@
         </div>
         <div class="buttons">
             <button class="bottom-button" onclick="openCreateRoomPopup()">Create Room</button>
-            <button class="bottom-button" onclick="startGame()">Join Public Room</button>
-            <button class="bottom-button" onclick="startGame()">Join Private Room</button>
-            @* <button class="bottom-button" onclick="startGame()">Start Game</button> *@
+            <button class="bottom-button" onclick="openJoinPublicRoomPopup()">Join Public Room</button>
+            <button class="bottom-button" onclick="openJoinPrivateRoomPopup()">Join Private Room</button>
             <button class="bottom-button" onclick="openRulesPopup()">Rules</button>
         </div>
         <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse profile-button">
-            @* Hello, @UserManager.GetUserAsync(User).Result.FirstName @UserManager.GetUserAsync(User).Result.LastName! *@
             <partial name="../Shared/_LoginPartial.cshtml"/>
         </div>
     </div>
@@ -155,10 +159,58 @@
                 <h4 style="color:white">Room password*:</h4>
                 <input type="password" id="roomPassword" class="input-message" onkeyup="checkRoomRequiredFields()"/>
             </div>
-            
             <div class="modal-footer" style="justify-content:center">
-                <button type="button" class="btn close-rules-button" onclick="CreateRoom()" id="createRoomButton" disabled="true">Create</button>
+                <button type="button" class="btn close-rules-button" onclick="CreateRoom(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)" id="createRoomButton" disabled="true">Create</button>
                 <button type="button" class="btn close-rules-button" onclick="closeCreateRoomPopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Join Public Room *@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalJoinPublicRoom">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="background-color: #52755F;">
+            <div class="modal-header text-center" style="justify-content: center">
+                <h2 class="modal-title rules-text" style="color: #F5CD6C;">Join public room</h2>
+            </div>
+            <div style="margin-top:10px;margin-left:10px;margin-right:10px" class="text-center">
+                <h4 style="color:white">Select a room you would like to join:</h4>
+            </div>
+            <div style="margin:10px" class="text-center" id="availablePublicRooms" hidden="true">
+                <select id="selectPublicRoom" class="select-public-room form-control" style="height:100%" multiple></select> 
+            </div>
+            <div style="margin:10px;color:white;font-size:larger" class="text-center" id="noPublicRooms" hidden="true">No public rooms available</div>
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-rules-button" onclick="JoinPublicRoom(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)" disabled="true" hidden="true" id="joinPublicRoomButton">Join</button>
+                <button type="button" class="btn close-rules-button" onclick="closeJoinPublicRoomPopup()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Join Private Room *@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="modalJoinPrivateRoom">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content" style="background-color: #52755F;">
+            <div class="modal-header text-center" style="justify-content: center">
+                <h2 class="modal-title rules-text" style="color: #F5CD6C;">Join private room</h2>
+            </div>
+            <div style="margin-top:10px;margin-left:10px;margin-right:10px" class="text-center">
+                <h4 style="color:white">Select a room you would like to join:</h4>
+            </div>
+
+            <div style="margin:10px" class="text-center" id="availablePrivateRooms" hidden="true">
+                <select id="selectPrivateRoom" class="select-public-room form-control" multiple></select> 
+            </div>
+
+            <div style="margin:10px;color:white;font-size:larger" class="text-center" id="noPrivateRooms" hidden="true">No private rooms available</div>
+
+            <input type="text" id="privateRoomPassword" class="input-message" onkeyup="checkRequiredFieldsPrivateRoom()" hidden="true"/>
+            <div class="alert alert-danger" role="alert" style="margin:10px;font-weight:bold;color:red" hidden="true" id="wrongPassword">Wrong password!</div>
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-rules-button" onclick="JoinPrivateRoom(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)" disabled="true" id="joinPrivateRoomButton">Join</button>
+                <button type="button" class="btn close-rules-button" onclick="closeJoinPrivateRoomPopup()">Cancel</button>
             </div>
         </div>
     </div>
@@ -197,11 +249,35 @@
         }
     }
 
-    function CreateRoom()
+    function checkRequiredFieldsPrivateRoom()
     {
-        console.log("Room type:", $('#roomType').children("option:selected").val());
-        console.log("Room name:", $('#roomName').val());
-        console.log("Room password:", $('#roomPassword').val());
+        console.log($("#privateRoomPassword").val());
+        console.log($( "#selectPrivateRoom :selected").length)
+        if($( "#selectPrivateRoom :selected").length != 0 && $("#privateRoomPassword").val() != ""){
+            $('#joinPrivateRoomButton').prop('disabled', false);
+        }else{
+            $('#joinPrivateRoomButton').prop('disabled', true);
+        }
+    }
+
+    function CreateRoom(player)
+    {
+        console.log(player);
+        var roomName = $('#roomName').val();
+        var password = $('#roomPassword').val();
+        console.log("Da");
+        $.ajax({
+            type: 'GET',
+            url: 'Home/CreateRoom',
+            dataType: 'json',
+            data: {
+                roomName: roomName,
+                password: password,
+                player: player,
+            }
+        });
+        $('#modalCreateRoom').modal('hide');
+        window.location.href = 'Home/WaitingRoom';
     }
     
     function checkRequiredFields()
@@ -223,10 +299,134 @@
        $('#modalCreateRoom').modal('hide'); 
     }
 
-    function startGame()
+    function openJoinPublicRoomPopup()
     {
-        window.location.href = 'Home/Game';
+        $.ajax({
+            url: 'Home/GetPublicRoomsList',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function(data) {
+                if(data.length!=0)
+                {
+                    $('#availablePublicRooms').prop('hidden', false);
+                    $('#joinPublicRoomButton').prop('hidden', false);
+                    $("#selectPublicRoom").empty();
+                    $.each(data, function(){
+                        if(this.playersNumber < 4){
+                            var displayedName = this.roomName + " (" + this.playersNumber + "/4)";
+                            $("#selectPublicRoom").append('<option style="color:white;font-size:larger" class="select-public-room" value="'+ this.roomId +'">'+ displayedName +'</option>')
+                        }
+                    });
+
+                    var selectPublic = document.getElementById('selectPublicRoom');
+                    selectPublic.size = selectPublic.length;
+                }else{
+                    $('#noPublicRooms').prop('hidden', false);
+                    $('#joinPublicRoomButton').prop('hidden', true);
+                }
+                $('#modalJoinPublicRoom').modal('show');
+            }
+        }
+        );
     }
+
+    function closeJoinPublicRoomPopup()
+    {
+        $('#modalJoinPublicRoom').modal('hide'); 
+    }
+
+    function JoinPublicRoom(player)
+    {
+        var id = parseInt($( "#selectPublicRoom").val()[0]);
+        $.ajax({
+            type: 'GET',
+            url: 'Home/JoinPublicRoom',
+            dataType: 'json',
+            data: {
+                roomId:id,
+                player:player
+            }
+        });
+        window.location.href = 'Home/WaitingRoom';
+    }
+
+    function JoinPrivateRoom(player)
+    {
+        var id = parseInt($( "#selectPrivateRoom").val()[0]);
+        $.ajax({
+            type: 'GET',
+            url: 'Home/JoinPrivateRoom',
+            dataType: 'json',
+            data: {
+                roomId:id,
+                player:player,
+                password: $('#privateRoomPassword').val()
+            },
+            success: function(data) {
+                console.log(data)
+                if(data == "Wrong password"){
+                    $('#wrongPassword').prop('hidden', false);
+                }else{
+                    window.location.href = 'Home/WaitingRoom';
+                }
+            }
+        });
+    }
+
+    function openJoinPrivateRoomPopup()
+    {
+        $('#joinPrivateRoomButton').prop('disabled', true);
+        $.ajax({
+            url: 'Home/GetPrivateRoomsList',
+            type: 'GET',
+            contentType: 'application/json',
+            success: function(data) {
+                if(data.length!=0){
+                    $('#availablePrivateRooms').prop('hidden', false);
+                    $('#joinPrivateRoomButton').prop('hidden', false);
+                    $('#privateRoomPassword').prop('hidden', false);
+                    $("#selectPrivateRoom").empty();
+                    $.each(data, function(){
+                        if(this.playersNumber < 4){
+                            var displayedName = this.roomName + " (" + this.playersNumber + "/4)";
+                            $("#selectPrivateRoom").append('<option style="color:white;font-size:larger" class="select-public-room" value="'+ this.roomId +'">'+ displayedName +'</option>')
+                        }
+                        
+                    });
+
+                    var selectPrivate = document.getElementById('selectPrivateRoom');
+                    selectPrivate.size = selectPrivate.length;
+                }else{
+                    $('#noPrivateRooms').prop('hidden', false);
+                    $('#joinPrivateRoomButton').prop('hidden', true);
+                }
+                
+                $('#modalJoinPrivateRoom').modal('show');
+            }
+        }
+        );
+    }
+
+    function closeJoinPrivateRoomPopup()
+    {
+        $('#modalJoinPrivateRoom').modal('hide'); 
+    }
+
+    $('#selectPublicRoom').change(function() {
+        if($( "#selectPublicRoom :selected").length != 0){
+            $('#joinPublicRoomButton').prop('disabled', false);
+        }else{
+            $('#joinPublicRoomButton').prop('disabled', true);
+        }
+    });
+
+    $('#selectPrivateRoom').change(function() {
+        if($( "#selectPrivateRoom :selected").length == 0){
+            $('#joinPrivateRoomButton').prop('disabled', true);
+        }else if($( "#selectPrivateRoom :selected").length != 0 && $("#privateRoomPassword").val() != ""){
+            $('#joinPrivateRoomButton').prop('disabled', false);
+        }
+    });
 </script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat-main-page.js"></script>

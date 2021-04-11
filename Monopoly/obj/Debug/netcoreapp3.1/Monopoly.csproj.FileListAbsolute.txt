@@ -492,3 +492,4 @@ D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win-x64\native\Mic
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Razor\Views\Home\WaitingRoom.cshtml.g.cs

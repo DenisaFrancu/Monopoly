@@ -14552,6 +14552,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\LICENTA\\Monopoly\\Monopoly\\Views\\Home\\WaitingRoom.cshtml",
+      "TargetPath": "Views\\Home\\WaitingRoom.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\LICENTA\\Monopoly\\Monopoly\\Views\\Shared\\_LoginPartial.cshtml",
       "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
       "FileKind": "mvc"

@@ -13,7 +13,9 @@ connection.on("ReceiveMessage", function (user, message, date) {
     updateScrollMainPage();
 });
 connection.start().then(function () {
-    // document.getElementById("sendBtn").disabled = false;
+    if(performance.navigation.type == 2){
+        connection.invoke('RemoveFromGroup');
+    }
 }).catch(function (err) {
     return console.error(err.toString());
 });
