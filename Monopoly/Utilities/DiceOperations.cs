@@ -11,13 +11,13 @@ using Monopoly.Models;
 namespace Monopoly.Controllers
 {
     [Authorize]
-    public class DiceController : Controller
+    public class DiceOperations
     {
         public string[] diceImage = new string[2];
         private string dicePrefix = "/images/Dices/dice";
         private string diceSuffix = ".png";
 
-        public DiceController()
+        public DiceOperations()
         {
             diceImage[0] = diceImage[1] = GetDicePath(1);
         }

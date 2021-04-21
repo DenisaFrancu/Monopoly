@@ -20,15 +20,17 @@ connection.on("JoinedRoomMessage", function (user, message) {
     document.getElementById("ulGroupMessages").appendChild(li);
     updateScroll();
 });
+connection.on("RedirectToGame", function (room) {
+    console.log(room)
+    document.cookie="Room="+room;
+    window.location.href = "Game";
+});
 connection.start().then(function () {
-    connection.invoke('AddToGroup');
+    connection.invoke('AddToLoby');
     if (!performance.navigation.type == performance.navigation.TYPE_RELOAD){
         connection.invoke("SendJoinedRoomMessage").catch(function (err) {
             return console.error(err.toString());
         });
-    }
-    if(performance.navigation.type == 2){
-        console.log("back");
     }
 }).catch(function (err) {
     return console.error(err.toString());
@@ -55,3 +57,8 @@ function updateScroll(){
     var element = document.getElementById("messagesList");
     element.scrollTop = element.scrollHeight;
 }
+
+document.getElementById("leaveRoom").addEventListener("click", function (event) {
+    connection.invoke('RemoveFromGroup');
+    event.preventDefault();
+});

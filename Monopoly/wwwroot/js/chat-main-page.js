@@ -41,4 +41,3 @@ function updateScrollMainPage(){
     var element = document.getElementById("messagesList");
     element.scrollTop = element.scrollHeight;
 }
-

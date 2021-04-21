@@ -13,7 +13,7 @@
         <h2 class="text-center waiting-room-title">Waiting room</h2>
         <hr style="border-color:#F5CD6C;background-color:#F5CD6C">
         <button type="button" class="btn see-players-button" onclick="seePlayers(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)">See current players from this room</button>
-        <button onclick="startGame()" class="start-button" hidden="true" id="startGame">Start<i class='fas fa-angle-double-right'></i></button>
+        <button onclick="leaveGame()" class="start-button" id="leaveRoom">Leave room</button>
         <div class="chat">            
             <div class="send-message">
                 <div class="send-message-title">Message:</div>
@@ -47,29 +47,9 @@
 </div>
 
 <script>
-    var intervalId = window.setInterval(function(){
-        $.ajax({
-            url: 'GetPlayersCount',
-            type: 'GET',
-            contentType: 'application/json',
-            data: {
-                player: `@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`
-            },
-            success: function(data) {
-                console.log(data)
-                if(data > 1){
-                    $('#startGame').prop('hidden', false);
-                }else{
-                    $('#startGame').prop('hidden', true);
-                }
-                
-            }
-        }
-        );
-    }, 1000);
-    function startGame()
+    function leaveGame()
     {
-        window.location.href = 'Game';
+        window.location.href = 'Index';
     }
     
     function seePlayers(player)

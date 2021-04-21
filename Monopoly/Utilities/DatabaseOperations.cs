@@ -40,7 +40,6 @@ namespace Monopoly.Controllers
                     room.Player3 = player;
                 else if(room.Player4 == null)
                     room.Player4 = player;
-                room.PlayersNumber++;
                 gameRoomContext.SaveChanges();
             }
         }
@@ -59,9 +58,6 @@ namespace Monopoly.Controllers
                     room.Player3 = null;
                 else if(room.Player4 == player)
                     room.Player4 = null;
-                room.PlayersNumber--;
-                if(room.PlayersNumber == 0)
-                    gameRoomContext.Remove(room);
                 gameRoomContext.SaveChanges();
             }
         }
@@ -92,6 +88,43 @@ namespace Monopoly.Controllers
             if(currentRoom.Player4 != null)
                 players.Add(currentRoom.Player4);   
             return players;
+        }
+
+        public List<Player> GetPlayersForGame(int roomId)
+        {
+            var gameRoomContext = new GameRoomContext();
+            Room currentRoom = gameRoomContext.Rooms.Where(x => x.RoomId == roomId).FirstOrDefault();
+            List<Player> players = new List<Player>();
+            if(currentRoom.Player1 != null)
+                players.Add(new Player
+                {
+                    Name = currentRoom.Player1,
+                    Money = 2000,
+                    Pawn = "~/images/pawns/blue.png"
+                });
+            if(currentRoom.Player2 != null)
+                players.Add(new Player
+                {
+                    Name = currentRoom.Player2,
+                    Money = 2000,
+                    Pawn = "~/images/pawns/green.png"
+                });
+            if(currentRoom.Player3 != null)
+                players.Add(new Player
+                {
+                    Name = currentRoom.Player3,
+                    Money = 2000,
+                    Pawn = "~/images/pawns/red.png"
+                });
+            if(currentRoom.Player4 != null)
+                players.Add(new Player
+                {
+                    Name = currentRoom.Player4,
+                    Money = 2000,
+                    Pawn = "~/images/pawns/yellow.png"
+                });
+            
+            return players.OrderBy(x => x.Name).ToList();
         }
 
         public int GetPlayersCount(string player)

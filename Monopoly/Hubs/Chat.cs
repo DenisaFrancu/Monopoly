@@ -33,14 +33,40 @@ namespace Monopoly.Hubs
             await Groups.AddToGroupAsync(Context.ConnectionId, group);
         }
 
+        public async Task AddToLoby()
+        {
+            string group = GetCurrentGroup();
+            await Groups.AddToGroupAsync(Context.ConnectionId, group);
+            CheckRedirectToGame();
+        }
+
+        public void CheckRedirectToGame()
+        {
+            string group =  GetCurrentGroup();
+            var roomDb = new GameRoomContext();
+            Room currentRoom = roomDb.Rooms.Where(x => x.RoomId == Int32.Parse(group)).FirstOrDefault();
+            int playersNumber = 0;
+            if(currentRoom.Player1!=null)
+                playersNumber++;
+            if(currentRoom.Player2!=null)
+                playersNumber++;
+            if(currentRoom.Player3!=null)
+                playersNumber++;
+            if(currentRoom.Player4!=null)
+                playersNumber++;
+            int room = currentRoom.RoomId;
+            if(playersNumber == currentRoom.PlayersNumber)
+                Clients.Group(group).SendAsync("RedirectToGame", room);
+        }
+
         public async Task RemoveFromGroup()
         {
             string group = GetCurrentGroup();
             MonopolyUser currentUser = GetCurrentUser();
             string player = currentUser.FirstName + " " + currentUser.LastName;
             _gameRoomOperations.RemovePlayerFromRoom(player);
+            await SendLeftRoomMessage(group, player);
             await Groups.RemoveFromGroupAsync(Context.ConnectionId, group);
-            SendLeftRoomMessage(group, player);
         }
 
         public async Task SendMessageToGroup(string message)

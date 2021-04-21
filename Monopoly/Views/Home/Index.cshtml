@@ -10,8 +10,6 @@
 @inject SignInManager<MonopolyUser> SignInManager
 @inject UserManager<MonopolyUser> UserManager
 
-@model Monopoly.ViewModels.HomeViewModel;
-
 <body class="main-page">
     <div class="custom">
         
@@ -159,6 +157,24 @@
                 <h4 style="color:white">Room password*:</h4>
                 <input type="password" id="roomPassword" class="input-message" onkeyup="checkRoomRequiredFields()"/>
             </div>
+            <div style="margin:10px" class="text-center" id="roomNameDiv">
+                <h4 style="color:white">Number of players*:</h4>
+                <div style="display:flex;justify-content:center">
+                    <div style="display:flex;margin:5px" >
+                        <input type="radio" id="TwoPlayers" name="playersNumber" value="2" style="margin:5px" checked="checked">
+                        <label for="TwoPlayers" style="font-size:large;color:white">2</label><br>
+                    </div>
+                    <div style="display:flex;margin:5px" >
+                        <input type="radio" id="ThreePlayers" name="playersNumber" value="3" style="margin:5px">
+                        <label for="ThreePlayers" style="font-size:large;color:white">3</label><br>  
+                    </div>
+                    <div style="display:flex;margin:5px" >
+                        <input type="radio" id="FourPlayers" name="playersNumber" value="4" style="margin:5px">
+                        <label for="FourPlayers" style="font-size:large;color:white">4</label><br><br>
+                    </div>
+                </div>
+            </div>
+            
             <div class="modal-footer" style="justify-content:center">
                 <button type="button" class="btn close-rules-button" onclick="CreateRoom(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)" id="createRoomButton" disabled="true">Create</button>
                 <button type="button" class="btn close-rules-button" onclick="closeCreateRoomPopup()">Cancel</button>
@@ -262,9 +278,9 @@
 
     function CreateRoom(player)
     {
-        console.log(player);
         var roomName = $('#roomName').val();
         var password = $('#roomPassword').val();
+        var playersNumber = $('input[name="playersNumber"]:checked').val()
         console.log("Da");
         $.ajax({
             type: 'GET',
@@ -274,6 +290,7 @@
                 roomName: roomName,
                 password: password,
                 player: player,
+                playersNumber: playersNumber
             }
         });
         $('#modalCreateRoom').modal('hide');
@@ -301,8 +318,11 @@
 
     function openJoinPublicRoomPopup()
     {
+        if(window.location.href.includes('Index'))
+            url = 'GetPublicRoomsList';
+        else url = 'Home/GetPublicRoomsList'
         $.ajax({
-            url: 'Home/GetPublicRoomsList',
+            url: url,
             type: 'GET',
             contentType: 'application/json',
             success: function(data) {
@@ -312,8 +332,17 @@
                     $('#joinPublicRoomButton').prop('hidden', false);
                     $("#selectPublicRoom").empty();
                     $.each(data, function(){
-                        if(this.playersNumber < 4){
-                            var displayedName = this.roomName + " (" + this.playersNumber + "/4)";
+                        var connectedPlayers = 0;
+                        if(this.player1!=null)
+                            connectedPlayers++;
+                        if(this.player2!=null)
+                            connectedPlayers++;
+                        if(this.player3!=null)
+                            connectedPlayers++;
+                        if(this.player4!=null)
+                            connectedPlayers++;
+                        if(connectedPlayers < this.playersNumber){
+                            var displayedName = this.roomName + " (" + connectedPlayers + "/" + this.playersNumber + ")";
                             $("#selectPublicRoom").append('<option style="color:white;font-size:larger" class="select-public-room" value="'+ this.roomId +'">'+ displayedName +'</option>')
                         }
                     });
@@ -347,7 +376,9 @@
                 player:player
             }
         });
-        window.location.href = 'Home/WaitingRoom';
+        if(!window.location.href.includes('Index'))
+            window.location.href = 'Home/WaitingRoom';
+        else window.location.href = 'WaitingRoom';
     }
 
     function JoinPrivateRoom(player)
@@ -367,7 +398,9 @@
                 if(data == "Wrong password"){
                     $('#wrongPassword').prop('hidden', false);
                 }else{
-                    window.location.href = 'Home/WaitingRoom';
+                    if(!window.location.href.includes('Index'))
+                        window.location.href = 'Home/WaitingRoom';
+                    else window.location.href = 'WaitingRoom';
                 }
             }
         });
@@ -375,9 +408,12 @@
 
     function openJoinPrivateRoomPopup()
     {
+        if(window.location.href.includes('Index'))
+            url = 'GetPrivateRoomsList';
+        else url = 'Home/GetPrivateRoomsList'
         $('#joinPrivateRoomButton').prop('disabled', true);
         $.ajax({
-            url: 'Home/GetPrivateRoomsList',
+            url: url,
             type: 'GET',
             contentType: 'application/json',
             success: function(data) {
@@ -387,8 +423,17 @@
                     $('#privateRoomPassword').prop('hidden', false);
                     $("#selectPrivateRoom").empty();
                     $.each(data, function(){
-                        if(this.playersNumber < 4){
-                            var displayedName = this.roomName + " (" + this.playersNumber + "/4)";
+                        var connectedPlayers = 0;
+                        if(this.player1!=null)
+                            connectedPlayers++;
+                        if(this.player2!=null)
+                            connectedPlayers++;
+                        if(this.player3!=null)
+                            connectedPlayers++;
+                        if(this.player4!=null)
+                            connectedPlayers++;
+                        if(connectedPlayers < this.playersNumber){
+                            var displayedName = this.roomName + " (" + connectedPlayers + "/" + this.playersNumber + ")";
                             $("#selectPrivateRoom").append('<option style="color:white;font-size:larger" class="select-public-room" value="'+ this.roomId +'">'+ displayedName +'</option>')
                         }
                         
@@ -427,6 +472,14 @@
             $('#joinPrivateRoomButton').prop('disabled', false);
         }
     });
+
+    function DisableBackButton() {
+       window.history.forward()
+      }
+    DisableBackButton();
+    window.onload = DisableBackButton;
+    window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
+    window.onunload = function() { void (0) }
 </script>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat-main-page.js"></script>

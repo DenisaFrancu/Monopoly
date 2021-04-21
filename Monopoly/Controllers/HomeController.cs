@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Monopoly.Hubs;
 using Monopoly.Models;
-using Monopoly.ViewModels;
 
 namespace Monopoly.Controllers
 {
@@ -16,7 +11,7 @@ namespace Monopoly.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private DiceController _diceController = new DiceController();
+        private DiceOperations _diceOperations = new DiceOperations();
         private DatabaseOperations _gameRoomOperations = new DatabaseOperations();
 
         public HomeController(ILogger<HomeController> logger)
@@ -26,17 +21,13 @@ namespace Monopoly.Controllers
 
         public IActionResult Index()
         {
-            HomeViewModel home = new HomeViewModel()
-            {
-                PublicRooms = _gameRoomOperations.GetPublicRooms(),
-                PrivateRooms = _gameRoomOperations.GetPrivateRooms()
-            };
-            return View(home);
+            return View();
         }
 
         public IActionResult Game()
         {
-            return View();
+            int room = Int32.Parse(Request.Cookies["Room"]);
+            return View(_gameRoomOperations.GetPlayersForGame(room));
         }
 
         public IActionResult WaitingRoom()
@@ -46,7 +37,7 @@ namespace Monopoly.Controllers
 
         public IActionResult RollDice()
         {
-            return Json(_diceController.GetRolledDice());
+            return Json(_diceOperations.GetRolledDice());
         }
 
         public IActionResult GetPublicRoomsList()
@@ -64,23 +55,18 @@ namespace Monopoly.Controllers
             return Json(_gameRoomOperations.GetPlayersFromRoom(player));
         }
 
-        public IActionResult GetPlayersCount(string player)
-        {
-            return Json(_gameRoomOperations.GetPlayersCount(player));
-        }
-
         public IActionResult Chat()
         {
             return View("ChatView");
         }
 
-        public IActionResult CreateRoom(string roomName, string password, string player)
+        public IActionResult CreateRoom(string roomName, string password, string player, int playersNumber)
         {
             Room room = new Room{
                 RoomName = roomName,
                 Password = password,
                 Player1 = player,
-                PlayersNumber = 1
+                PlayersNumber = playersNumber
             };
             _gameRoomOperations.AddRoom(room);
             return RedirectToAction("Index");
