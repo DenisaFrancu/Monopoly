@@ -9,75 +9,92 @@
 
 @model IEnumerable<Monopoly.Models.Player>;
 
+@{
+    List<Player> players = new List<Player>();
+}
+
 <link rel="stylesheet" href="~/css/game-page.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 <div class="game-body">
     <div class="board">
         <div class="top-line">
-            <img src="~/images/Board/FreePark.png" class="square-image"/>
-            <img src="~/images/Board/KentuckyAvenue.png" class="top-image" onclick="cardClick('Kentucky Avenue', 'Cost: 220$', '/images/Payments/KentuckyAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/FreePark.png" class="square-image" id="FreePark"/>
+            <img src="~/images/Board/KentuckyAvenue.png" class="top-image" id="KentuckyAvenue" onclick="cardClick('Kentucky Avenue', 'Cost: 220$', '/images/Payments/KentuckyAvenue.png')" style="cursor:pointer"/>
             <img src="~/images/Board/TouristTax.png" class="top-image"/>
-            <img src="~/images/Board/IndianaAvenue.png" class="top-image" onclick="cardClick('Indiana Avenue', 'Cost: 220$', '/images/Payments/IndianaAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/IllinoisAvenue.png" class="top-image" onclick="cardClick('Illinois Avenue', 'Cost: 240$', '/images/Payments/IllinoisAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/B&ORailroad.png" class="top-image" onclick="cardClick('B&O Railroad', 'Cost: 200$', '/images/Payments/B&ORailroad.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/AtlanticAvenue.png" class="top-image" onclick="cardClick('Atlantic Avenue', 'Cost: 260$', '/images/Payments/AtlanticAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/VentorAvenue.png" class="top-image" onclick="cardClick('Ventor Avenue', 'Cost: 100$', '/images/Payments/VentorAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/PortlandAirport.png" class="top-image" onclick="cardClick('Portland Airport', 'Cost: 200$', '/images/Payments/PortlandAirport.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/MarvinGardens.png" class="top-image" onclick="cardClick('Marvin Gardens', 'Cost: 280$', '/images/Payments/MarvinGardens.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/GoToJail.png" class="square-image"/>
+            <img src="~/images/Board/IndianaAvenue.png" class="top-image" id="IndianaAvenue" onclick="cardClick('Indiana Avenue', 'Cost: 220$', '/images/Payments/IndianaAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/IllinoisAvenue.png" class="top-image" id="IllinoisAvenue" onclick="cardClick('Illinois Avenue', 'Cost: 240$', '/images/Payments/IllinoisAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/B&ORailroad.png" class="top-image" id="B&ORailroad" onclick="cardClick('B&O Railroad', 'Cost: 200$', '/images/Payments/B&ORailroad.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/AtlanticAvenue.png" class="top-image" id="AtlanticAvenue" onclick="cardClick('Atlantic Avenue', 'Cost: 260$', '/images/Payments/AtlanticAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/VentorAvenue.png" class="top-image" id="VentorAvenue" onclick="cardClick('Ventor Avenue', 'Cost: 260$', '/images/Payments/VentorAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/PortlandAirport.png" class="top-image" id="PortlandAirport" onclick="cardClick('Portland Airport', 'Cost: 200$', '/images/Payments/PortlandAirport.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/MarvinGardens.png" class="top-image" id="MarvinGardens" onclick="cardClick('Marvin Gardens', 'Cost: 280$', '/images/Payments/MarvinGardens.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/GoToJail.png" class="square-image" id="GoToJail"/>
         </div>
 
         <div class="sides">            
             <div class="left-line">
-                <img src="~/images/Board/NewYorkAvenue.png" class="left-image" onclick="cardClick('NewYork Avenue', 'Cost: 200$', '/images/Payments/NewYorkAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/TennesseAvenue.png" class="left-image" onclick="cardClick('Tennesse Avenue', 'Cost: 180$', '/images/Payments/TennesseAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/OrlandoAirport.png" class="left-image" onclick="cardClick('Orlando Airport', 'Cost: 200$', '/images/Payments/OrlandoAirport.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/StJamesPlace.png" class="left-image" onclick="cardClick('St James Place', 'Cost: 180$', '/images/Payments/StJamesPlace.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/PennsylvaniaRailroad.png" class="left-image" onclick="cardClick('Pennsylvania Railroad', 'Cost: 200$', '/images/Payments/PennsylvaniaRailroad.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/VirginiaAvenue.png" class="left-image" onclick="cardClick('Virginia Avenue', 'Cost: 160$', '/images/Payments/VirginiaAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/StatesAvenue.png" class="left-image" onclick="cardClick('States Avenue', 'Cost: 150$', '/images/Payments/StatesAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/LocalTax.png" class="left-image"/>
-                <img src="~/images/Board/StCharlesPlace.png" class="left-image" onclick="cardClick('St Charles Place', 'Cost: 150$', '/images/Payments/StCharlesPlace.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/NewYorkAvenue.png" class="left-image" id="NewYorkAvenue" onclick="cardClick('NewYork Avenue', 'Cost: 200$', '/images/Payments/NewYorkAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/TennesseAvenue.png" class="left-image" id="TennesseAvenue" onclick="cardClick('Tennesse Avenue', 'Cost: 180$', '/images/Payments/TennesseAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/OrlandoAirport.png" class="left-image" id="OrlandoAirport" onclick="cardClick('Orlando Airport', 'Cost: 200$', '/images/Payments/OrlandoAirport.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/StJamesPlace.png" class="left-image" id="StJamesPlace" onclick="cardClick('St James Place', 'Cost: 180$', '/images/Payments/StJamesPlace.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/PennsylvaniaRailroad.png" class="left-image" id="PennsylvaniaRailroad" onclick="cardClick('Pennsylvania Railroad', 'Cost: 200$', '/images/Payments/PennsylvaniaRailroad.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/VirginiaAvenue.png" class="left-image" id="VirginiaAvenue" onclick="cardClick('Virginia Avenue', 'Cost: 160$', '/images/Payments/VirginiaAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/StatesAvenue.png" class="left-image" id="StatesAvenue" onclick="cardClick('States Avenue', 'Cost: 150$', '/images/Payments/StatesAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/LocalTax.png" class="left-image" id="LocalTax"/>
+                <img src="~/images/Board/StCharlesPlace.png" class="left-image" id="StCharlesPlace" onclick="cardClick('St Charles Place', 'Cost: 150$', '/images/Payments/StCharlesPlace.png')" style="cursor:pointer"/>
             </div>
 
             <div class="right-line">
-                <img src="~/images/Board/PacificAvenue.png" class="left-image" onclick="cardClick('Pacific Avenue', 'Cost: 300$', '/images/Payments/PacificAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/NorthCarolinaAvenue.png" class="left-image" onclick="cardClick('North Carolina Avenue', 'Cost: 300$', '/images/Payments/NorthCarolinaAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/IndianapolisAirport.png" class="left-image" onclick="cardClick('Indianapolis Airport', 'Cost: 200$', '/images/Payments/IndianapolisAirport.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/PennsylvaniaAvenue.png" class="left-image" onclick="cardClick('Pennsylvania Avenue', 'Cost: 320$', '/images/Payments/PennsylvaniaAvenue.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/ShortLineRailroad.png" class="left-image" onclick="cardClick('Short Line Railroad', 'Cost: 200$', '/images/Payments/ShortLineRailroad.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/BradleyAirport.png" class="left-image" onclick="cardClick('Bradley Airport', 'Cost: 200$', '/images/Payments/BradleyAirport.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/ParkPlace.png" class="left-image" onclick="cardClick('Park Place', 'Cost: 350$', '/images/Payments/ParkPlace.png')" style="cursor:pointer"/>
-                <img src="~/images/Board/LuxuryTax.png" class="left-image"/>
-                <img src="~/images/Board/Boardwalk.png" class="left-image" onclick="cardClick('Boardwalk', 'Cost: 400$', '/images/Payments/Boardwalk.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/PacificAvenue.png" class="left-image" id="PacificAvenue" onclick="cardClick('Pacific Avenue', 'Cost: 300$', '/images/Payments/PacificAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/NorthCarolinaAvenue.png" class="left-image" id="NorthCarolinaAvenue" onclick="cardClick('North Carolina Avenue', 'Cost: 300$', '/images/Payments/NorthCarolinaAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/IndianapolisAirport.png" class="left-image" id="IndianapolisAirport" onclick="cardClick('Indianapolis Airport', 'Cost: 200$', '/images/Payments/IndianapolisAirport.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/PennsylvaniaAvenue.png" class="left-image" id="PennsylvaniaAvenue" onclick="cardClick('Pennsylvania Avenue', 'Cost: 320$', '/images/Payments/PennsylvaniaAvenue.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/ShortLineRailroad.png" class="left-image" id="ShortLineRailroad" onclick="cardClick('Short Line Railroad', 'Cost: 200$', '/images/Payments/ShortLineRailroad.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/BradleyAirport.png" class="left-image" id="BradleyAirport" onclick="cardClick('Bradley Airport', 'Cost: 200$', '/images/Payments/BradleyAirport.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/ParkPlace.png" class="left-image" id="ParkPlace" onclick="cardClick('Park Place', 'Cost: 350$', '/images/Payments/ParkPlace.png')" style="cursor:pointer"/>
+                <img src="~/images/Board/LuxuryTax.png" class="left-image" id="LuxuryTax"/>
+                <img src="~/images/Board/Boardwalk.png" class="left-image" id="Boardwalk" onclick="cardClick('Boardwalk', 'Cost: 400$', '/images/Payments/Boardwalk.png')" style="cursor:pointer"/>
             </div>
         </div>
 
         <div class="bottom-line">
             <img src="~/images/Board/Jail.png" class="square-image"/>
-            <img src="~/images/Board/ConnecticutAvenue.png" class="top-image" onclick="cardClick('Connecticut Avenue', 'Cost: 110$', '/images/Payments/ConnecticutAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/VermontAvenue.png" class="top-image" onclick="cardClick('Vermont Avenue', 'Cost: 100$', '/images/Payments/VermontAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/MinneapolisAirport.png" class="top-image" onclick="cardClick('Minneapolis Airport', 'Cost: 200$', '/images/Payments/MinneapolisAirport.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/OrientalAvenue.png" class="top-image" onclick="cardClick('Oriental Avenue', 'Cost: 100$', '/images/Payments/OrientalAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/ReadingRailroad.png" class="top-image" onclick="cardClick('Reading Railroad', 'Cost: 200$', '/images/Payments/ReadingRailroad.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/IncomeTax.png" class="top-image"/>
-            <img src="~/images/Board/BalticAvenue.png" class="top-image" onclick="cardClick('Baltic Avenue', 'Cost: 60$', '/images/Payments/BalticAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/DenverAirport.png" class="top-image" onclick="cardClick('Denver Airport', 'Cost: 200$', '/images/Payments/DenverAirport.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/MediteraneanAvenue.png" class="top-image" onclick="cardClick('Mediteranean Avenue', 'Cost: 60$', '/images/Payments/MediteraneanAvenue.png')" style="cursor:pointer"/>
-            <img src="~/images/Board/Start.png" class="square-image"/>
+            <img src="~/images/Board/ConnecticutAvenue.png" class="top-image" id="ConnecticutAvenue" onclick="cardClick('Connecticut Avenue', 'Cost: 110$', '/images/Payments/ConnecticutAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/VermontAvenue.png" class="top-image" id="VermontAvenue" onclick="cardClick('Vermont Avenue', 'Cost: 100$', '/images/Payments/VermontAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/MinneapolisAirport.png" class="top-image" id="MinneapolisAirport" onclick="cardClick('Minneapolis Airport', 'Cost: 200$', '/images/Payments/MinneapolisAirport.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/OrientalAvenue.png" class="top-image" id="OrientalAvenue" onclick="cardClick('Oriental Avenue', 'Cost: 100$', '/images/Payments/OrientalAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/ReadingRailroad.png" class="top-image" id="ReadingRailroad" onclick="cardClick('Reading Railroad', 'Cost: 200$', '/images/Payments/ReadingRailroad.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/IncomeTax.png" class="top-image" id="IncomeTax"/>
+            <img src="~/images/Board/BalticAvenue.png" class="top-image" id="BalticAvenue" onclick="cardClick('Baltic Avenue', 'Cost: 60$', '/images/Payments/BalticAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/DenverAirport.png" class="top-image" id="DenverAirport" onclick="cardClick('Denver Airport', 'Cost: 200$', '/images/Payments/DenverAirport.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/MediteraneanAvenue.png" class="top-image" id="MediteraneanAvenue" onclick="cardClick('Mediteranean Avenue', 'Cost: 60$', '/images/Payments/MediteraneanAvenue.png')" style="cursor:pointer"/>
+            <img src="~/images/Board/Start.png" class="square-image" id="Start"/>
         </div>
     </div>
+</div>
+<div>
+    @if(Model.Count() == 4)
+    {
+        <img src="~/images/Pawns/yellow.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/yellow.png"/>
+    }
+    @if(Model.Count() >= 3)
+    {
+        <img src="~/images/Pawns/red.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/red.png"/>
+    }
+    <img src="~/images/Pawns/green.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/green.png"/>
+    <img src="~/images/Pawns/blue.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/blue.png"/>
 </div>
 
 <div class="players-column">
     <div class="players">
         @foreach (Player player in Model)
         {
+            players.Add(player);
             <div style="display: flex;">
             <img src="@Url.Content(player.Pawn)" class="player-image"/>
             <div>
-                <p style="text-decoration: underline;">Player1:</p>
+                <p style="text-decoration: underline;">Player:</p>
                 <ul>
                     <li>@player.Name</li>
                     <li>@player.Money$</li>
@@ -108,12 +125,15 @@
 <div class="dices">
     <img src="~/images/Dices/dice1.png" id="dice1" class="dice-image"/>
     <img src="~/images/Dices/dice1.png" id="dice2" class="dice-image"/>
-    <button class="roll-button" onclick="rollDice()">Roll dices</button>
+    <button class="roll-button" id="rollDiceBtn">Roll dices</button>    
+    <button class="roll-button" id="endTurnBtn">End turn</button>
+    <button class="roll-button" id="bankruptcyBtn">Bankruptcy</button>
+    <button class="roll-button" id="leaveGameBtn">Leave Game</button>
 </div>
 
 
 @*Card modal popup when click on image*@
-<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="cardModal">
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="cardModal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-md card-modal-dialog" style="width:70vh;margin-left:15vh;margin-top:15vh">
         <div class="modal-content card-modal-content">
 
@@ -133,8 +153,9 @@
         </div>
     </div>
 </div>
-
-<script>
+<input id="modelToJavascript" value="">
+<script type="text/javascript">
+    $('#modelToJavascript').val('@Html.Raw(Json.Serialize(Model))');
     function cardClick(name, subtitle, picturePath){
         $('#modalTitle').html(name);
         $('#modalSubtitle').html(subtitle);
@@ -152,8 +173,10 @@
         $('#cardModal').modal('hide');
     }
 
-    function rollDice()
+    @* function rollDice()
     {
+        var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+        console.log(model)
         $.ajax({
             url: 'RollDice',
             type: 'GET',
@@ -165,7 +188,7 @@
             }
             }
         );
-    }
+    } *@
     function checkRequiredFields()
     {
         if($('#txtmessage').val() != ""){
@@ -185,4 +208,4 @@
 </script>
 
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/chat-game-page.js"></script>
+<script src="~/js/game.js"></script>

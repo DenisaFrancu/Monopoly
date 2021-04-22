@@ -2,39 +2,23 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Monopoly.Models;
 
 namespace Monopoly.Migrations.GameRoom
 {
     [DbContext(typeof(GameRoomContext))]
-    partial class GameRoomContextModelSnapshot : ModelSnapshot
+    [Migration("20210421135303_InitialBaseline")]
+    partial class InitialBaseline
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.5")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("Monopoly.Models.ConnectionIds", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("RoomId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("connectionId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ConnectionIds");
-                });
 
             modelBuilder.Entity("Monopoly.Models.Room", b =>
                 {
@@ -67,6 +51,33 @@ namespace Monopoly.Migrations.GameRoom
                     b.HasKey("RoomId");
 
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("Monopoly.Models.RoomPlayersIds", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("connectionPlayer1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("connectionPlayer2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("connectionPlayer3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("connectionPlayer4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PlayersIds");
                 });
 #pragma warning restore 612, 618
         }

@@ -63,6 +63,7 @@ namespace Monopoly
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
                 endpoints.MapHub<Chat>("/chat");
+                endpoints.MapHub<Game>("/game");
             });
 
             // app.UseSignalR(routes => 

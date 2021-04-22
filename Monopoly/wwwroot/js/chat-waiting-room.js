@@ -16,7 +16,6 @@ connection.on("JoinedRoomMessage", function (user, message) {
     var encodedMsg = user + " " + msg;
     var li = document.createElement("li");
     li.textContent = encodedMsg;
-    console.log("DA")
     document.getElementById("ulGroupMessages").appendChild(li);
     updateScroll();
 });

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Monopoly.Models;
+using Monopoly.Utilities;
 
 namespace Monopoly.Controllers
 {
@@ -12,7 +13,7 @@ namespace Monopoly.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private DiceOperations _diceOperations = new DiceOperations();
-        private DatabaseOperations _gameRoomOperations = new DatabaseOperations();
+        private RoomDatabaseOperations _gameRoomOperations = new RoomDatabaseOperations();
 
         public HomeController(ILogger<HomeController> logger)
         {

@@ -11,19 +11,18 @@ using Monopoly.Areas.Identity.Data;
 using Monopoly.Data;
 using Monopoly.Models;
 
-namespace Monopoly.Controllers
+namespace Monopoly.Utilities
 {
     [Authorize]
-    public class DatabaseOperations
+    public class RoomDatabaseOperations
     {
-        public DatabaseOperations() { }
+        public RoomDatabaseOperations() { }
         
         public void AddRoom(Room room)
         {
             var gameRoomContext = new GameRoomContext();
             gameRoomContext.Rooms.Add(room);
             gameRoomContext.SaveChanges();
-            List<Room> rooms = gameRoomContext.Rooms.ToList();
         }
 
         public void AddPlayerToRoom(int roomId, string player)
@@ -124,7 +123,7 @@ namespace Monopoly.Controllers
                     Pawn = "~/images/pawns/yellow.png"
                 });
             
-            return players.OrderBy(x => x.Name).ToList();
+            return players;
         }
 
         public int GetPlayersCount(string player)

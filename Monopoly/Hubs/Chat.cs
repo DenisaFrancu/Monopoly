@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Monopoly.Areas.Identity.Data;
-using Monopoly.Controllers;
-using Monopoly.Data;
+using Monopoly.Utilities;
 using Monopoly.Models;
 
 namespace Monopoly.Hubs
@@ -13,7 +12,7 @@ namespace Monopoly.Hubs
     public class Chat : Hub
     {
         UserManager<MonopolyUser> _userManager;
-        private DatabaseOperations _gameRoomOperations = new DatabaseOperations();
+        private RoomDatabaseOperations _gameRoomOperations = new RoomDatabaseOperations();
 
         public Chat(UserManager<MonopolyUser> userManager)
         {
