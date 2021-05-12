@@ -25,7 +25,10 @@ connection.on("RedirectToGame", function (room) {
     window.location.href = "Game";
 });
 connection.start().then(function () {
-    connection.invoke('AddToLoby');
+    connection.invoke('AddToLoby').catch(function (err){
+        console.log(err);
+        connection.invoke('AddToLoby');
+    });
     if (!performance.navigation.type == performance.navigation.TYPE_RELOAD){
         connection.invoke("SendJoinedRoomMessage").catch(function (err) {
             return console.error(err.toString());

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 using Monopoly.Areas.Identity.Data;
 using Monopoly.Utilities;
 using Monopoly.Models;
+using System.Collections.Generic;
 
 namespace Monopoly.Hubs
 {
@@ -100,8 +101,8 @@ namespace Monopoly.Hubs
             MonopolyUser user = _userManager.FindByEmailAsync(Context.User.Identity.Name).Result;
             string player = user.FirstName + " " + user.LastName;
             var gameRoomContext = new GameRoomContext();
-            string group = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).First().RoomId.ToString();
-            return group;
+            List<Room> group = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).ToList();
+            return group.Last().RoomId.ToString();
         }     
     }
 }

@@ -96,8 +96,8 @@
             <div>
                 <p style="text-decoration: underline;">Player:</p>
                 <ul>
-                    <li>@player.Name</li>
-                    <li>@player.Money$</li>
+                    <li id="@player.Pawn name">@player.Name</li>
+                    <li id="@player.Pawn money">@player.Money$</li>
                 </ul>
             </div>
         </div>
@@ -125,9 +125,9 @@
 <div class="dices">
     <img src="~/images/Dices/dice1.png" id="dice1" class="dice-image"/>
     <img src="~/images/Dices/dice1.png" id="dice2" class="dice-image"/>
-    <button class="roll-button" id="rollDiceBtn">Roll dices</button>    
-    <button class="roll-button" id="endTurnBtn">End turn</button>
-    <button class="roll-button" id="bankruptcyBtn">Bankruptcy</button>
+    <button class="btn roll-button" id="rollDiceBtn">Roll dices</button>    
+    <button class="btn roll-button" id="endTurnBtn">End turn</button>
+    <button class="btn roll-button" id="bankruptcyBtn">Bankruptcy</button>
     <button class="roll-button" id="leaveGameBtn">Leave Game</button>
 </div>
 
@@ -147,7 +147,10 @@
             </div>
 
             <div class="modal-footer" style="justify-content:center">
-                <button type="button" class="btn close-card-button" onclick="closePopup()">Close</button>
+                <button type="button" class="btn close-card-button" id="buyProperty">Buy</button>
+                <button type="button" class="btn close-card-button" id="buyHouse">Buy house</button>
+                <button type="button" class="btn close-card-button" id="proposeDeal">Propose deal</button>
+                <button type="button" class="btn close-card-button" onclick="closePopup()">Close</button>                
             </div>
 
         </div>
@@ -173,22 +176,6 @@
         $('#cardModal').modal('hide');
     }
 
-    @* function rollDice()
-    {
-        var model = JSON.parse('@Html.Raw(Json.Serialize(Model))');
-        console.log(model)
-        $.ajax({
-            url: 'RollDice',
-            type: 'GET',
-            contentType: 'application/json',
-            success: function(data) {
-                console.log(data);
-                $("#dice1").attr("src", data[0]);
-                $("#dice2").attr("src", data[1]);
-            }
-            }
-        );
-    } *@
     function checkRequiredFields()
     {
         if($('#txtmessage').val() != ""){
@@ -208,4 +195,4 @@
 </script>
 
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script src="~/js/game.js"></script>
+<script type="module" src="~/js/game.js"></script>

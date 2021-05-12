@@ -79,14 +79,13 @@
 
                 <h4 class="rules-text">Jail</h4>
                 <div class="subrules">
-                    A player goes to Jail when he arrive on the "GO TO JAIL" card or when he rolls a double for three times in a row.
+                    A player goes to Jail when he arrive on the "GO TO JAIL"/"JAIL" card or when he rolls a double for three times in a row.
                 </div>
                 <div class="subrules">
-                    The player can roll the dice even if he is in Jail, but he is going to use them only when:
+                    The player gets out of Jail the next round but he is going to pay:
                     <ul>
-                        <li>He already stayed for two rounds.</li>
-                        <li>By paying 20$ if he rolls doubles.</li>
-                        <li>By paying 50$ otherwise.</li>
+                        <li>20$ if he rolls doubles.</li>
+                        <li>50$ otherwise.</li>
                     </ul>
                 </div>
                 <div class="subrules">
@@ -294,7 +293,10 @@
             }
         });
         $('#modalCreateRoom').modal('hide');
-        window.location.href = 'Home/WaitingRoom';
+        if(window.location.href.includes('Index'))
+            url = 'WaitingRoom';
+        else url = 'Home/WaitingRoom'
+        window.location.href = url;
     }
     
     function checkRequiredFields()

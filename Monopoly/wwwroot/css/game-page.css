@@ -158,7 +158,7 @@
     padding: 10px;
 }
 
-.roll-button:hover{
+.roll-button:enabled:hover{
     background-color: #23442F;
     color: white;
 }
