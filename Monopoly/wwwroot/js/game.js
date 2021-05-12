@@ -9,6 +9,7 @@ var numberOfPlayers = 0;
 var playersTurn = 0;
 var dicesSum = 0;
 var numberOfDubles = 0;
+const timer = ms => new Promise(res => setTimeout(res, ms));
 
 connection.start().then(function () {
     console.log(properties);
@@ -89,8 +90,9 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
         }
     }
 
-    if(actualHeight == 90 && actualWidth == 5){       
-        getOutOfJail(dice1, dice2);
+    if(actualHeight == 90 && actualWidth == 5){
+        console.log("into jail");       
+        getOutOfJail(dice1, dice2,pawn);
         //check bankrupcity
     }
 
@@ -171,6 +173,9 @@ async function movePawnByDice(pawn, expectedHeight, expectedWidth){
         findPawnMovementDirection(actualHeight, actualWidth, pawn);
         actualWidth = document.getElementById(pawn).style.marginLeft.slice(0,-2);
         actualHeight = document.getElementById(pawn).style.marginTop.slice(0,-2);
+        if(actualHeight == 90 && actualWidth == 89){
+            getMoneyFromStart(pawn);
+        }
     }
 }
 
@@ -266,7 +271,8 @@ function moveDown(pawn){
     document.getElementById(pawn).style.marginTop = newHeight;
 }
 
-function getOutOfJail(dice1,dice2){
+function getOutOfJail(dice1,dice2, pawn){
+    console.log("into get out of jail");
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1));
@@ -275,5 +281,14 @@ function getOutOfJail(dice1,dice2){
     }else{
         updateMoney = updateMoney - 50;
     }
+    console.log(updateMoney);
+    document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
+}
+
+function getMoneyFromStart(pawn){
+    var moneyElement = pawn + " money";
+    var currentMoney = document.getElementById(moneyElement).innerHTML;
+    var updateMoney = parseInt(currentMoney.slice(0,-1));
+    updateMoney = updateMoney + 200;
     document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
 }
