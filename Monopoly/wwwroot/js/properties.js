@@ -1,6 +1,7 @@
 var properties = {
     p0 : {
         name: "Start",
+        path: "",
         top: 90,
         left: 89,
         owned: true,
@@ -9,6 +10,7 @@ var properties = {
     },
     p1 : {
         name: "MediteraneanAvenue",
+        path: "",
         top: 90,
         left: 79,
         owned: false,
@@ -17,6 +19,7 @@ var properties = {
     },
     p2 : {
         name: "DenverAirport",
+        path: "",
         top: 90,
         left: 71,
         owned: false,
@@ -25,6 +28,7 @@ var properties = {
     },
     p3 : {
         name: "BalticAvenue",
+        path: "",
         top: 90,
         left: 63,
         owned: false,
@@ -33,6 +37,7 @@ var properties = {
     },
     p4 : {
         name: "IncomeTax",
+        path: "",
         top: 90,
         left: 55,
         owned: true,
@@ -41,6 +46,7 @@ var properties = {
     },
     p5 : {
         name: "ReadingRailroad",
+        path: "",
         top: 90,
         left: 47,
         owned: false,
@@ -49,6 +55,7 @@ var properties = {
     },
     p6 : {
         name: "OrientalAvenue",
+        path: "",
         top: 90,
         left: 39,
         owned: false,
@@ -57,6 +64,7 @@ var properties = {
     },
     p7 : {
         name: "MinneapolisAirport",
+        path: "",
         top: 90,
         left: 31,
         owned: false,
@@ -65,6 +73,7 @@ var properties = {
     },
     p8 : {
         name: "VermontAvenue",
+        path: "",
         top: 90,
         left: 23,
         owned: false,
@@ -73,6 +82,7 @@ var properties = {
     },
     p9 : {
         name: "ConnecticutAvenue",
+        path: "",
         top: 90,
         left: 15,
         owned: false,
@@ -81,6 +91,7 @@ var properties = {
     },
     p10 : {
         name: "Jail",
+        path: "",
         top: 90,
         left: 5,
         owned: true,
@@ -89,6 +100,7 @@ var properties = {
     },
     p11 : {
         name: "StCharlesPlace",
+        path: "",
         top: 80,
         left: 5,
         owned: false,
@@ -97,6 +109,7 @@ var properties = {
     },
     p12 : {
         name: "LocalTax",
+        path: "",
         top: 72,
         left: 5,
         owned: true,
@@ -105,6 +118,7 @@ var properties = {
     },
     p13 : {
         name: "StatesAvenue",
+        path: "",
         top: 64,
         left: 5,
         owned: false,
@@ -113,6 +127,7 @@ var properties = {
     },
     p14 : {
         name: "VirginiaAvenue",
+        path: "",
         top: 56,
         left: 5,
         owned: false,
@@ -121,6 +136,7 @@ var properties = {
     },
     p15 : {
         name: "PennsylvaniaRailroad",
+        path: "",
         top: 48,
         left: 5,
         owned: false,
@@ -129,6 +145,7 @@ var properties = {
     },
     p16 : {
         name: "StJamesPlace",
+        path: "",
         top: 40,
         left: 5,
         owned: false,
@@ -137,6 +154,7 @@ var properties = {
     },
     p17 : {
         name: "OrlandoAirport",
+        path: "",
         top: 32,
         left: 5,
         owned: false,
@@ -145,6 +163,7 @@ var properties = {
     },
     p18 : {
         name: "TennesseAvenue",
+        path: "",
         top: 24,
         left: 5,
         owned: false,
@@ -153,6 +172,7 @@ var properties = {
     },
     p19 : {
         name: "NewYorkAvenue",
+        path: "",
         top: 16,
         left: 5,
         owned: false,
@@ -161,6 +181,7 @@ var properties = {
     },
     p20 : {
         name: "FreeParking",
+        path: "",
         top: 6,
         left: 5,
         owned: true,
@@ -169,6 +190,7 @@ var properties = {
     },
     p21 : {
         name: "KentukyAvenue",
+        path: "",
         top: 6,
         left: 15,
         owned: false,
@@ -177,6 +199,7 @@ var properties = {
     },
     p22 : {
         name: "TouristTax",
+        path: "",
         top: 6,
         left: 23,
         owned: true,
@@ -185,6 +208,7 @@ var properties = {
     },
     p23 : {
         name: "IndianaAvenue",
+        path: "",
         top: 6,
         left: 31,
         owned: false,
@@ -193,6 +217,7 @@ var properties = {
     },
     p24 : {
         name: "IllinoisAvenue",
+        path: "",
         top: 6,
         left: 39,
         owned: false,
@@ -201,6 +226,7 @@ var properties = {
     },
     p25 : {
         name: "B&ORailroad",
+        path: "",
         top: 6,
         left: 47,
         owned: false,
@@ -209,6 +235,7 @@ var properties = {
     },
     p26 : {
         name: "AtlanticAvenue",
+        path: "",
         top: 6,
         left: 55,
         owned: false,
@@ -217,6 +244,7 @@ var properties = {
     },
     p27 : {
         name: "VentorAvenue",
+        path: "",
         top: 6,
         left: 63,
         owned: false,
@@ -225,6 +253,7 @@ var properties = {
     },
     p28 : {
         name: "PortlandAirport",
+        path: "",
         top: 6,
         left: 71,
         owned: false,
@@ -233,6 +262,7 @@ var properties = {
     },
     p29 : {
         name: "MarvinGardens",
+        path: "",
         top: 6,
         left: 79,
         owned: false,
@@ -241,6 +271,7 @@ var properties = {
     },
     p30 : {
         name: "GoToJail",
+        path: "",
         top: 6,
         left: 89,
         owned: true,
@@ -249,6 +280,7 @@ var properties = {
     },
     p31 : {
         name: "PacificAvenue",
+        path: "",
         top: 16,
         left: 89,
         owned: false,
@@ -257,6 +289,7 @@ var properties = {
     },
     p32 : {
         name: "NorthCarolinaAvenue",
+        path: "",
         top: 24,
         left: 89,
         owned: false,
@@ -265,6 +298,7 @@ var properties = {
     },
     p33 : {
         name: "IndianapolisAirport",
+        path: "",
         top: 32,
         left: 89,
         owned: false,
@@ -273,6 +307,7 @@ var properties = {
     },
     p34 : {
         name: "PennsylvaniaAvenue",
+        path: "",
         top: 40,
         left: 89,
         owned: false,
@@ -281,6 +316,7 @@ var properties = {
     },
     p35 : {
         name: "ShortLine",
+        path: "",
         top: 48,
         left: 89,
         owned: false,
@@ -289,6 +325,7 @@ var properties = {
     },
     p36 : {
         name: "BradleyAirport",
+        path: "",
         top: 56,
         left: 89,
         owned: false,
@@ -297,6 +334,7 @@ var properties = {
     },
     p37 : {
         name: "ParkPlace",
+        path: "",
         top: 64,
         left: 89,
         owned: false,
@@ -305,6 +343,7 @@ var properties = {
     },
     p38 : {
         name: "LuxuryTax",
+        path: "",
         top: 72,
         left: 89,
         owned: true,
@@ -313,6 +352,7 @@ var properties = {
     },
     p39 : {
         name: "Boardwalk",
+        path: "",
         top: 80,
         left: 89,
         owned: false,
@@ -320,5 +360,3 @@ var properties = {
         rent: 0
     }
 };
-
-export {properties};

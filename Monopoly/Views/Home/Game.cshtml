@@ -129,6 +129,7 @@
     <button class="btn roll-button" id="endTurnBtn">End turn</button>
     <button class="btn roll-button" id="bankruptcyBtn">Bankruptcy</button>
     <button class="roll-button" id="leaveGameBtn">Leave Game</button>
+    <button class="roll-button" onclick="LogInfo()">Test</button>
 </div>
 
 
@@ -157,24 +158,9 @@
     </div>
 </div>
 <input id="modelToJavascript" value="">
+
 <script type="text/javascript">
     $('#modelToJavascript').val('@Html.Raw(Json.Serialize(Model))');
-    function cardClick(name, subtitle, picturePath){
-        $('#modalTitle').html(name);
-        $('#modalSubtitle').html(subtitle);
-        $('#modalImage').attr('src', picturePath);
-        openPopup();
-    }
-
-    function openPopup()
-    {
-        $('#cardModal').modal('show');
-    }
-
-    function closePopup()
-    {
-        $('#cardModal').modal('hide');
-    }
 
     function checkRequiredFields()
     {
@@ -193,6 +179,8 @@
     window.onpageshow = function(evt) { if (evt.persisted) DisableBackButton() }
     window.onunload = function() { void (0) }
 </script>
-
-<script src="~/lib/signalr/dist/browser/signalr.js"></script>
-<script type="module" src="~/js/game.js"></script>
+<head>  
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+    <script type="text/javascript" src="~/js/properties.js"></script>
+    <script type="text/javascript" src="~/js/game.js"></script>
+</head>  

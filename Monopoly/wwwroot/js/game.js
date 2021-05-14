@@ -1,5 +1,4 @@
 "use strict";
-import {properties} from './properties.js';
 //create connection
 var connection = new signalR.HubConnectionBuilder().withUrl("/Game").build();
 //get current players
@@ -7,7 +6,6 @@ var players = new Object();
 var players = JSON.parse(document.getElementById('modelToJavascript').value);
 var numberOfPlayers = 0;
 var playersTurn = 0;
-var dicesSum = 0;
 var numberOfDubles = 0;
 const timer = ms => new Promise(res => setTimeout(res, ms));
 
@@ -87,8 +85,18 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
         if(`${key}` == expectedPosition){
             var expectedWidth = parseInt(`${value.left}`);
             var expectedHeight = parseInt(`${value.top}`);
+            var propertyLand = `${value.name}`;
+            var propertyOwned = `${value.owned}`;
+            var propertyCost = `${value.cost}`;
+            var propertyRent = `${value.rent}`;
         }
     }
+
+    // document.getElementById("#modalTitle").html(propertyLand);
+    // document.getElementById("#modalSubtitle").html(propertyCost);
+    // document.getElementById("#modalImage").attr('src', '/images/Payments/BalticAvenue.png');
+    // document.getElementById("#cardModal").modal('show');
+
 
     if(actualHeight == 90 && actualWidth == 5){
         console.log("into jail");       
@@ -291,4 +299,25 @@ function getMoneyFromStart(pawn){
     var updateMoney = parseInt(currentMoney.slice(0,-1));
     updateMoney = updateMoney + 200;
     document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
+}
+
+function cardClick(name, subtitle, picturePath){
+    $('#modalTitle').html(name);
+    $('#modalSubtitle').html(subtitle);
+    $('#modalImage').attr('src', picturePath);
+    openPopup();
+}
+
+function openPopup()
+{
+    $('#cardModal').modal('show');
+}
+
+function closePopup()
+{
+    $('#cardModal').modal('hide');
+}
+
+function LogInfo(){
+    console.log("from js");
 }
