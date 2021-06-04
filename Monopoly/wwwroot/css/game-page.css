@@ -125,6 +125,7 @@
     border-color: #EBDECB;
     font-weight: bold;
     font-size: x-large;
+    height: 5vh;
 }
 
 .close-card-button:hover{
@@ -236,4 +237,27 @@
     margin: 5px;
     max-height: calc(75vh - 150px);
     overflow-y: auto;
+}
+
+.input-propose{
+    border: none;
+    border: 2px solid #EBDECB;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: x-large;
+    color: #EBDECB;
+    height: 5vh;
+    text-align: center;
+}
+
+.input-propose:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

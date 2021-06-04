@@ -57,6 +57,22 @@ namespace Monopoly.Hubs
             await Clients.Group(GetCurrentGroup()).SendAsync("DisplayRollDices", dice1, dice2, pawn);
         }
 
+        public async Task OpenPopup(int playersTurn, string propertyCost, string propertyLand)
+        {
+            string connection = databaseOperations.GetRoomConnections(databaseOperations.GetRoomId(Context.ConnectionId)).ElementAt(playersTurn);
+            await Clients.Client(connection).SendAsync("DisplayPopup", propertyCost, propertyLand);
+        }
+
+        public async Task PlayerBuysProperty(string color)
+        {
+            await Clients.Group(GetCurrentGroup()).SendAsync("BuysProperty",color);
+        }
+
+        public async Task ProposeDeal(string sender,string  receiver,string  propertyValue,string  proposedProperty,string  message)
+        {
+            
+        }
+
         public MonopolyUser GetCurrentUser()
         {
             return _userManager.FindByEmailAsync(Context.User.Identity.Name).Result;

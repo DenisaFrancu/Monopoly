@@ -7,7 +7,35 @@ var players = JSON.parse(document.getElementById('modelToJavascript').value);
 var numberOfPlayers = 0;
 var playersTurn = 0;
 var numberOfDubles = 0;
+var pawn;
 const timer = ms => new Promise(res => setTimeout(res, ms));
+var imageClickEnabled = false;
+var expectedPosition;
+var clickedProperty = "";
+
+var pawnsColors = {
+    blue:
+    {
+        background: "#5CBCBD",
+        rgb: "rgb(92, 188, 189)"
+
+    },
+    red:
+    {
+        background: "#EB4034",
+        rgb: "rgb(236, 64, 67)"
+    },
+    green:
+    {
+        background: "#6ACF5D",
+        rgb: "rgb(106, 207, 93)"
+    },
+    yellow:
+    {
+        background: "#F0F75c",
+        rgb: "rgb(240, 247, 92)"
+    }
+}
 
 connection.start().then(function () {
     console.log(properties);
@@ -57,19 +85,24 @@ function updateScroll(){
 
 //game functionality
 connection.on("PlayGame", function (turn) {
+    console.log(properties);
     playersTurn=turn;
     numberOfDubles = 0;
+    document.getElementById("proposeDeal").hidden = true;
+    document.getElementById("proposeDeal").disabled = true;
+    document.getElementById("proposeDealValue").style.display = "none";
     document.getElementById("rollDiceBtn").hidden = false;
     document.getElementById("rollDiceBtn").disabled = false;
     document.getElementById("endTurnBtn").hidden = false;
     document.getElementById("endTurnBtn").disabled = true;
-
+    imageClickEnabled = true;
 });
 
-connection.on("DisplayRollDices", function(dice1, dice2, pawn){
+connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
+    pawn = pawnSent;
     $("#dice1").attr("src", dice1);
     $("#dice2").attr("src", dice2);
-    dicesSum = parseInt(dice1.charAt(18)) + parseInt(dice2.charAt(18));
+    var dicesSum = parseInt(dice1.charAt(18)) + parseInt(dice2.charAt(18));
     var actualWidth = document.getElementById(pawn).style.marginLeft.slice(0,-2);
     var actualHeight = document.getElementById(pawn).style.marginTop.slice(0,-2);
     var currentPosition;
@@ -78,8 +111,8 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
             currentPosition = parseInt(`${key}`.replace('p',''));
         }
     }
-
-    var expectedPosition = (currentPosition + dicesSum) % 40;
+    
+    expectedPosition = (currentPosition + dicesSum) % 40;
     expectedPosition = "p" + expectedPosition;
     for (const [key, value] of Object.entries(properties)) {
         if(`${key}` == expectedPosition){
@@ -92,12 +125,6 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
         }
     }
 
-    // document.getElementById("#modalTitle").html(propertyLand);
-    // document.getElementById("#modalSubtitle").html(propertyCost);
-    // document.getElementById("#modalImage").attr('src', '/images/Payments/BalticAvenue.png');
-    // document.getElementById("#cardModal").modal('show');
-
-
     if(actualHeight == 90 && actualWidth == 5){
         console.log("into jail");       
         getOutOfJail(dice1, dice2,pawn);
@@ -105,6 +132,7 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
     }
 
     movePawnByDice(pawn, expectedHeight, expectedWidth).then(() => {
+        console.log(pawn);
         if(dice1 == dice2){
             numberOfDubles++;
             if(numberOfDubles == 3){
@@ -116,6 +144,16 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
                     reset();
                 });
             }else{
+                if(propertyOwned == "false"){
+                    document.getElementById("buyProperty").hidden = false;
+                    cardClick(propertyLand, getPropertyCost(propertyCost), getPropertyPath(propertyLand));
+                    var pawnColor = pawn.replace('~/images/pawns/','');
+                    pawnColor = pawnColor.replace('.png','');
+                }else{
+                    document.getElementById("buyProperty").hidden = true;
+                    checkPayRent(properties[expectedPosition].name, propertyRent);
+                }
+                
                 //buy or pay for property
                 //check bankrupcity
                 document.getElementById("rollDiceBtn").disabled = false;
@@ -126,11 +164,32 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawn){
                 reset();
             });
         }else{
+            if(propertyOwned == "false"){
+                document.getElementById("buyProperty").hidden = false;
+                cardClick(propertyLand, getPropertyCost(propertyCost), getPropertyPath(propertyLand));
+                var pawnColor = pawn.replace('~/images/pawns/','');
+                pawnColor = pawnColor.replace('.png','');
+            }else{
+                document.getElementById("buyProperty").hidden = true;
+                checkPayRent(properties[expectedPosition].name, propertyRent);
+            }            
             //buy or pay for property
             //check bankrupcity
             reset();
         }
     });   
+});
+
+connection.on("DisplayPopup", function(propertyCost, propertyLand) {
+    cardClick(propertyLand, getPropertyCost(propertyCost), getPropertyPath(propertyLand));
+});
+
+connection.on("BuysProperty", function(color) {
+    console.log(expectedPosition);
+    console.log(properties[expectedPosition].name);
+    properties[expectedPosition].owned = true;
+    document.getElementById(properties[expectedPosition].name).style.backgroundColor = color;
+    payRent(properties[expectedPosition].cost);
 });
 
 document.getElementById("rollDiceBtn").addEventListener("click", function (event) {
@@ -153,16 +212,65 @@ document.getElementById("endTurnBtn").addEventListener("click", function (event)
     event.preventDefault();
 });
 
+document.getElementById("proposeDeal").addEventListener("click", function (event) {
+    var sender = pawn;
+    var receiver;
+    var proposedValue = document.getElementById("proposeDealValue").value;
+    var proposedProperty = clickedProperty;
+    var backgroundProposed = document.getElementById(proposedProperty).style.backgroundColor;
+
+    var receiverColor;
+    for (const [key, value] of Object.entries(pawnsColors)) {
+        if(`${value.rgb}` == backgroundProposed){
+            receiverColor = `${key}`;
+        }
+    }
+
+    var playerName = pawn + " name";
+    var name = document.getElementById(playerName).innerHTML;
+    var message = name + " offers you " + proposedValue + "$ for this property.";
+
+    receiver = "~/images/pawns/"+ receiverColor +".png";
+    console.log("proposal from:", sender);
+    console.log("proposal to: ", receiver);
+    console.log("value:", proposedValue);
+    console.log(message);
+    connection.invoke('ProposeDeal',sender, receiver, propertyValue, proposedProperty, message);
+    closePopup();
+});
+
+document.getElementById("buyProperty").addEventListener("click", function (event) {
+    var pawnColor = pawn.replace('~/images/pawns/','');
+    pawnColor = pawnColor.replace('.png','');
+    var color;
+    for (const [key, value] of Object.entries(pawnsColors)) {
+        if(`${key}` == pawnColor){
+            color = `${value.background}`;
+        }
+    }
+    connection.invoke('PlayerBuysProperty',color);
+    closePopup();
+});
+
 function reset(){
     document.getElementById("rollDiceBtn").disabled = true;
     document.getElementById("endTurnBtn").disabled = false;
     numberOfDubles = 0;
 }
 function startGame(){
+    console.log(properties);
     document.getElementById("rollDiceBtn").hidden = true;
     document.getElementById("endTurnBtn").hidden = true;
     document.getElementById("bankruptcyBtn").hidden = true;
     document.getElementById("leaveGameBtn").hidden = false;
+    document.getElementById("buyProperty").hidden = true;
+    document.getElementById("buyHouse").hidden = true;
+    document.getElementById("proposeDeal").hidden = true;
+    document.getElementById("proposeDeal").disabled = true;
+    document.getElementById("proposeDealValue").style.display = "none";
+    document.getElementById("acceptDeal").hidden = true;
+    document.getElementById("declineDeal").hidden = true;
+    imageClickEnabled = false;
 }
 
 function nextPlayer(){
@@ -293,6 +401,14 @@ function getOutOfJail(dice1,dice2, pawn){
     document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
 }
 
+function payRent(rent){
+    var moneyElement = pawn + " money";
+    var currentMoney = document.getElementById(moneyElement).innerHTML;
+    var updateMoney = parseInt(currentMoney.slice(0,-1));
+    updateMoney = updateMoney - rent;
+    document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
+}
+
 function getMoneyFromStart(pawn){
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
@@ -302,10 +418,43 @@ function getMoneyFromStart(pawn){
 }
 
 function cardClick(name, subtitle, picturePath){
-    $('#modalTitle').html(name);
-    $('#modalSubtitle').html(subtitle);
-    $('#modalImage').attr('src', picturePath);
-    openPopup();
+    if(imageClickEnabled){
+        checkProposalAvailable(name);
+        $('#modalTitle').html(name);
+        $('#modalSubtitle').html(subtitle);
+        $('#modalImage').attr('src', picturePath);
+        clickedProperty = name;
+        openPopup();
+    }
+}
+
+function checkProposalAvailable(propertyClicked){
+    var pawnColor = pawn.replace('~/images/pawns/','');
+    pawnColor = pawnColor.replace('.png','')
+    var color;
+    for (const [key, value] of Object.entries(pawnsColors)) {
+        if(`${key}` == pawnColor){
+            color = `${value.rgb}`;
+        }
+    }
+    if(document.getElementById(propertyClicked).style.backgroundColor != color && document.getElementById(propertyClicked).style.backgroundColor != ""){
+        document.getElementById("proposeDeal").hidden = false;
+        document.getElementById("proposeDealValue").style.display = "block";
+    }
+}
+
+function checkPayRent(property, rent){
+    var pawnColor = pawn.replace('~/images/pawns/','');
+    pawnColor = pawnColor.replace('.png','');
+    var color;
+    for (const [key, value] of Object.entries(pawnsColors)) {
+        if(`${key}` == pawnColor){
+            color = `${value.rgb}`;
+        }
+    }
+    if(document.getElementById(property).style.backgroundColor != color){
+        payRent(rent);
+    }
 }
 
 function openPopup()
@@ -316,8 +465,20 @@ function openPopup()
 function closePopup()
 {
     $('#cardModal').modal('hide');
+    document.getElementById("buyProperty").hidden = true;
+    document.getElementById("buyHouse").hidden = true;
+    document.getElementById("proposeDeal").hidden = true;
+    document.getElementById("proposeDeal").disabled = true;
+    document.getElementById("proposeDealValue").style.display = "none";
+    document.getElementById("acceptDeal").hidden = true;
+    document.getElementById("declineDeal").hidden = true;
 }
 
-function LogInfo(){
-    console.log("from js");
+
+function getPropertyCost(propertyCost){
+    return "Cost: " + propertyCost + "$";
+} 
+
+function getPropertyPath(propertyLand){
+    return "/images/Payments/" + propertyLand + ".png";
 }
