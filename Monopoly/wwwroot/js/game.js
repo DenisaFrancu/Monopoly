@@ -45,7 +45,6 @@ var pawnsColors = {
 }
 
 connection.start().then(function () {
-    console.log(properties);
     connection.invoke('AddToGroup');
     players.forEach(element => {
         numberOfPlayers++;
@@ -92,7 +91,6 @@ function updateScroll(){
 
 //game functionality
 connection.on("PlayGame", function (turn) {
-    console.log(properties);
     playersTurn=turn;
     numberOfDubles = 0;
     document.getElementById("proposeDeal").hidden = true;
@@ -110,7 +108,7 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
     $("#dice1").attr("src", dice1);
     $("#dice2").attr("src", dice2);
     var dicesSum = parseInt(dice1.charAt(18)) + parseInt(dice2.charAt(18));
-    dicesSum=3;
+
     var actualWidth = document.getElementById(pawn).style.marginLeft.slice(0,-2);
     var actualHeight = document.getElementById(pawn).style.marginTop.slice(0,-2);
     var currentPosition;
@@ -134,13 +132,11 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
     }
 
     if(actualHeight == 90 && actualWidth == 5){
-        console.log("into jail");       
         getOutOfJail(dice1, dice2,pawn);
         //check bankrupcity
     }
 
     movePawnByDice(pawn, expectedHeight, expectedWidth).then(() => {
-        console.log(pawn);
         if(dice1 == dice2){
             numberOfDubles++;
             if(numberOfDubles == 3){
@@ -162,7 +158,6 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
                     checkPayRent(properties[expectedPosition].name, propertyRent);
                 }
                 
-                //buy or pay for property
                 //check bankrupcity
                 document.getElementById("rollDiceBtn").disabled = false;
                 document.getElementById("endTurnBtn").disabled = true;
@@ -193,11 +188,16 @@ connection.on("DisplayPopup", function(propertyCost, propertyLand) {
 });
 
 connection.on("BuysProperty", function(color) {
-    console.log(expectedPosition);
-    console.log(properties[expectedPosition].name);
     properties[expectedPosition].owned = true;
     document.getElementById(properties[expectedPosition].name).style.backgroundColor = color;
     payRent(properties[expectedPosition].cost);
+    //increase rent if you have more railroads/airports/neighbourhood
+    //railroad land
+    console.log(expectedPosition);
+    increaseRailroadRent(pawn);
+    //airport land
+    increaseAirportRent(pawn);
+
 });
 
 connection.on("ViewDeal", function(proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue){
@@ -206,14 +206,6 @@ connection.on("ViewDeal", function(proposedProperty, pawnSender, pawnReceiver, p
     _pawnReceiver = pawnReceiver;
     _proposedMessage = proposedMessage;
     _proposedValue = proposedValue;
-
-    console.log("----------VIEW DEAL-----------");
-    console.log("pawn sender: ", _pawnSender);
-    console.log("pawn receiver: ", _pawnReceiver);
-    console.log("property: ", _proposedProperty);
-    console.log("message: ", _proposedMessage);
-    console.log("value: ", _proposedValue);
-    console.log("--------------------------------");
 
     document.getElementById("acceptDeal").hidden = false;
     document.getElementById("declineDeal").hidden = false;
@@ -230,14 +222,6 @@ connection.on("ViewProposalResponse", function(proposedProperty, pawnSender, paw
     _proposedMessage = proposedMessage;
     _proposedValue = proposedValue;
 
-    console.log("----------RESPONSE DEAL-----------");
-    console.log("pawn sender: ", _pawnSender);
-    console.log("pawn receiver: ", _pawnReceiver);
-    console.log("property: ", _proposedProperty);
-    console.log("message: ", _proposedMessage);
-    console.log("value: ", _proposedValue);
-    console.log("--------------------------------");
-
     displayProposalResponse(_proposedProperty, _proposedMessage, getPropertyPath(_proposedProperty));
 });
 
@@ -248,17 +232,15 @@ connection.on("SwitchProperty", function(proposedProperty, pawnSender, pawnRecei
     _proposedMessage = proposedMessage;
     _proposedValue = proposedValue;
 
-    console.log("----------SWITCH DEAL-----------");
-    console.log("pawn sender: ", _pawnSender);
-    console.log("pawn receiver: ", _pawnReceiver);
-    console.log("property: ", _proposedProperty);
-    console.log("message: ", _proposedMessage);
-    console.log("value: ", _proposedValue);
-    console.log("--------------------------------");
     var pawnColor = _pawnSender.replace('~/images/pawns/','');
     pawnColor = pawnColor.replace('.png','');
     document.getElementById(_proposedProperty).style.backgroundColor = pawnsColors[pawnColor].background;
     updateMoneyAfterProposal();
+    //update railroad/airport/neighbourhood rent
+    increaseAirportRent(_pawnSender);
+    increaseAirportRent(_pawnReceiver);
+    increaseAirportRent(_pawnSender);
+    increaseAirportRent(_pawnReceiver);
 });
 
 document.getElementById("rollDiceBtn").addEventListener("click", function (event) {
@@ -282,19 +264,10 @@ document.getElementById("endTurnBtn").addEventListener("click", function (event)
 });
 
 document.getElementById("acceptDeal").addEventListener("click", function(event){
-    console.log("----------ACCEPT DEAL-----------");
-    console.log("pawn sender: ", _pawnSender);
-    console.log("pawn receiver: ", _pawnReceiver);
-    console.log("property: ", _proposedProperty);
-    console.log("message: ", _proposedMessage);
-    console.log("value: ", _proposedValue);
-    console.log("--------------------------------");
-
     document.getElementById("acceptDeal").hidden = true;
     document.getElementById("declineDeal").hidden = true;
     document.getElementById("closePopup").hidden = false;
     closePopup();
-    console.log("pawn receiver", _pawnReceiver);
     var playerName = _pawnReceiver + " name";
     var name = document.getElementById(playerName).innerHTML;
     _proposedMessage = name + " accepted your offer.";
@@ -307,14 +280,6 @@ document.getElementById("acceptDeal").addEventListener("click", function(event){
 });
 
 document.getElementById("declineDeal").addEventListener("click", function(event){
-    console.log("----------DECLINE DEAL-----------");
-    console.log("pawn sender: ", _pawnSender);
-    console.log("pawn receiver: ", _pawnReceiver);
-    console.log("property: ", _proposedProperty);
-    console.log("message: ", _proposedMessage);
-    console.log("value: ", _proposedValue);
-    console.log("--------------------------------");
-
     document.getElementById("acceptDeal").hidden = true;
     document.getElementById("declineDeal").hidden = true;
     document.getElementById("closePopup").hidden = false;
@@ -349,14 +314,6 @@ document.getElementById("proposeDeal").addEventListener("click", function (event
     var playerName = _pawnReceiver + " name";
     var receiverName = document.getElementById(playerName).innerHTML;
 
-    console.log("----------PROPOSE DEAL-----------");
-    console.log("pawn sender: ", _pawnSender);
-    console.log("pawn receiver: ", _pawnReceiver);
-    console.log("property: ", _proposedProperty);
-    console.log("message: ", _proposedMessage);
-    console.log("value: ", _proposedValue);
-    console.log("--------------------------------");
-
     connection.invoke('ProposeDeal',receiverName, _proposedProperty, _pawnSender, _pawnReceiver, _proposedMessage, _proposedValue);
     closePopup();
 });
@@ -380,11 +337,10 @@ function reset(){
     numberOfDubles = 0;
 }
 function startGame(){
-    console.log(properties);
     document.getElementById("rollDiceBtn").hidden = true;
     document.getElementById("endTurnBtn").hidden = true;
     document.getElementById("bankruptcyBtn").hidden = true;
-    document.getElementById("leaveGameBtn").hidden = false;
+    // document.getElementById("leaveGameBtn").hidden = false;
     document.getElementById("buyProperty").hidden = true;
     document.getElementById("buyHouse").hidden = true;
     document.getElementById("proposeDeal").hidden = true;
@@ -510,7 +466,6 @@ function moveDown(pawn){
 }
 
 function getOutOfJail(dice1,dice2, pawn){
-    console.log("into get out of jail");
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1));
@@ -519,7 +474,6 @@ function getOutOfJail(dice1,dice2, pawn){
     }else{
         updateMoney = updateMoney - 50;
     }
-    console.log(updateMoney);
     document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
 }
 
@@ -602,24 +556,27 @@ function checkPayRent(property, rent){
         }
     }
     if(document.getElementById(property).style.backgroundColor != color){
-        payRent(rent);
-        var propertyBackground = document.getElementById(property).style.backgroundColor;
-        for (const [key, value] of Object.entries(pawnsColors)) {
-            if(`${value.rgb}` == propertyBackground){
-                player = `${key}`;
+        if(document.getElementById(property).style.backgroundColor == pawnsColors["blue"].rgb ||
+            document.getElementById(property).style.backgroundColor == pawnsColors["red"].rgb ||
+            document.getElementById(property).style.backgroundColor == pawnsColors["green"].rgb ||
+            document.getElementById(property).style.backgroundColor == pawnsColors["yellow"].rgb){
+                payRent(rent);
+                var propertyBackground = document.getElementById(property).style.backgroundColor;
+                for (const [key, value] of Object.entries(pawnsColors)) {
+                    if(`${value.rgb}` == propertyBackground){
+                        player = `${key}`;
+                    }
+                }
+                increaseRent(rent,"~/images/pawns/" + player + ".png");
             }
-        }
-        increaseRent(rent,"~/images/pawns/" + player + ".png");
     }
 }
 
-function openPopup()
-{
+function openPopup(){
     $('#cardModal').modal('show');
 }
 
-function closePopup()
-{
+function closePopup(){
     $('#cardModal').modal('hide');
     document.getElementById("buyProperty").hidden = true;
     document.getElementById("buyHouse").hidden = true;
@@ -640,8 +597,6 @@ function getPropertyPath(propertyLand){
 }
 
 function updateMoneyAfterProposal(){
-    console.log("----------UPDATE MONEY-----------");
-
     var moneyElement = _pawnSender + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1));
@@ -655,3 +610,93 @@ function updateMoneyAfterProposal(){
     document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
 }
 
+function getPawn(pawnPath){
+    var pawnColor = pawn.replace('~/images/pawns/','');
+    pawnColor = pawnColor.replace('.png','');
+    return pawnColor;
+}
+
+function increaseRailroadRent(pawnPath){
+    var backgroundColorPawn = pawnsColors[getPawn(pawnPath)].rgb;
+    var numberOfRailroadsOwned = 0;
+    let railroadsPositions = [];
+    var rent = 25;
+
+    if(document.getElementById(properties["p5"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfRailroadsOwned++;
+        rent = rent * numberOfRailroadsOwned;
+        railroadsPositions.push("p5");
+    }
+    if(document.getElementById(properties["p15"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfRailroadsOwned++;
+        rent = rent * numberOfRailroadsOwned;
+        railroadsPositions.push("p15");
+    }
+    if(document.getElementById(properties["p25"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfRailroadsOwned++;
+        rent = rent * numberOfRailroadsOwned;
+        railroadsPositions.push("p25");
+    }
+    if(document.getElementById(properties["p35"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfRailroadsOwned++;
+        rent = rent * numberOfRailroadsOwned;
+        railroadsPositions.push("p35");
+    }
+
+    railroadsPositions.forEach(function(item){
+        console.log(item);
+        properties[item].rent = rent;
+    });
+}
+
+function increaseAirportRent(pawnPath){
+    var backgroundColorPawn = pawnsColors[getPawn(pawnPath)].rgb;
+    var numberOfAirportssOwned = 0;
+    let airportsPositions = [];
+    var rent;
+
+    if(document.getElementById(properties["p2"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfAirportssOwned++;
+        airportsPositions.push("p2");
+    }
+    if(document.getElementById(properties["p7"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfAirportssOwned++;
+        airportsPositions.push("p7");
+    }
+    if(document.getElementById(properties["p17"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfAirportssOwned++;
+        airportsPositions.push("p17");
+    }
+    if(document.getElementById(properties["p28"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfAirportssOwned++;
+        airportsPositions.push("p28");
+    }
+    if(document.getElementById(properties["p33"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfAirportssOwned++;
+        airportsPositions.push("p33");
+    }
+    if(document.getElementById(properties["p36"].name).style.backgroundColor == backgroundColorPawn){
+        numberOfAirportssOwned++;
+        airportsPositions.push("p36");
+    }
+
+    if(numberOfAirportssOwned == 1){
+        rent = 25;
+    }else if(numberOfAirportssOwned == 2){
+        rent = 50;
+    }else if(numberOfAirportssOwned == 3){
+        rent = 75;
+    }else if(numberOfAirportssOwned == 4){
+        rent = 100;
+    }else if(numberOfAirportssOwned == 5){
+        rent = 150;
+    }else if(numberOfAirportssOwned == 6){
+        rent = 200;
+    }
+
+    console.log(rent);
+    airportsPositions.forEach(function(item){
+        console.log(item);
+        properties[item].rent = rent;
+    });
+}
