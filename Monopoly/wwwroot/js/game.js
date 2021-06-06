@@ -13,6 +13,13 @@ var imageClickEnabled = false;
 var expectedPosition;
 var clickedProperty = "";
 
+//variables needed for proposal
+var _proposedProperty = "";
+var _pawnSender = "";
+var _pawnReceiver = "";
+var _proposedMessage = "";
+var _proposedValue;
+
 var pawnsColors = {
     blue:
     {
@@ -103,6 +110,7 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
     $("#dice1").attr("src", dice1);
     $("#dice2").attr("src", dice2);
     var dicesSum = parseInt(dice1.charAt(18)) + parseInt(dice2.charAt(18));
+    dicesSum=3;
     var actualWidth = document.getElementById(pawn).style.marginLeft.slice(0,-2);
     var actualHeight = document.getElementById(pawn).style.marginTop.slice(0,-2);
     var currentPosition;
@@ -192,6 +200,67 @@ connection.on("BuysProperty", function(color) {
     payRent(properties[expectedPosition].cost);
 });
 
+connection.on("ViewDeal", function(proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue){
+    _proposedProperty = proposedProperty;
+    _pawnSender = pawnSender;
+    _pawnReceiver = pawnReceiver;
+    _proposedMessage = proposedMessage;
+    _proposedValue = proposedValue;
+
+    console.log("----------VIEW DEAL-----------");
+    console.log("pawn sender: ", _pawnSender);
+    console.log("pawn receiver: ", _pawnReceiver);
+    console.log("property: ", _proposedProperty);
+    console.log("message: ", _proposedMessage);
+    console.log("value: ", _proposedValue);
+    console.log("--------------------------------");
+
+    document.getElementById("acceptDeal").hidden = false;
+    document.getElementById("declineDeal").hidden = false;
+    document.getElementById("closePopup").hidden = true;
+    document.getElementById("buyProperty").hidden = true;
+
+    openProposalPopup(_proposedProperty, _proposedMessage, getPropertyPath(_proposedProperty));
+});
+
+connection.on("ViewProposalResponse", function(proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue){
+    _proposedProperty = proposedProperty;
+    _pawnSender = pawnSender;
+    _pawnReceiver = pawnReceiver;
+    _proposedMessage = proposedMessage;
+    _proposedValue = proposedValue;
+
+    console.log("----------RESPONSE DEAL-----------");
+    console.log("pawn sender: ", _pawnSender);
+    console.log("pawn receiver: ", _pawnReceiver);
+    console.log("property: ", _proposedProperty);
+    console.log("message: ", _proposedMessage);
+    console.log("value: ", _proposedValue);
+    console.log("--------------------------------");
+
+    displayProposalResponse(_proposedProperty, _proposedMessage, getPropertyPath(_proposedProperty));
+});
+
+connection.on("SwitchProperty", function(proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue){
+    _proposedProperty = proposedProperty;
+    _pawnSender = pawnSender;
+    _pawnReceiver = pawnReceiver;
+    _proposedMessage = proposedMessage;
+    _proposedValue = proposedValue;
+
+    console.log("----------SWITCH DEAL-----------");
+    console.log("pawn sender: ", _pawnSender);
+    console.log("pawn receiver: ", _pawnReceiver);
+    console.log("property: ", _proposedProperty);
+    console.log("message: ", _proposedMessage);
+    console.log("value: ", _proposedValue);
+    console.log("--------------------------------");
+    var pawnColor = _pawnSender.replace('~/images/pawns/','');
+    pawnColor = pawnColor.replace('.png','');
+    document.getElementById(_proposedProperty).style.backgroundColor = pawnsColors[pawnColor].background;
+    updateMoneyAfterProposal();
+});
+
 document.getElementById("rollDiceBtn").addEventListener("click", function (event) {
     $.ajax({
         url: 'RollDice',
@@ -212,30 +281,83 @@ document.getElementById("endTurnBtn").addEventListener("click", function (event)
     event.preventDefault();
 });
 
-document.getElementById("proposeDeal").addEventListener("click", function (event) {
-    var sender = pawn;
-    var receiver;
-    var proposedValue = document.getElementById("proposeDealValue").value;
-    var proposedProperty = clickedProperty;
-    var backgroundProposed = document.getElementById(proposedProperty).style.backgroundColor;
+document.getElementById("acceptDeal").addEventListener("click", function(event){
+    console.log("----------ACCEPT DEAL-----------");
+    console.log("pawn sender: ", _pawnSender);
+    console.log("pawn receiver: ", _pawnReceiver);
+    console.log("property: ", _proposedProperty);
+    console.log("message: ", _proposedMessage);
+    console.log("value: ", _proposedValue);
+    console.log("--------------------------------");
 
+    document.getElementById("acceptDeal").hidden = true;
+    document.getElementById("declineDeal").hidden = true;
+    document.getElementById("closePopup").hidden = false;
+    closePopup();
+    console.log("pawn receiver", _pawnReceiver);
+    var playerName = _pawnReceiver + " name";
+    var name = document.getElementById(playerName).innerHTML;
+    _proposedMessage = name + " accepted your offer.";
+
+    var playerName = _pawnSender + " name";
+    var receiverName = document.getElementById(playerName).innerHTML;
+
+    connection.invoke('ShowResponse',receiverName, _proposedProperty, _pawnSender, _pawnReceiver, _proposedMessage, _proposedValue);
+    connection.invoke('ChangeProperty', _proposedProperty, _pawnSender, _pawnReceiver, _proposedMessage, _proposedValue);
+});
+
+document.getElementById("declineDeal").addEventListener("click", function(event){
+    console.log("----------DECLINE DEAL-----------");
+    console.log("pawn sender: ", _pawnSender);
+    console.log("pawn receiver: ", _pawnReceiver);
+    console.log("property: ", _proposedProperty);
+    console.log("message: ", _proposedMessage);
+    console.log("value: ", _proposedValue);
+    console.log("--------------------------------");
+
+    document.getElementById("acceptDeal").hidden = true;
+    document.getElementById("declineDeal").hidden = true;
+    document.getElementById("closePopup").hidden = false;
+    closePopup();
+
+    var playerName = _pawnReceiver + " name";
+    var name = document.getElementById(playerName).innerHTML;
+    _proposedMessage = name + " declined your offer.";
+
+    var playerName = _pawnSender + " name";
+    var receiverName = document.getElementById(playerName).innerHTML;
+
+    connection.invoke('ShowResponse',receiverName, _proposedProperty, _pawnSender, _pawnReceiver, _proposedMessage, _proposedValue);
+});
+
+document.getElementById("proposeDeal").addEventListener("click", function (event) {
+    _pawnSender = pawn;
+    _proposedValue = document.getElementById("proposeDealValue").value;
+    _proposedProperty = clickedProperty;
+
+    var backgroundProposed = document.getElementById(_proposedProperty).style.backgroundColor;
     var receiverColor;
     for (const [key, value] of Object.entries(pawnsColors)) {
         if(`${value.rgb}` == backgroundProposed){
             receiverColor = `${key}`;
         }
     }
-
     var playerName = pawn + " name";
     var name = document.getElementById(playerName).innerHTML;
-    var message = name + " offers you " + proposedValue + "$ for this property.";
+    _proposedMessage = name + " offers you " + _proposedValue + "$ for this property.";
+    _pawnReceiver = "~/images/pawns/"+ receiverColor +".png";
+    var playerName = _pawnReceiver + " name";
+    var receiverName = document.getElementById(playerName).innerHTML;
 
-    receiver = "~/images/pawns/"+ receiverColor +".png";
-    console.log("proposal from:", sender);
-    console.log("proposal to: ", receiver);
-    console.log("value:", proposedValue);
-    console.log(message);
-    connection.invoke('ProposeDeal',sender, receiver, propertyValue, proposedProperty, message);
+    console.log("----------PROPOSE DEAL-----------");
+    console.log("pawn sender: ", _pawnSender);
+    console.log("pawn receiver: ", _pawnReceiver);
+    console.log("property: ", _proposedProperty);
+    console.log("message: ", _proposedMessage);
+    console.log("value: ", _proposedValue);
+    console.log("--------------------------------");
+
+    connection.invoke('ProposeDeal',receiverName, _proposedProperty, _pawnSender, _pawnReceiver, _proposedMessage, _proposedValue);
     closePopup();
 });
 
@@ -409,6 +531,14 @@ function payRent(rent){
     document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
 }
 
+function increaseRent(rent, player){
+    var moneyElement = player + " money";
+    var currentMoney = document.getElementById(moneyElement).innerHTML;
+    var updateMoney = parseInt(currentMoney.slice(0,-1));
+    updateMoney = updateMoney + parseInt(rent);
+    document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
+}
+
 function getMoneyFromStart(pawn){
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
@@ -426,6 +556,24 @@ function cardClick(name, subtitle, picturePath){
         clickedProperty = name;
         openPopup();
     }
+}
+
+function openProposalPopup(name, subtitle, picturePath){
+    $('#modalTitle').html(name);
+    $('#modalSubtitle').html(subtitle);
+    $('#modalImage').attr('src', picturePath);
+    clickedProperty = name;
+    openPopup();
+}
+
+function displayProposalResponse(name, subtitle, picturePath){
+    document.getElementById("acceptDeal").hidden = true;
+    document.getElementById("declineDeal").hidden = true;
+    document.getElementById("closePopup").hidden = false;
+    $('#modalTitle').html(name);
+    $('#modalSubtitle').html(subtitle);
+    $('#modalImage').attr('src', picturePath);
+    openPopup();
 }
 
 function checkProposalAvailable(propertyClicked){
@@ -447,6 +595,7 @@ function checkPayRent(property, rent){
     var pawnColor = pawn.replace('~/images/pawns/','');
     pawnColor = pawnColor.replace('.png','');
     var color;
+    var player;
     for (const [key, value] of Object.entries(pawnsColors)) {
         if(`${key}` == pawnColor){
             color = `${value.rgb}`;
@@ -454,6 +603,13 @@ function checkPayRent(property, rent){
     }
     if(document.getElementById(property).style.backgroundColor != color){
         payRent(rent);
+        var propertyBackground = document.getElementById(property).style.backgroundColor;
+        for (const [key, value] of Object.entries(pawnsColors)) {
+            if(`${value.rgb}` == propertyBackground){
+                player = `${key}`;
+            }
+        }
+        increaseRent(rent,"~/images/pawns/" + player + ".png");
     }
 }
 
@@ -482,3 +638,20 @@ function getPropertyCost(propertyCost){
 function getPropertyPath(propertyLand){
     return "/images/Payments/" + propertyLand + ".png";
 }
+
+function updateMoneyAfterProposal(){
+    console.log("----------UPDATE MONEY-----------");
+
+    var moneyElement = _pawnSender + " money";
+    var currentMoney = document.getElementById(moneyElement).innerHTML;
+    var updateMoney = parseInt(currentMoney.slice(0,-1));
+    updateMoney = updateMoney - _proposedValue;
+    document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
+
+    moneyElement = _pawnReceiver + " money";
+    currentMoney = document.getElementById(moneyElement).innerHTML;
+    updateMoney = parseInt(currentMoney.slice(0,-1));
+    updateMoney = updateMoney + parseInt(_proposedValue);
+    document.getElementById(moneyElement).innerHTML = (updateMoney + "$").toString();
+}
+

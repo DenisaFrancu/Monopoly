@@ -30,5 +30,6 @@ namespace Monopoly.Models
         public int Id { get; set; }
         public int RoomId { get; set; }
         public string connectionId { get; set; }
+        public string PlayerName { get; set; }
     }
 }

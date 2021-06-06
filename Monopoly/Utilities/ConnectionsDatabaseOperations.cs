@@ -35,5 +35,12 @@ namespace Monopoly.Utilities
             ConnectionIds room = connectionIdsContext.ConnectionIds.Where(x => x.connectionId == connection).FirstOrDefault();
             return room.RoomId;
         }
+
+        public string getConnectionForPlayer(string playerName, int roomId)
+        {
+            List<string> connectionsIds = new List<string>();
+            var connectionIdsContext = new GameRoomContext();
+            return connectionIdsContext.ConnectionIds.Where(x => x.RoomId == roomId && x.PlayerName == playerName).FirstOrDefault().connectionId;
+        }
     }
 }

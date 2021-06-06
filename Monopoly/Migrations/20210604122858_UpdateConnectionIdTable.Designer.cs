@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Monopoly.Data;
 
 namespace Monopoly.Migrations
 {
     [DbContext(typeof(MonopolyDbContext))]
-    partial class MonopolyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210604122858_UpdateConnectionIdTable")]
+    partial class UpdateConnectionIdTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

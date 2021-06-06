@@ -27,10 +27,12 @@ namespace Monopoly.Hubs
             string group = GetCurrentGroup();
             await Groups.AddToGroupAsync(Context.ConnectionId, group);
             int roomId = Int32.Parse(group);
+            string player = GetCurrentPlayerName();
             await databaseOperations.AddRoom(new ConnectionIds()
             {
                 RoomId = roomId,
-                connectionId = Context.ConnectionId
+                connectionId = Context.ConnectionId,
+                PlayerName = player
             });
         }
 
@@ -68,9 +70,21 @@ namespace Monopoly.Hubs
             await Clients.Group(GetCurrentGroup()).SendAsync("BuysProperty",color);
         }
 
-        public async Task ProposeDeal(string sender,string  receiver,string  propertyValue,string  proposedProperty,string  message)
+        public async Task ProposeDeal(string receiverName, string proposedProperty, string pawnSender, string pawnReceiver, string proposedMessage, string proposedValue)
         {
-            
+            string connection = databaseOperations.getConnectionForPlayer(receiverName,databaseOperations.GetRoomId(Context.ConnectionId));
+            await Clients.Client(connection).SendAsync("ViewDeal", proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue);
+        }
+
+        public async Task ShowResponse(string receiverName, string proposedProperty, string pawnSender, string pawnReceiver, string proposedMessage, string proposedValue)
+        {
+            string connection = databaseOperations.getConnectionForPlayer(receiverName,databaseOperations.GetRoomId(Context.ConnectionId));
+            await Clients.Client(connection).SendAsync("ViewProposalResponse", proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue);
+        }
+
+        public async Task ChangeProperty(string proposedProperty, string pawnSender, string pawnReceiver, string proposedMessage, string proposedValue)
+        {
+            await Clients.Group(GetCurrentGroup()).SendAsync("SwitchProperty", proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue);
         }
 
         public MonopolyUser GetCurrentUser()
@@ -85,6 +99,13 @@ namespace Monopoly.Hubs
             var gameRoomContext = new GameRoomContext();
             string group = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).First().RoomId.ToString();
             return group;
+        }
+
+        public string GetCurrentPlayerName()
+        {
+            MonopolyUser user = _userManager.FindByEmailAsync(Context.User.Identity.Name).Result;
+            string player = user.FirstName + " " + user.LastName;
+            return player;
         } 
     }
 }
