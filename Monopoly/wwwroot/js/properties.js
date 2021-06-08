@@ -5,7 +5,8 @@ var properties = {
         left: 89,
         owned: true,
         cost: 0,
-        rent: 0
+        rent: 0,
+        basicRent: 0
     },
     p1 : {
         name: "MediteraneanAvenue",
@@ -13,7 +14,8 @@ var properties = {
         left: 79,
         owned: false,
         cost: 60,
-        rent: 10
+        rent: 2,
+        basicRent: 2
     },
     p2 : {
         name: "DenverAirport",
@@ -21,7 +23,8 @@ var properties = {
         left: 71,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p3 : {
         name: "BalticAvenue",
@@ -29,7 +32,8 @@ var properties = {
         left: 63,
         owned: false,
         cost: 60,
-        rent: 4
+        rent: 4,
+        basicRent: 4
     },
     p4 : {
         name: "IncomeTax",
@@ -37,7 +41,8 @@ var properties = {
         left: 55,
         owned: true,
         cost: 0,
-        rent: 200
+        rent: 200,
+        basicRent: 200
     },
     p5 : {
         name: "ReadingRailroad",
@@ -45,7 +50,8 @@ var properties = {
         left: 47,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p6 : {
         name: "OrientalAvenue",
@@ -53,7 +59,8 @@ var properties = {
         left: 39,
         owned: false,
         cost: 100,
-        rent: 6
+        rent: 6,
+        basicRent: 6
     },
     p7 : {
         name: "MinneapolisAirport",
@@ -61,7 +68,8 @@ var properties = {
         left: 31,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p8 : {
         name: "VermontAvenue",
@@ -69,7 +77,8 @@ var properties = {
         left: 23,
         owned: false,
         cost: 100,
-        rent: 6
+        rent: 6,
+        basicRent: 6
     },
     p9 : {
         name: "ConnecticutAvenue",
@@ -77,7 +86,8 @@ var properties = {
         left: 15,
         owned: false,
         cost: 110,
-        rent: 8
+        rent: 8,
+        basicRent: 8
     },
     p10 : {
         name: "Jail",
@@ -85,7 +95,8 @@ var properties = {
         left: 5,
         owned: true,
         cost: 0,
-        rent: 0
+        rent: 0,
+        basicRent: 0
     },
     p11 : {
         name: "StCharlesPlace",
@@ -93,7 +104,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 150,
-        rent: 10
+        rent: 10,
+        basicRent: 10
     },
     p12 : {
         name: "LocalTax",
@@ -101,7 +113,8 @@ var properties = {
         left: 5,
         owned: true,
         cost: 0,
-        rent: 100
+        rent: 100,
+        basicRent: 100
     },
     p13 : {
         name: "StatesAvenue",
@@ -109,7 +122,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 150,
-        rent: 10
+        rent: 10,
+        basicRent: 10
     },
     p14 : {
         name: "VirginiaAvenue",
@@ -117,7 +131,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 160,
-        rent: 12
+        rent: 12,
+        basicRent: 12
     },
     p15 : {
         name: "PennsylvaniaRailroad",
@@ -125,7 +140,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p16 : {
         name: "StJamesPlace",
@@ -133,7 +149,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 180,
-        rent: 14
+        rent: 14,
+        basicRent: 14
     },
     p17 : {
         name: "OrlandoAirport",
@@ -141,7 +158,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p18 : {
         name: "TennesseAvenue",
@@ -149,7 +167,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 180,
-        rent: 14
+        rent: 14,
+        basicRent: 14
     },
     p19 : {
         name: "NewYorkAvenue",
@@ -157,7 +176,8 @@ var properties = {
         left: 5,
         owned: false,
         cost: 200,
-        rent: 16
+        rent: 16,
+        basicRent: 16
     },
     p20 : {
         name: "FreeParking",
@@ -165,7 +185,8 @@ var properties = {
         left: 5,
         owned: true,
         cost: 0,
-        rent: 0
+        rent: 0,
+        basicRent: 0
     },
     p21 : {
         name: "KentuckyAvenue",
@@ -173,7 +194,8 @@ var properties = {
         left: 15,
         owned: false,
         cost: 220,
-        rent: 18
+        rent: 18,
+        basicRent: 18
     },
     p22 : {
         name: "TouristTax",
@@ -181,7 +203,8 @@ var properties = {
         left: 23,
         owned: true,
         cost: 0,
-        rent: 200
+        rent: 200,
+        basicRent: 200
     },
     p23 : {
         name: "IndianaAvenue",
@@ -189,7 +212,8 @@ var properties = {
         left: 31,
         owned: false,
         cost: 220,
-        rent: 18
+        rent: 18,
+        basicRent: 18
     },
     p24 : {
         name: "IllinoisAvenue",
@@ -197,7 +221,8 @@ var properties = {
         left: 39,
         owned: false,
         cost: 240,
-        rent: 20
+        rent: 20,
+        basicRent: 20
     },
     p25 : {
         name: "B&ORailroad",
@@ -205,7 +230,8 @@ var properties = {
         left: 47,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p26 : {
         name: "AtlanticAvenue",
@@ -213,7 +239,8 @@ var properties = {
         left: 55,
         owned: false,
         cost: 260,
-        rent: 22
+        rent: 22,
+        basicRent: 22
     },
     p27 : {
         name: "VentorAvenue",
@@ -221,7 +248,8 @@ var properties = {
         left: 63,
         owned: false,
         cost: 260,
-        rent: 22
+        rent: 22,
+        basicRent: 22
     },
     p28 : {
         name: "PortlandAirport",
@@ -229,7 +257,8 @@ var properties = {
         left: 71,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p29 : {
         name: "MarvinGardens",
@@ -237,7 +266,8 @@ var properties = {
         left: 79,
         owned: false,
         cost: 280,
-        rent: 24
+        rent: 24,
+        basicRent: 24
     },
     p30 : {
         name: "GoToJail",
@@ -245,7 +275,8 @@ var properties = {
         left: 89,
         owned: true,
         cost: 0,
-        rent: 0
+        rent: 0,
+        basicRent: 0
     },
     p31 : {
         name: "PacificAvenue",
@@ -253,7 +284,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 300,
-        rent: 26
+        rent: 26,
+        basicRent: 26
     },
     p32 : {
         name: "NorthCarolinaAvenue",
@@ -261,7 +293,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 300,
-        rent: 26
+        rent: 26,
+        basicRent: 26
     },
     p33 : {
         name: "IndianapolisAirport",
@@ -269,7 +302,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p34 : {
         name: "PennsylvaniaAvenue",
@@ -277,7 +311,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 320,
-        rent: 28
+        rent: 28,
+        basicRent: 28
     },
     p35 : {
         name: "ShortLineRailroad",
@@ -285,7 +320,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p36 : {
         name: "BradleyAirport",
@@ -293,7 +329,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 200,
-        rent: 25
+        rent: 25,
+        basicRent: 25
     },
     p37 : {
         name: "ParkPlace",
@@ -301,7 +338,8 @@ var properties = {
         left: 89,
         owned: false,
         cost: 350,
-        rent: 35
+        rent: 35,
+        basicRent: 35
     },
     p38 : {
         name: "LuxuryTax",
@@ -309,7 +347,8 @@ var properties = {
         left: 89,
         owned: true,
         cost: 0,
-        rent: 75
+        rent: 75,
+        basicRent: 75
     },
     p39 : {
         name: "Boardwalk",
@@ -317,6 +356,7 @@ var properties = {
         left: 89,
         owned: false,
         cost: 400,
-        rent: 50
+        rent: 50,
+        basicRent: 50
     }
 };
