@@ -89,6 +89,7 @@
 .top-image{
     width: 8vh;
     height: 13vh;
+    background-color: rgb(255,255,255);
 }
 
 .square-image{
@@ -99,6 +100,7 @@
 .left-image{
     height: 8vh;
     width: 13vh;
+    background-color: rgb(255,255,255);
 }
 
 .card-modal-dialog{

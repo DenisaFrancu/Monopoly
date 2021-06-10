@@ -70,6 +70,16 @@ namespace Monopoly.Hubs
             await Clients.Group(GetCurrentGroup()).SendAsync("BuysProperty",color);
         }
 
+        public async Task PlayerBuysHouse(string clickedProperty)
+        {
+            await Clients.Group(GetCurrentGroup()).SendAsync("DisplayPlayerBuysHouse", clickedProperty);
+        }
+
+        public async Task PlayerSellsHouse(string clickedProperty)
+        {
+            await Clients.Group(GetCurrentGroup()).SendAsync("DisplayPlayerSellsHouse", clickedProperty);
+        }
+
         public async Task ProposeDeal(string receiverName, string proposedProperty, string pawnSender, string pawnReceiver, string proposedMessage, string proposedValue)
         {
             string connection = databaseOperations.getConnectionForPlayer(receiverName,databaseOperations.GetRoomId(Context.ConnectionId));

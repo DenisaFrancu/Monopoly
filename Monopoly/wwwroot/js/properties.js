@@ -6,7 +6,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 0,
-        basicRent: 0
+        basicRent: 0,
+        houses: 0,
+        buyEnabled: false
     },
     p1 : {
         name: "MediteraneanAvenue",
@@ -15,7 +17,14 @@ var properties = {
         owned: false,
         cost: 60,
         rent: 2,
-        basicRent: 2
+        basicRent: 2,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 30,
+        house1: 10,
+        house2: 30,
+        house3: 90,
+        house4: 160
     },
     p2 : {
         name: "DenverAirport",
@@ -24,7 +33,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p3 : {
         name: "BalticAvenue",
@@ -33,7 +44,14 @@ var properties = {
         owned: false,
         cost: 60,
         rent: 4,
-        basicRent: 4
+        basicRent: 4,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 30,
+        house1: 20,
+        house2: 60,
+        house3: 180,
+        house4: 320
     },
     p4 : {
         name: "IncomeTax",
@@ -42,7 +60,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 200,
-        basicRent: 200
+        basicRent: 200,
+        houses: 0,
+        buyEnabled: false
     },
     p5 : {
         name: "ReadingRailroad",
@@ -51,7 +71,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p6 : {
         name: "OrientalAvenue",
@@ -60,7 +82,14 @@ var properties = {
         owned: false,
         cost: 100,
         rent: 6,
-        basicRent: 6
+        basicRent: 6,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 50,
+        house1: 30,
+        house2: 90,
+        house3: 270,
+        house4: 400
     },
     p7 : {
         name: "MinneapolisAirport",
@@ -69,7 +98,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p8 : {
         name: "VermontAvenue",
@@ -78,7 +109,14 @@ var properties = {
         owned: false,
         cost: 100,
         rent: 6,
-        basicRent: 6
+        basicRent: 6,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 50,
+        house1: 30,
+        house2: 90,
+        house3: 270,
+        house4: 400
     },
     p9 : {
         name: "ConnecticutAvenue",
@@ -87,7 +125,14 @@ var properties = {
         owned: false,
         cost: 110,
         rent: 8,
-        basicRent: 8
+        basicRent: 8,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 60,
+        house1: 40,
+        house2: 100,
+        house3: 300,
+        house4: 450
     },
     p10 : {
         name: "Jail",
@@ -96,7 +141,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 0,
-        basicRent: 0
+        basicRent: 0,
+        houses: 0,
+        buyEnabled: false
     },
     p11 : {
         name: "StCharlesPlace",
@@ -105,7 +152,14 @@ var properties = {
         owned: false,
         cost: 150,
         rent: 10,
-        basicRent: 10
+        basicRent: 10,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 100,
+        house1: 50,
+        house2: 150,
+        house3: 450,
+        house4: 625
     },
     p12 : {
         name: "LocalTax",
@@ -114,7 +168,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 100,
-        basicRent: 100
+        basicRent: 100,
+        houses: 0,
+        buyEnabled: false
     },
     p13 : {
         name: "StatesAvenue",
@@ -123,7 +179,14 @@ var properties = {
         owned: false,
         cost: 150,
         rent: 10,
-        basicRent: 10
+        basicRent: 10,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 100,
+        house1: 50,
+        house2: 150,
+        house3: 450,
+        house4: 625
     },
     p14 : {
         name: "VirginiaAvenue",
@@ -132,7 +195,14 @@ var properties = {
         owned: false,
         cost: 160,
         rent: 12,
-        basicRent: 12
+        basicRent: 12,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 100,
+        house1: 60,
+        house2: 180,
+        house3: 500,
+        house4: 700
     },
     p15 : {
         name: "PennsylvaniaRailroad",
@@ -141,7 +211,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p16 : {
         name: "StJamesPlace",
@@ -150,7 +222,14 @@ var properties = {
         owned: false,
         cost: 180,
         rent: 14,
-        basicRent: 14
+        basicRent: 14,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 100,
+        house1: 70,
+        house2: 200,
+        house3: 550,
+        house4: 750
     },
     p17 : {
         name: "OrlandoAirport",
@@ -159,7 +238,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p18 : {
         name: "TennesseAvenue",
@@ -168,7 +249,14 @@ var properties = {
         owned: false,
         cost: 180,
         rent: 14,
-        basicRent: 14
+        basicRent: 14,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 100,
+        house1: 70,
+        house2: 200,
+        house3: 550,
+        house4: 750
     },
     p19 : {
         name: "NewYorkAvenue",
@@ -177,7 +265,14 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 16,
-        basicRent: 16
+        basicRent: 16,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 100,
+        house1: 80,
+        house2: 220,
+        house3: 600,
+        house4: 800
     },
     p20 : {
         name: "FreeParking",
@@ -186,7 +281,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 0,
-        basicRent: 0
+        basicRent: 0,
+        houses: 0,
+        buyEnabled: false
     },
     p21 : {
         name: "KentuckyAvenue",
@@ -195,7 +292,14 @@ var properties = {
         owned: false,
         cost: 220,
         rent: 18,
-        basicRent: 18
+        basicRent: 18,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 150,
+        house1: 90,
+        house2: 250,
+        house3: 700,
+        house4: 875
     },
     p22 : {
         name: "TouristTax",
@@ -204,7 +308,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 200,
-        basicRent: 200
+        basicRent: 200,
+        houses: 0,
+        buyEnabled: false
     },
     p23 : {
         name: "IndianaAvenue",
@@ -213,7 +319,14 @@ var properties = {
         owned: false,
         cost: 220,
         rent: 18,
-        basicRent: 18
+        basicRent: 18,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 150,
+        house1: 90,
+        house2: 250,
+        house3: 700,
+        house4: 875
     },
     p24 : {
         name: "IllinoisAvenue",
@@ -222,7 +335,14 @@ var properties = {
         owned: false,
         cost: 240,
         rent: 20,
-        basicRent: 20
+        basicRent: 20,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 150,
+        house1: 100,
+        house2: 300,
+        house3: 750,
+        house4: 925
     },
     p25 : {
         name: "B&ORailroad",
@@ -231,7 +351,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p26 : {
         name: "AtlanticAvenue",
@@ -240,7 +362,14 @@ var properties = {
         owned: false,
         cost: 260,
         rent: 22,
-        basicRent: 22
+        basicRent: 22,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 150,
+        house1: 110,
+        house2: 330,
+        house3: 800,
+        house4: 975
     },
     p27 : {
         name: "VentorAvenue",
@@ -249,7 +378,14 @@ var properties = {
         owned: false,
         cost: 260,
         rent: 22,
-        basicRent: 22
+        basicRent: 22,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 150,
+        house1: 110,
+        house2: 330,
+        house3: 800,
+        house4: 975
     },
     p28 : {
         name: "PortlandAirport",
@@ -258,7 +394,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p29 : {
         name: "MarvinGardens",
@@ -267,7 +405,13 @@ var properties = {
         owned: false,
         cost: 280,
         rent: 24,
-        basicRent: 24
+        basicRent: 24,
+        houses: 0,
+        houseCost: 150,
+        house1: 120,
+        house2: 360,
+        house3: 850,
+        house4: 1025
     },
     p30 : {
         name: "GoToJail",
@@ -276,7 +420,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 0,
-        basicRent: 0
+        basicRent: 0,
+        houses: 0,
+        buyEnabled: false
     },
     p31 : {
         name: "PacificAvenue",
@@ -285,7 +431,14 @@ var properties = {
         owned: false,
         cost: 300,
         rent: 26,
-        basicRent: 26
+        basicRent: 26,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 200,
+        house1: 130,
+        house2: 390,
+        house3: 900,
+        house4: 1100
     },
     p32 : {
         name: "NorthCarolinaAvenue",
@@ -294,7 +447,14 @@ var properties = {
         owned: false,
         cost: 300,
         rent: 26,
-        basicRent: 26
+        basicRent: 26,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 200,
+        house1: 130,
+        house2: 390,
+        house3: 900,
+        house4: 1100
     },
     p33 : {
         name: "IndianapolisAirport",
@@ -303,7 +463,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p34 : {
         name: "PennsylvaniaAvenue",
@@ -312,7 +474,14 @@ var properties = {
         owned: false,
         cost: 320,
         rent: 28,
-        basicRent: 28
+        basicRent: 28,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 200,
+        house1: 150,
+        house2: 450,
+        house3: 1000,
+        house4: 1200
     },
     p35 : {
         name: "ShortLineRailroad",
@@ -321,7 +490,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p36 : {
         name: "BradleyAirport",
@@ -330,7 +501,9 @@ var properties = {
         owned: false,
         cost: 200,
         rent: 25,
-        basicRent: 25
+        basicRent: 25,
+        houses: 0,
+        buyEnabled: false
     },
     p37 : {
         name: "ParkPlace",
@@ -339,7 +512,14 @@ var properties = {
         owned: false,
         cost: 350,
         rent: 35,
-        basicRent: 35
+        basicRent: 35,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 175,
+        house1: 175,
+        house2: 500,
+        house3: 1100,
+        house4: 1300
     },
     p38 : {
         name: "LuxuryTax",
@@ -348,7 +528,9 @@ var properties = {
         owned: true,
         cost: 0,
         rent: 75,
-        basicRent: 75
+        basicRent: 75,
+        houses: 0,
+        buyEnabled: false
     },
     p39 : {
         name: "Boardwalk",
@@ -357,6 +539,13 @@ var properties = {
         owned: false,
         cost: 400,
         rent: 50,
-        basicRent: 50
+        basicRent: 50,
+        houses: 0,
+        buyEnabled: false,
+        houseCost: 200,
+        house1: 200,
+        house2: 600,
+        house3: 1400,
+        house4: 1700
     }
 };
