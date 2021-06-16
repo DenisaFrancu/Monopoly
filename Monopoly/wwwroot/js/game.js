@@ -20,6 +20,8 @@ var _pawnReceiver = "";
 var _proposedMessage = "";
 var _proposedValue;
 
+var deletePlayer = true;
+
 var pawnsColors = {
     blue:
     {
@@ -133,9 +135,13 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
 
     if(actualHeight == 90 && actualWidth == 5){
         getOutOfJail(dice1, dice2,pawn);
-        //check bankrupcity
+        if(dice1 == dice2){
+            checkBanckrupcity(expectedPosition, 20);
+        }
+        else{
+            checkBanckrupcity(expectedPosition, 50);
+        }
     }
-    console.log("rent: ", propertyRent)
     
     movePawnByDice(pawn, expectedHeight, expectedWidth).then(() => {
         if(dice1 == dice2){
@@ -161,9 +167,9 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
                 }else{
                     document.getElementById("buyProperty").hidden = true;
                     checkPayRent(properties[expectedPosition].name, propertyRent);
+                    checkBanckrupcity(expectedPosition, 0);
                 }
                 
-                //check bankrupcity
                 document.getElementById("rollDiceBtn").disabled = false;
                 document.getElementById("endTurnBtn").disabled = true;
             }
@@ -184,9 +190,8 @@ connection.on("DisplayRollDices", function(dice1, dice2, pawnSent){
             }else{
                 document.getElementById("buyProperty").hidden = true;
                 checkPayRent(properties[expectedPosition].name, propertyRent);
+                checkBanckrupcity(expectedPosition, 0);
             }            
-            //buy or pay for property
-            //check bankrupcity
             reset();
         }
     });   
@@ -197,8 +202,23 @@ connection.on("DisplayPopup", function(propertyCost, propertyLand) {
 });
 
 connection.on("BuysProperty", function(color) {
-    properties[expectedPosition].owned = true;
-    document.getElementById(properties[expectedPosition].name).style.backgroundColor = color;
+    //get pawn by color
+    var pawn2;
+    for (const [key, value] of Object.entries(pawnsColors)) {
+        if(`${value.background}` == color){
+            pawn2 = `${key}`;
+        }
+    }
+    pawn2 = "~/images/pawns/"+ pawn2 +".png"
+    console.log("pawn from buy: ", pawn2);
+    var moneyElement = pawn2 + " money";
+    var currentMoney = document.getElementById(moneyElement).innerHTML;
+    var updateMoney = parseInt(currentMoney.slice(0,-1)) - properties[expectedPosition].cost;
+    console.log(updateMoney);
+    if(updateMoney >= 0){
+        properties[expectedPosition].owned = true;
+        document.getElementById(properties[expectedPosition].name).style.backgroundColor = color;
+    }
     payRent(properties[expectedPosition].cost);
     //increase rent if you have more railroads/airports/neighbourhood
     //railroad land
@@ -247,8 +267,8 @@ connection.on("SwitchProperty", function(proposedProperty, pawnSender, pawnRecei
     //update railroad/airport/neighbourhood rent
     increaseAirportRent(_pawnSender);
     increaseAirportRent(_pawnReceiver);
-    increaseAirportRent(_pawnSender);
-    increaseAirportRent(_pawnReceiver);
+    increaseRailroadRent(_pawnSender);
+    increaseRailroadRent(_pawnReceiver);
     checkNeighbourhoods();
 });
 
@@ -336,11 +356,14 @@ document.getElementById("buyProperty").addEventListener("click", function (event
             color = `${value.background}`;
         }
     }
+    checkBanckrupcity(expectedPosition, properties[expectedPosition].cost);
     connection.invoke('PlayerBuysProperty',color);
     closePopup();
 });
 
 document.getElementById("buyHouse").addEventListener("click", function(event) {
+    //check bancrupcity
+    checkBanckrupcity(expectedPosition, properties[clickedProperty].houseCost);
     connection.invoke('PlayerBuysHouse',clickedProperty);
 });
 
@@ -411,14 +434,21 @@ function startGame(){
     document.getElementById("acceptDeal").hidden = true;
     document.getElementById("declineDeal").hidden = true;
     imageClickEnabled = false;
+    deletePlayer = true;
 }
 
 function nextPlayer(){
+    console.log("next player method, numberOfPlayer=",numberOfPlayers);
+    if(numberOfPlayers == 1){
+        openWinnerPopup();
+    }
     playersTurn++;
     if(playersTurn>=numberOfPlayers){
         playersTurn=0;
     }
+    
     connection.invoke('StartGame',playersTurn);
+    
 }
 
 async function movePawnByDice(pawn, expectedHeight, expectedWidth){
@@ -540,6 +570,7 @@ function getOutOfJail(dice1,dice2, pawn){
 }
 
 function payRent(rent){
+    console.log("pay rent");
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1));
@@ -613,11 +644,11 @@ function checkProposalAvailable(propertyClicked){
         }
     }
     var position = getCardPositionByName(propertyClicked);
-
-    if(document.getElementById(propertyClicked).style.backgroundColor != color && document.getElementById(propertyClicked).style.backgroundColor != "" &&
-        properties[position].buyEnabled == false){
+    if(document.getElementById(propertyClicked).style.backgroundColor != color && document.getElementById(propertyClicked).style.backgroundColor != "rgb(255, 255, 255)" &&
+        properties[position].buyEnabled == false && properties[position].owned == true){
         document.getElementById("proposeDeal").hidden = false;
         document.getElementById("proposeDealValue").style.display = "block";
+        document.getElementById("proposeDealValue").value = "";
     }
 }
 
@@ -641,6 +672,8 @@ function checkBuyHouseAvailable(property){
 }
 
 function checkPayRent(property, rent){
+    console.log("check pay rent, rent: ", rent);
+    console.log("property: ", property);
     var pawnColor = pawn.replace('~/images/pawns/','');
     pawnColor = pawnColor.replace('.png','');
     var color;
@@ -652,8 +685,12 @@ function checkPayRent(property, rent){
     }
 
     var position = getCardPositionByName(property);
-
-    if(document.getElementById(property).style.backgroundColor != "rgb(255, 255, 255)"){
+    console.log(document.getElementById(property).style.backgroundColor);
+    console.log(color);
+    if(position == "p4" || position == "p12" || position == "p22" || position == "p38"){
+        payRent(rent);
+    }
+    if(document.getElementById(property).style.backgroundColor != ""){
         if(document.getElementById(property).style.backgroundColor != color){
                 payRent(rent);
                 var propertyBackground = document.getElementById(property).style.backgroundColor;
@@ -662,7 +699,8 @@ function checkPayRent(property, rent){
                         player = `${key}`;
                     }
                 }
-                if(position != "p4" && position != "p12" && position != "p22" && position != "p38"){
+                console.log("increase rent player: ", player);
+                if(position != "p4" && position != "p12" && position != "p22" && position != "p38" && position != "p20" && position != "p0"){
                     increaseRent(rent,"~/images/pawns/" + player + ".png");
                 }
             }
@@ -796,101 +834,199 @@ function increaseAirportRent(pawnPath){
     });
 }
 
+function checkBanckrupcity(position, cost){
+    console.log("checkBanckrupcity", position);
+    var moneyElement = pawn + " money";
+    var currentMoney = document.getElementById(moneyElement).innerHTML;
+    var updateMoney = parseInt(currentMoney.slice(0,-1)) - cost;
+    console.log(updateMoney);
+    if(updateMoney < 0){
+        console.log("FALIMENT");
+        console.log("players number: ", numberOfPlayers);
+        console.log("players turn: ", playersTurn);
+        openBanckrupcityPopup();
+        var playerName = pawn + " name";
+        var name = document.getElementById(playerName).innerHTML;
+        connection.invoke('Banckrupcity', position, name);        
+    }
+}
+
+connection.on("PlayersBanckrupcity", function(position, name) {
+    console.log("NAME:", name);
+    numberOfPlayers--;
+    changePropertiesStatus(position).then(() => {
+        document.getElementById("endTurnBtn").click();
+    });
+});
+
+async function changePropertiesStatus(position){
+    console.log("Change status");
+    console.log("position: ", position);
+    console.log("pawn:", pawn);
+    var pawnColor = pawn.replace('~/images/pawns/','');
+    pawnColor = pawnColor.replace('.png','');
+    var backgroundColorPawn = pawnsColors[pawnColor].rgb;
+    console.log("pawn background: ", backgroundColorPawn);
+    console.log(document.getElementById(properties[position].name).style.backgroundColor);
+    if(position != "p4" && position != "p12" && position != "p22" && position != "p38" && document.getElementById(properties[position].name).style.backgroundColor != ""){
+        //revin jucatorului la care am dat faliment
+        console.log("revin jucatorului");
+        var currentBackground = document.getElementById(properties[position].name).style.backgroundColor;
+        console.log("current player pawn color: ", currentBackground);
+        for (const [key, value] of Object.entries(properties)) {
+            console.log("key: ", `${key}`);
+            console.log(document.getElementById(`${value.name}`).style.backgroundColor);
+            console.log(backgroundColorPawn);
+            console.log(`${value.owned}`);
+            if(`${value.owned}` == "true" && document.getElementById(`${value.name}`).style.backgroundColor == backgroundColorPawn){
+                document.getElementById(`${value.name}`).style.backgroundColor = currentBackground;
+            }
+        }
+    }else{
+        //revin bancii
+        console.log("revin bancii");
+        console.log(properties);
+        for (const [key, value] of Object.entries(properties)) {
+            console.log("key: ", `${key}`);
+            console.log(document.getElementById(`${value.name}`).style.backgroundColor);
+            console.log(backgroundColorPawn);
+            console.log(`${value.owned}`);
+            if(`${value.owned}` == "true" && document.getElementById(`${value.name}`).style.backgroundColor == backgroundColorPawn){
+                console.log("updates on ", `${key}`);
+                properties[`${key}`].owned = false;
+                properties[`${key}`].rent = properties[`${key}`].basicRent;
+                properties[`${key}`].houses = 0;
+                properties[`${key}`].buyEnabled = false;
+                if(`${key}` != "p2" && `${key}` != "p5" && `${key}` != "p7" && `${key}` != "p15" && `${key}` != "p17" && `${key}` != "p25" &&
+                `${key}` != "p27" && `${key}` != "p33" && `${key}` != "p35" &&`${key}` != "p36"){
+                    var houseName1 = (clickedProperty + 1).toString();
+                    var houseName2 = (clickedProperty + 2).toString();
+                    var houseName3 = (clickedProperty + 3).toString();
+                    var houseName4 = (clickedProperty + 4).toString();
+                    document.getElementById(houseName1).hidden = true;
+                    document.getElementById(houseName2).hidden = true;
+                    document.getElementById(houseName3).hidden = true;
+                    document.getElementById(houseName4).hidden = true;
+                }                
+                console.log(document.getElementById(`${value.name}`).style.backgroundColor);
+                document.getElementById(`${value.name}`).style.backgroundColor = "rgb(255,255,255)";
+                console.log(document.getElementById(`${value.name}`).style.backgroundColor);
+            }
+        }
+        document.getElementById(properties[position].name).style.backgroundColor = "rgb(255,255,255)";
+    }
+    document.getElementById(pawn).hidden = true;
+}
+
+function openBanckrupcityPopup(){
+    console.log("open banckrupcity popoup");
+    $('#banckrupcityModal').modal('show');
+}
+
+function closeBanckrupcityPopup(){
+    console.log("close banckrupcity popoup");
+    $('#banckrupcityModal').modal('hide');
+    window.location.href = 'Index';
+}
+
+function openWinnerPopup(){
+    $('#winnerModal').modal('show');
+}
+
+function closeWinnerPopup(){
+    $('#winnerModal').modal('hide');
+    window.location.href = 'Index';
+}
+
+function checkProperty(position){
+    if(document.getElementById(properties[position].name).style.backgroundColor == ""){
+        return false;
+    }
+    if(properties[position].buyEnabled == true){
+        return false;
+    }
+    return true;
+}
+
 function checkNeighbourhoods(){
-    if(document.getElementById(properties["p1"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p3"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p1"].name).style.backgroundColor == document.getElementById(properties["p3"].name).style.backgroundColor &&
-        properties["p1"].houses == 0 && properties["p3"].houses == 0){
-            properties["p1"].rent = properties["p1"].rent * 2;
-            properties["p3"].rent = properties["p3"].rent * 2;
-            properties["p1"].buyEnabled = true;
-            properties["p3"].buyEnabled = true;
+    if(checkProperty("p1") == true && checkProperty("p3") == true && 
+    document.getElementById(properties["p1"].name).style.backgroundColor == document.getElementById(properties["p3"].name).style.backgroundColor){
+        properties["p1"].rent = properties["p1"].rent * 2;
+        properties["p3"].rent = properties["p3"].rent * 2;
+        properties["p1"].buyEnabled = true;
+        properties["p3"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p6"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p8"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p9"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p6"].name).style.backgroundColor == document.getElementById(properties["p8"].name).style.backgroundColor &&
-        document.getElementById(properties["p8"].name).style.backgroundColor == document.getElementById(properties["p9"].name).style.backgroundColor &&
-        properties["p6"].houses == 0 && properties["p8"].houses == 0 && properties["p9"].houses == 0){
-            properties["p6"].rent = properties["p6"].rent * 2;
-            properties["p8"].rent = properties["p8"].rent * 2;
-            properties["p9"].rent = properties["p9"].rent * 2;
-            properties["p6"].buyEnabled = true;
-            properties["p8"].buyEnabled = true;
-            properties["p9"].buyEnabled = true;
+    if(checkProperty("p6") == true && checkProperty("p8") == true && checkProperty("p9") == true &&
+    document.getElementById(properties["p6"].name).style.backgroundColor == document.getElementById(properties["p8"].name).style.backgroundColor &&
+    document.getElementById(properties["p6"].name).style.backgroundColor == document.getElementById(properties["p9"].name).style.backgroundColor &&
+    document.getElementById(properties["p8"].name).style.backgroundColor == document.getElementById(properties["p9"].name).style.backgroundColor){
+        properties["p6"].rent = properties["p6"].rent * 2;
+        properties["p8"].rent = properties["p8"].rent * 2;
+        properties["p9"].rent = properties["p9"].rent * 2;
+        properties["p6"].buyEnabled = true;
+        properties["p8"].buyEnabled = true;
+        properties["p9"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p11"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p13"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p14"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p11"].name).style.backgroundColor == document.getElementById(properties["p13"].name).style.backgroundColor &&
-        document.getElementById(properties["p13"].name).style.backgroundColor == document.getElementById(properties["p14"].name).style.backgroundColor &&
-        properties["p11"].houses == 0 && properties["p13"].houses == 0 && properties["p14"].houses == 0){
-            properties["p11"].rent = properties["p11"].rent * 2;
-            properties["p13"].rent = properties["p13"].rent * 2;
-            properties["p14"].rent = properties["p14"].rent * 2;
-            properties["p11"].buyEnabled = true;
-            properties["p13"].buyEnabled = true;
-            properties["p14"].buyEnabled = true;
+    if(checkProperty("p11") == true && checkProperty("p13") == true && checkProperty("p14") == true &&
+    document.getElementById(properties["p11"].name).style.backgroundColor == document.getElementById(properties["p13"].name).style.backgroundColor &&
+    document.getElementById(properties["p11"].name).style.backgroundColor == document.getElementById(properties["p14"].name).style.backgroundColor &&
+    document.getElementById(properties["p13"].name).style.backgroundColor == document.getElementById(properties["p14"].name).style.backgroundColor){
+        properties["p11"].rent = properties["p11"].rent * 2;
+        properties["p13"].rent = properties["p13"].rent * 2;
+        properties["p14"].rent = properties["p14"].rent * 2;
+        properties["p11"].buyEnabled = true;
+        properties["p13"].buyEnabled = true;
+        properties["p14"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p16"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p18"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p19"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p16"].name).style.backgroundColor == document.getElementById(properties["p18"].name).style.backgroundColor &&
-        document.getElementById(properties["p18"].name).style.backgroundColor == document.getElementById(properties["p19"].name).style.backgroundColor &&
-        properties["p16"].houses == 0 && properties["p18"].houses == 0 && properties["p19"].houses == 0){
-            properties["p16"].rent = properties["p16"].rent * 2;
-            properties["p18"].rent = properties["p18"].rent * 2;
-            properties["p19"].rent = properties["p19"].rent * 2;
-            properties["p16"].buyEnabled = true;
-            properties["p18"].buyEnabled = true;
-            properties["p19"].buyEnabled = true;
+    if(checkProperty("p16") == true && checkProperty("p18") == true && checkProperty("p19") == true &&
+    document.getElementById(properties["p16"].name).style.backgroundColor == document.getElementById(properties["p18"].name).style.backgroundColor &&
+    document.getElementById(properties["p16"].name).style.backgroundColor == document.getElementById(properties["p19"].name).style.backgroundColor &&
+    document.getElementById(properties["p18"].name).style.backgroundColor == document.getElementById(properties["p19"].name).style.backgroundColor){
+        properties["p16"].rent = properties["p16"].rent * 2;
+        properties["p18"].rent = properties["p18"].rent * 2;
+        properties["p19"].rent = properties["p19"].rent * 2;
+        properties["p16"].buyEnabled = true;
+        properties["p18"].buyEnabled = true;
+        properties["p19"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p21"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p23"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p24"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p21"].name).style.backgroundColor == document.getElementById(properties["p23"].name).style.backgroundColor &&
-        document.getElementById(properties["p23"].name).style.backgroundColor == document.getElementById(properties["p24"].name).style.backgroundColor &&
-        properties["p21"].houses == 0 && properties["p23"].houses == 0 && properties["p24"].houses == 0){
-            properties["p21"].rent = properties["p21"].rent * 2;
-            properties["p23"].rent = properties["p23"].rent * 2;
-            properties["p24"].rent = properties["p24"].rent * 2;
-            properties["p21"].buyEnabled = true;
-            properties["p23"].buyEnabled = true;
-            properties["p24"].buyEnabled = true;
+    if(checkProperty("p21") == true && checkProperty("p33") == true && checkProperty("p24") == true &&
+    document.getElementById(properties["p21"].name).style.backgroundColor == document.getElementById(properties["p23"].name).style.backgroundColor &&
+    document.getElementById(properties["p21"].name).style.backgroundColor == document.getElementById(properties["p24"].name).style.backgroundColor &&
+    document.getElementById(properties["p23"].name).style.backgroundColor == document.getElementById(properties["p24"].name).style.backgroundColor){
+        properties["p21"].rent = properties["p21"].rent * 2;
+        properties["p23"].rent = properties["p23"].rent * 2;
+        properties["p24"].rent = properties["p24"].rent * 2;
+        properties["p21"].buyEnabled = true;
+        properties["p23"].buyEnabled = true;
+        properties["p24"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p26"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p27"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p99"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p26"].name).style.backgroundColor == document.getElementById(properties["p27"].name).style.backgroundColor &&
-        document.getElementById(properties["p27"].name).style.backgroundColor == document.getElementById(properties["p29"].name).style.backgroundColor &&
-        properties["p26"].houses == 0 && properties["p27"].houses == 0 && properties["p29"].houses == 0){
-            properties["p26"].rent = properties["p26"].rent * 2;
-            properties["p27"].rent = properties["p27"].rent * 2;
-            properties["p29"].rent = properties["p29"].rent * 2;
-            properties["p26"].buyEnabled = true;
-            properties["p27"].buyEnabled = true;
-            properties["p29"].buyEnabled = true;
+    if(checkProperty("p26") == true && checkProperty("p27") == true && checkProperty("p29") == true &&
+    document.getElementById(properties["p26"].name).style.backgroundColor == document.getElementById(properties["p27"].name).style.backgroundColor &&
+    document.getElementById(properties["p26"].name).style.backgroundColor == document.getElementById(properties["p29"].name).style.backgroundColor &&
+    document.getElementById(properties["p27"].name).style.backgroundColor == document.getElementById(properties["p29"].name).style.backgroundColor){
+        properties["p26"].rent = properties["p26"].rent * 2;
+        properties["p27"].rent = properties["p27"].rent * 2;
+        properties["p29"].rent = properties["p29"].rent * 2;
+        properties["p26"].buyEnabled = true;
+        properties["p27"].buyEnabled = true;
+        properties["p29"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p31"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p32"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p24"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p31"].name).style.backgroundColor == document.getElementById(properties["p32"].name).style.backgroundColor &&
-        document.getElementById(properties["p32"].name).style.backgroundColor == document.getElementById(properties["p34"].name).style.backgroundColor &&
-        properties["p31"].houses == 0 && properties["p32"].houses == 0 && properties["p34"].houses == 0){
-            properties["p31"].rent = properties["p31"].rent * 2;
-            properties["p32"].rent = properties["p32"].rent * 2;
-            properties["p34"].rent = properties["p34"].rent * 2;
-            properties["p31"].buyEnabled = true;
-            properties["p32"].buyEnabled = true;
-            properties["p34"].buyEnabled = true;
+    if(checkProperty("p31") == true && checkProperty("p32") == true && checkProperty("p34") == true &&
+    document.getElementById(properties["p31"].name).style.backgroundColor == document.getElementById(properties["p32"].name).style.backgroundColor &&
+    document.getElementById(properties["p31"].name).style.backgroundColor == document.getElementById(properties["p34"].name).style.backgroundColor &&
+    document.getElementById(properties["p32"].name).style.backgroundColor == document.getElementById(properties["p34"].name).style.backgroundColor){
+        properties["p31"].rent = properties["p31"].rent * 2;
+        properties["p32"].rent = properties["p32"].rent * 2;
+        properties["p34"].rent = properties["p34"].rent * 2;
+        properties["p31"].buyEnabled = true;
+        properties["p32"].buyEnabled = true;
+        properties["p34"].buyEnabled = true;
     }
-    if(document.getElementById(properties["p37"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p39"].name).style.backgroundColor != "rgb(255, 255, 255)" && 
-        document.getElementById(properties["p37"].name).style.backgroundColor == document.getElementById(properties["p39"].name).style.backgroundColor &&
-        properties["p37"].houses == 0 && properties["p39"].houses == 0){
-            properties["p37"].rent = properties["p37"].rent * 2;
-            properties["p39"].rent = properties["p39"].rent * 2;
-            properties["p37"].buyEnabled = true;
-            properties["p39"].buyEnabled = true;
+    if(checkProperty("p37") == true && checkProperty("p39") == true && 
+    document.getElementById(properties["p37"].name).style.backgroundColor == document.getElementById(properties["p39"].name).style.backgroundColor){
+        properties["p37"].rent = properties["p37"].rent * 2;
+        properties["p39"].rent = properties["p39"].rent * 2;
+        properties["p37"].buyEnabled = true;
+        properties["p39"].buyEnabled = true;
     }
 }

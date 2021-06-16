@@ -41,6 +41,12 @@ namespace Monopoly.Controllers
             return Json(_diceOperations.GetRolledDice());
         }
 
+        public IActionResult RemovePlayer(string player)
+        {
+            _gameRoomOperations.removeConnection(player);
+            return Ok();
+        }
+
         public IActionResult GetPublicRoomsList()
         {
             return Json(_gameRoomOperations.GetPublicRooms());

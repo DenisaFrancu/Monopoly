@@ -11,6 +11,11 @@ namespace Monopoly.Models
         public DbSet<Room> Rooms { get; set; }
         public DbSet<ConnectionIds> ConnectionIds { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlServer(@"Server=DFRANCU-RO-DE;Database=MonopolyRooms;Trusted_Connection=True;MultipleActiveResultSets=true");
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Room>();
+            modelBuilder.Entity<ConnectionIds>();
+        }
     }
 
     public class Room

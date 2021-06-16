@@ -279,7 +279,7 @@
             </div>
 
             <div class="modal-footer" style="justify-content:center">
-                <input type="number" id="proposeDealValue" class="input-propose" onkeyup="checkProposalAmount(this)" min="1" max="999"/>
+                <input type="number" id="proposeDealValue" class="input-propose" onkeyup="checkProposalAmount(this)" min="1" max="9999"/>
                 <button type="button" class="btn close-card-button" id="buyProperty" hidden="true">Buy</button>
                 <button type="button" class="btn close-card-button" id="buyHouse" hidden="true">Buy house</button>
                 <button type="button" class="btn close-card-button" id="sellHouse" hidden="true">Sell house</button>
@@ -292,6 +292,50 @@
         </div>
     </div>
 </div>
+
+@*Winner modal*@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="winnerModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md card-modal-dialog" style="width:70vh;margin-left:15vh;margin-top:15vh">
+        <div class="modal-content card-modal-content">
+
+            <div class="modal-header" style="justify-content: center">
+                <h1 class="modal-title rules-text card-modal-title">Congratulations!</h1>
+            </div>
+
+            <div style="margin:10px" class="text-center">
+                <h3 class="text-center card-modal-subtitle">You are the winner!</h3>
+                <img style="margin:5px; width:20vw" src="~/images/winner.png"/>
+            </div>
+
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-card-button" onclick="closeWinnerPopup()" id="winnerReturnButton">Return to main page</button>                
+            </div>
+
+        </div>
+    </div>
+</div>
+@*Banckrupcity modal*@
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" id="banckrupcityModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-md card-modal-dialog" style="width:70vh;margin-left:15vh;margin-top:15vh">
+        <div class="modal-content card-modal-content">
+
+            <div class="modal-header" style="justify-content: center">
+                <h1 class="modal-title rules-text card-modal-title">Bankruptcy!</h1>
+            </div>
+
+            <div style="margin:10px" class="text-center">
+                <h3 class="text-center card-modal-subtitle">No money available!</h3>
+                <img style="margin:5px; width:20vw" src="~/images/loser.png"/>
+            </div>
+
+            <div class="modal-footer" style="justify-content:center">
+                <button type="button" class="btn close-card-button" onclick="closeBanckrupcityPopup()" id="winnerReturnButton">Return to main page</button>                
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <input id="modelToJavascript" value="">
 
 <script type="text/javascript">

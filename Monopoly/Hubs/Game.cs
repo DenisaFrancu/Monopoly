@@ -67,7 +67,7 @@ namespace Monopoly.Hubs
 
         public async Task PlayerBuysProperty(string color)
         {
-            await Clients.Group(GetCurrentGroup()).SendAsync("BuysProperty",color);
+            await Clients.Group(GetCurrentGroup()).SendAsync("BuysProperty", color);
         }
 
         public async Task PlayerBuysHouse(string clickedProperty)
@@ -95,6 +95,12 @@ namespace Monopoly.Hubs
         public async Task ChangeProperty(string proposedProperty, string pawnSender, string pawnReceiver, string proposedMessage, string proposedValue)
         {
             await Clients.Group(GetCurrentGroup()).SendAsync("SwitchProperty", proposedProperty, pawnSender, pawnReceiver, proposedMessage, proposedValue);
+        }
+
+        public async Task Banckrupcity(string position, string name)
+        {
+            await Clients.Group(GetCurrentGroup()).SendAsync("PlayersBanckrupcity",position,name);
+            roomDatabaseOperations.removeConnection(name);
         }
 
         public MonopolyUser GetCurrentUser()

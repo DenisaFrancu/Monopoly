@@ -139,5 +139,48 @@ namespace Monopoly.Utilities
             Room room = gameRoomContext.Rooms.Where(x => x.RoomId == roomId).FirstOrDefault();
             return room.Password;
         }
+
+        public void removeConnection(string currentPlayer)
+        {
+            int roomId = 0;
+            var roomDb = new GameRoomContext();
+            ConnectionIds connection = roomDb.ConnectionIds.Where(x => x.PlayerName == currentPlayer).FirstOrDefault();
+            if(connection != null)
+            {
+                roomId = roomDb.ConnectionIds.Where(x => x.PlayerName == currentPlayer).FirstOrDefault().RoomId;
+                roomDb.Remove(connection);
+                roomDb.SaveChanges();
+            }
+            checkLastPlayer(roomId);
+        }
+
+        public void checkLastPlayer(int roomId)
+        {
+            var roomDb = new GameRoomContext();
+            List<ConnectionIds> connections = roomDb.ConnectionIds.Where(x => x.RoomId == roomId).ToList();
+            List<Room> rooms = roomDb.Rooms.ToList();    
+            if(connections.Count() == 1)
+            {
+                // roomDb.Remove(roomDb.ConnectionIds.Where(x => x.RoomId == roomId));
+                foreach(ConnectionIds connection in connections)
+                {
+                    if(connection.RoomId == roomId)
+                    {
+                        roomDb.Remove(connection);
+                        roomDb.SaveChanges();
+                    }
+                }
+                // roomDb.Remove(roomDb.Rooms.Where(x => x.RoomId == roomId));
+                // roomDb.SaveChanges();
+                foreach(Room room in rooms)
+                {
+                    if(room.RoomId == roomId)
+                    {
+                        roomDb.Remove(room);
+                        roomDb.SaveChanges();
+                    }
+                }
+            }
+        }
     }
 }
