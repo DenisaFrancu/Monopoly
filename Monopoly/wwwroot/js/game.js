@@ -210,11 +210,9 @@ connection.on("BuysProperty", function(color) {
         }
     }
     pawn2 = "~/images/pawns/"+ pawn2 +".png"
-    console.log("pawn from buy: ", pawn2);
     var moneyElement = pawn2 + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1)) - properties[expectedPosition].cost;
-    console.log(updateMoney);
     if(updateMoney >= 0){
         properties[expectedPosition].owned = true;
         document.getElementById(properties[expectedPosition].name).style.backgroundColor = color;
@@ -363,7 +361,13 @@ document.getElementById("buyProperty").addEventListener("click", function (event
 
 document.getElementById("buyHouse").addEventListener("click", function(event) {
     //check bancrupcity
-    checkBanckrupcity(expectedPosition, properties[clickedProperty].houseCost);
+    var position;
+    for (const [key, value] of Object.entries(properties)) {
+        if(`${value.name}` == clickedProperty){
+            position = `${key}`;
+        }
+    }
+    checkBanckrupcity(expectedPosition, properties[position].houseCost);
     connection.invoke('PlayerBuysHouse',clickedProperty);
 });
 
@@ -438,7 +442,6 @@ function startGame(){
 }
 
 function nextPlayer(){
-    console.log("next player method, numberOfPlayer=",numberOfPlayers);
     if(numberOfPlayers == 1){
         openWinnerPopup();
     }
@@ -570,7 +573,6 @@ function getOutOfJail(dice1,dice2, pawn){
 }
 
 function payRent(rent){
-    console.log("pay rent");
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1));
@@ -672,8 +674,6 @@ function checkBuyHouseAvailable(property){
 }
 
 function checkPayRent(property, rent){
-    console.log("check pay rent, rent: ", rent);
-    console.log("property: ", property);
     var pawnColor = pawn.replace('~/images/pawns/','');
     pawnColor = pawnColor.replace('.png','');
     var color;
@@ -685,8 +685,6 @@ function checkPayRent(property, rent){
     }
 
     var position = getCardPositionByName(property);
-    console.log(document.getElementById(property).style.backgroundColor);
-    console.log(color);
     if(position == "p4" || position == "p12" || position == "p22" || position == "p38"){
         payRent(rent);
     }
@@ -699,7 +697,6 @@ function checkPayRent(property, rent){
                         player = `${key}`;
                     }
                 }
-                console.log("increase rent player: ", player);
                 if(position != "p4" && position != "p12" && position != "p22" && position != "p38" && position != "p20" && position != "p0"){
                     increaseRent(rent,"~/images/pawns/" + player + ".png");
                 }
@@ -729,7 +726,11 @@ function getPropertyCost(propertyCost){
 } 
 
 function getPropertyPath(propertyLand){
-    return "/images/Payments/" + propertyLand + ".png";
+    for (const [key, value] of Object.entries(properties)) {
+        if(`${value.name}` == propertyLand){
+            return `${value.picturePath}`
+        }
+    }
 }
 
 function updateMoneyAfterProposal(){
@@ -835,15 +836,10 @@ function increaseAirportRent(pawnPath){
 }
 
 function checkBanckrupcity(position, cost){
-    console.log("checkBanckrupcity", position);
     var moneyElement = pawn + " money";
     var currentMoney = document.getElementById(moneyElement).innerHTML;
     var updateMoney = parseInt(currentMoney.slice(0,-1)) - cost;
-    console.log(updateMoney);
     if(updateMoney < 0){
-        console.log("FALIMENT");
-        console.log("players number: ", numberOfPlayers);
-        console.log("players turn: ", playersTurn);
         openBanckrupcityPopup();
         var playerName = pawn + " name";
         var name = document.getElementById(playerName).innerHTML;
@@ -852,47 +848,28 @@ function checkBanckrupcity(position, cost){
 }
 
 connection.on("PlayersBanckrupcity", function(position, name) {
-    console.log("NAME:", name);
-    numberOfPlayers--;
     changePropertiesStatus(position).then(() => {
+        numberOfPlayers--;
         document.getElementById("endTurnBtn").click();
     });
 });
 
 async function changePropertiesStatus(position){
-    console.log("Change status");
-    console.log("position: ", position);
-    console.log("pawn:", pawn);
     var pawnColor = pawn.replace('~/images/pawns/','');
     pawnColor = pawnColor.replace('.png','');
     var backgroundColorPawn = pawnsColors[pawnColor].rgb;
-    console.log("pawn background: ", backgroundColorPawn);
-    console.log(document.getElementById(properties[position].name).style.backgroundColor);
     if(position != "p4" && position != "p12" && position != "p22" && position != "p38" && document.getElementById(properties[position].name).style.backgroundColor != ""){
         //revin jucatorului la care am dat faliment
-        console.log("revin jucatorului");
         var currentBackground = document.getElementById(properties[position].name).style.backgroundColor;
-        console.log("current player pawn color: ", currentBackground);
         for (const [key, value] of Object.entries(properties)) {
-            console.log("key: ", `${key}`);
-            console.log(document.getElementById(`${value.name}`).style.backgroundColor);
-            console.log(backgroundColorPawn);
-            console.log(`${value.owned}`);
             if(`${value.owned}` == "true" && document.getElementById(`${value.name}`).style.backgroundColor == backgroundColorPawn){
                 document.getElementById(`${value.name}`).style.backgroundColor = currentBackground;
             }
         }
     }else{
         //revin bancii
-        console.log("revin bancii");
-        console.log(properties);
         for (const [key, value] of Object.entries(properties)) {
-            console.log("key: ", `${key}`);
-            console.log(document.getElementById(`${value.name}`).style.backgroundColor);
-            console.log(backgroundColorPawn);
-            console.log(`${value.owned}`);
             if(`${value.owned}` == "true" && document.getElementById(`${value.name}`).style.backgroundColor == backgroundColorPawn){
-                console.log("updates on ", `${key}`);
                 properties[`${key}`].owned = false;
                 properties[`${key}`].rent = properties[`${key}`].basicRent;
                 properties[`${key}`].houses = 0;
@@ -908,9 +885,7 @@ async function changePropertiesStatus(position){
                     document.getElementById(houseName3).hidden = true;
                     document.getElementById(houseName4).hidden = true;
                 }                
-                console.log(document.getElementById(`${value.name}`).style.backgroundColor);
                 document.getElementById(`${value.name}`).style.backgroundColor = "rgb(255,255,255)";
-                console.log(document.getElementById(`${value.name}`).style.backgroundColor);
             }
         }
         document.getElementById(properties[position].name).style.backgroundColor = "rgb(255,255,255)";
@@ -919,12 +894,10 @@ async function changePropertiesStatus(position){
 }
 
 function openBanckrupcityPopup(){
-    console.log("open banckrupcity popoup");
     $('#banckrupcityModal').modal('show');
 }
 
 function closeBanckrupcityPopup(){
-    console.log("close banckrupcity popoup");
     $('#banckrupcityModal').modal('hide');
     window.location.href = 'Index';
 }

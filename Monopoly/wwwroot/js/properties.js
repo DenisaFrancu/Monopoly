@@ -24,7 +24,8 @@ var properties = {
         house1: 10,
         house2: 30,
         house3: 90,
-        house4: 160
+        house4: 160,
+        picturePath: "https://i.imgur.com/3lv25yh.png"
     },
     p2 : {
         name: "DenverAirport",
@@ -35,7 +36,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/plUewbh.png"
     },
     p3 : {
         name: "BalticAvenue",
@@ -51,7 +53,8 @@ var properties = {
         house1: 20,
         house2: 60,
         house3: 180,
-        house4: 320
+        house4: 320,
+        picturePath: "https://i.imgur.com/ZpHbEQd.png"
     },
     p4 : {
         name: "IncomeTax",
@@ -73,7 +76,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/cGSsXXe.png"
     },
     p6 : {
         name: "OrientalAvenue",
@@ -89,7 +93,8 @@ var properties = {
         house1: 30,
         house2: 90,
         house3: 270,
-        house4: 400
+        house4: 400,
+        picturePath: "https://i.imgur.com/0K7u6oa.png"
     },
     p7 : {
         name: "MinneapolisAirport",
@@ -100,7 +105,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/mYBJf2e.png"
     },
     p8 : {
         name: "VermontAvenue",
@@ -116,7 +122,8 @@ var properties = {
         house1: 30,
         house2: 90,
         house3: 270,
-        house4: 400
+        house4: 400,
+        picturePath: "https://i.imgur.com/OEu3Txl.png"
     },
     p9 : {
         name: "ConnecticutAvenue",
@@ -132,7 +139,8 @@ var properties = {
         house1: 40,
         house2: 100,
         house3: 300,
-        house4: 450
+        house4: 450,
+        picturePath: "https://i.imgur.com/F0Q1aGn.png"
     },
     p10 : {
         name: "Jail",
@@ -159,7 +167,8 @@ var properties = {
         house1: 50,
         house2: 150,
         house3: 450,
-        house4: 625
+        house4: 625,
+        picturePath: "https://i.imgur.com/Oj6Ao8j.png"
     },
     p12 : {
         name: "LocalTax",
@@ -186,7 +195,8 @@ var properties = {
         house1: 50,
         house2: 150,
         house3: 450,
-        house4: 625
+        house4: 625,
+        picturePath: "https://i.imgur.com/VpV8bPy.png"
     },
     p14 : {
         name: "VirginiaAvenue",
@@ -202,7 +212,8 @@ var properties = {
         house1: 60,
         house2: 180,
         house3: 500,
-        house4: 700
+        house4: 700,
+        picturePath: "https://i.imgur.com/NtwoqAD.png"
     },
     p15 : {
         name: "PennsylvaniaRailroad",
@@ -213,7 +224,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/pHQEgQv.png"
     },
     p16 : {
         name: "StJamesPlace",
@@ -229,7 +241,8 @@ var properties = {
         house1: 70,
         house2: 200,
         house3: 550,
-        house4: 750
+        house4: 750,
+        picturePath: "https://i.imgur.com/XnWQLKH.png"
     },
     p17 : {
         name: "OrlandoAirport",
@@ -240,7 +253,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/SK2UaMG.png"
     },
     p18 : {
         name: "TennesseAvenue",
@@ -256,7 +270,8 @@ var properties = {
         house1: 70,
         house2: 200,
         house3: 550,
-        house4: 750
+        house4: 750,
+        picturePath: "https://i.imgur.com/GRghdqi.png"
     },
     p19 : {
         name: "NewYorkAvenue",
@@ -272,7 +287,8 @@ var properties = {
         house1: 80,
         house2: 220,
         house3: 600,
-        house4: 800
+        house4: 800,
+        picturePath: "https://i.imgur.com/M4pP2QE.png"
     },
     p20 : {
         name: "FreeParking",
@@ -299,7 +315,8 @@ var properties = {
         house1: 90,
         house2: 250,
         house3: 700,
-        house4: 875
+        house4: 875,
+        picturePath: "https://i.imgur.com/ZM4Jzdb.png"
     },
     p22 : {
         name: "TouristTax",
@@ -326,7 +343,8 @@ var properties = {
         house1: 90,
         house2: 250,
         house3: 700,
-        house4: 875
+        house4: 875,
+        picturePath: "https://i.imgur.com/NCG0ggi.png"
     },
     p24 : {
         name: "IllinoisAvenue",
@@ -342,7 +360,8 @@ var properties = {
         house1: 100,
         house2: 300,
         house3: 750,
-        house4: 925
+        house4: 925,
+        picturePath: "https://i.imgur.com/J1Q0zzI.png"
     },
     p25 : {
         name: "B&ORailroad",
@@ -353,7 +372,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/0jKJvN6.png"
     },
     p26 : {
         name: "AtlanticAvenue",
@@ -369,7 +389,8 @@ var properties = {
         house1: 110,
         house2: 330,
         house3: 800,
-        house4: 975
+        house4: 975,
+        picturePath: "https://i.imgur.com/YrNd8F8.png"
     },
     p27 : {
         name: "VentorAvenue",
@@ -385,7 +406,8 @@ var properties = {
         house1: 110,
         house2: 330,
         house3: 800,
-        house4: 975
+        house4: 975,
+        picturePath: "https://i.imgur.com/DoBRAS2.png"
     },
     p28 : {
         name: "PortlandAirport",
@@ -396,7 +418,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/ACi0CNd.png"
     },
     p29 : {
         name: "MarvinGardens",
@@ -411,7 +434,8 @@ var properties = {
         house1: 120,
         house2: 360,
         house3: 850,
-        house4: 1025
+        house4: 1025,
+        picturePath: "https://i.imgur.com/rkgDSOb.png"
     },
     p30 : {
         name: "GoToJail",
@@ -438,7 +462,8 @@ var properties = {
         house1: 130,
         house2: 390,
         house3: 900,
-        house4: 1100
+        house4: 1100,
+        picturePath: "https://i.imgur.com/di23HlD.png"
     },
     p32 : {
         name: "NorthCarolinaAvenue",
@@ -454,7 +479,8 @@ var properties = {
         house1: 130,
         house2: 390,
         house3: 900,
-        house4: 1100
+        house4: 1100,
+        picturePath: "https://i.imgur.com/tlCRWAz.png"
     },
     p33 : {
         name: "IndianapolisAirport",
@@ -465,7 +491,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/rFkVIm3.png"
     },
     p34 : {
         name: "PennsylvaniaAvenue",
@@ -481,7 +508,8 @@ var properties = {
         house1: 150,
         house2: 450,
         house3: 1000,
-        house4: 1200
+        house4: 1200,
+        picturePath: "https://i.imgur.com/TuxWtqI.png"
     },
     p35 : {
         name: "ShortLineRailroad",
@@ -492,7 +520,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/ZqIAkPL.png"
     },
     p36 : {
         name: "BradleyAirport",
@@ -503,7 +532,8 @@ var properties = {
         rent: 25,
         basicRent: 25,
         houses: 0,
-        buyEnabled: false
+        buyEnabled: false,
+        picturePath: "https://i.imgur.com/E65ObNT.png"
     },
     p37 : {
         name: "ParkPlace",
@@ -519,7 +549,8 @@ var properties = {
         house1: 175,
         house2: 500,
         house3: 1100,
-        house4: 1300
+        house4: 1300,
+        picturePath: "https://i.imgur.com/1mATfUS.png"
     },
     p38 : {
         name: "LuxuryTax",
@@ -546,6 +577,7 @@ var properties = {
         house1: 200,
         house2: 600,
         house3: 1400,
-        house4: 1700
+        house4: 1700,
+        picturePath: "https://i.imgur.com/WHe1GYq.png"
     }
 };
