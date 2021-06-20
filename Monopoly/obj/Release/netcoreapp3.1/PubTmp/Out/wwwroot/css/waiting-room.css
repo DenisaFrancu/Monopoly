@@ -1,0 +1,150 @@
+.centered-div{
+    background-color: #9BC0AF;
+    border: 2px solid #F5CD6C;
+    width: 60vw;
+    height: 60vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+}
+
+.waiting-room-title{
+    color: #23442F;
+    font-weight: bold;
+    text-decoration: underline;
+    margin: 5px;
+}
+
+.close-button{
+    color: #F5CD6C;
+    border-color: #F5CD6C;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.close-button:hover{
+    color: #52755F;
+    border-color: #52755F;
+    background-color: #F5CD6C;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.players-list{
+    color: #EBDECB;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+
+.see-players-button{
+    color: #23442F;
+    font-weight: bold;
+    font-size: x-large;
+    background-color: transparent;
+    position: fixed;
+    bottom: 0;
+    margin: 10px;
+}
+
+.see-players-button:hover{
+    color: #23442F;
+    text-decoration: underline;
+}
+
+.seee-players-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.start-button{
+    background-color: #52796F;
+    font-size: large;
+    font-weight: bold;
+    color: #F5CD6C;
+    border: 3px solid #F5CD6C;
+    border-radius: 100px;
+    margin: 10px;
+    padding: 10px;
+    width: 150px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.start-button:hover{
+    background-color: #F5CD6C;
+    color: #52796F;
+}
+
+.start-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.chat{
+    overflow-y: auto;
+    position: fixed;
+    margin: 5px;
+    height: 70%;
+    overflow: hidden;
+    right:0;
+    left: 0;
+}
+
+.send-message{
+    display: flex;
+    justify-content: center;
+}
+
+.send-message-title{
+    font-size: large;
+    margin: 10px;
+    color: #23442F;
+    font-weight: bold;
+}
+
+.input-message{
+    border: none;
+    border-bottom: 2px solid #F5CD6C;
+    background-color: #9BC0AF;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: large;
+    color: white;
+    width:50%;
+}
+
+.input-message:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.send-message-button{
+    color: #23442F;
+    font-weight: bold;
+    font-size: large;
+    background-color: transparent;
+}
+
+.send-message-button:hover{
+    color: #23442F;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.send-message-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.message-list{
+    margin: 5px;
+    max-height: calc(85%);
+    overflow-y: auto;
+}

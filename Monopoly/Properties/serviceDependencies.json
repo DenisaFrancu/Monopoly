@@ -1,5 +1,17 @@
 {
   "dependencies": {
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:GameRoomContext"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:MonopolyDbContextConnection"
+    },
+    "signalr1": {
+      "type": "signalr",
+      "connectionId": "Azure__SignalR__ConnectionString"
+    },
     "mssql1": {
       "type": "mssql",
       "connectionId": "MonopolyDbContextConnection"

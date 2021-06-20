@@ -385,7 +385,6 @@ D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.W
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
-D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Monopoly.csprojAssemblyReference.cache
 D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Monopoly.AssemblyInfoInputs.cache
 D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Monopoly.AssemblyInfo.cs
 D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Monopoly.csproj.CoreCompileInputs.cache
@@ -493,3 +492,4 @@ D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Mic
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.pdb
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Razor\Views\Home\WaitingRoom.cshtml.g.cs
+D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Monopoly.csproj.AssemblyReference.cache

@@ -1,0 +1,278 @@
+.main-page{
+    background: linear-gradient(90deg, #EBDECB 65%, #9BC0AF 35%) !important;
+}
+
+.centered-image{
+    width: 45%;
+    height: 59%;
+    display: flex;
+    flex-flow: row wrap;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title{
+    color: #370A08;
+    font-size: xxx-large;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0%, -50%);
+    margin-right: 20%;
+}
+
+.logo{
+    height: 120px;
+    width: 120px;
+    margin-top: 30px;
+    margin-left: 30px;
+    position: absolute;
+    left: 0;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    align-content: flex-end;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 15px;
+}
+
+.bottom-button{
+    background-color: #DB754F;
+    font-size: larger;
+    font-weight: bold;
+    color: #370A08;
+    border: 3px solid #370A08;
+    border-radius: 100px;
+    margin: 10px;
+    padding: 10px;
+    width: 200px;
+}
+
+.profile-button{
+    background-color: transparent;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #370A08;
+    margin-top: 15px;
+    margin-right: 3%;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    border: transparent;
+    float: right;
+}
+
+.logout-button{
+    background-color: transparent;
+    font-size: large;
+    font-weight: bold;
+    color: #370A08;
+    margin-top: 60px;
+    margin-right: 3%;
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    border: transparent;
+    float: right;
+}
+
+.rules-button{
+    background-color: transparent;
+    font-size: xx-large;
+    font-weight: bold;
+    color: #370A08;
+    margin-bottom: 15px;
+    margin-right: 3%;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    border: transparent;
+    float: right;
+}
+
+.bottom-button:hover{
+    background-color: #370A08;
+    color: #DB754F;
+}
+
+.bottom-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.profile-button:hover{
+    text-decoration: underline;
+    color: #370A08;
+}
+
+.profile-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.logout-button:hover{
+    text-decoration: underline;
+    color: #370A08;
+}
+
+.logout-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.rules-button:hover{
+    text-decoration: underline;
+}
+
+.rules-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.custom{
+    background: linear-gradient(90deg, #EBDECB 65%, #9BC0AF 35%) !important;
+
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+}
+
+.rules-text{
+    color: #EBDECB;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.subrules{
+    color: #EBDECB;
+    text-align: left;
+}
+
+.close-rules-button{
+    color: #F5CD6C;
+    border-color: #F5CD6C;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.close-rules-button:hover{
+    color: #52755F;
+    border-color: #52755F;
+    background-color: #F5CD6C;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.send-message{
+    display: flex;
+    justify-content: center;
+}
+
+.send-message-title{
+    font-size: large;
+    margin: 10px;
+    color: #F5CD6C;
+    font-weight: bold;
+}
+
+.input-message{
+    border: none;
+    border: 2px solid #F5CD6C;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: large;
+    color: white;
+}
+
+.input-message:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.send-message-button{
+    color: #F5CD6C;
+    font-weight: bold;
+    font-size: large;
+    background-color: transparent;
+}
+
+.send-message-button:hover{
+    color: #F5CD6C;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.send-message-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.message-list{
+    margin: 5px;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+.chat{
+    background-color: #52755F;
+    overflow-y: auto;
+    width: 30%;
+    position: fixed;
+    margin: 5px;
+    max-height: 99%;
+    background-color: #52755F;
+    overflow: hidden;
+}
+
+.room-type{
+    border: 2px solid #F5CD6C;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: large;
+    color: white;
+    width: 45%;
+}
+
+.room-type:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+select.select-public-room{
+    height:100%;
+    overflow:auto;
+    background-color: #52755F;
+    border:none;
+}
+
+.select-public-room:focus{
+    outline: none;
+    box-shadow: none;
+    overflow:auto;
+    background-color: #52755F;
+    border:none;
+}

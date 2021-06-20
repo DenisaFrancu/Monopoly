@@ -1,0 +1,266 @@
+.game-body{
+    background-color: #9BC0AF;
+
+    position:fixed;
+    padding:0;
+    margin:0;
+
+    top:0;
+    left:0;
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+}
+
+.board{
+    background-color: white;
+
+    height: 98vh;
+    width: 98vh;
+    margin: 1vh;
+}
+
+.top-line{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.bottom-line{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+    position: absolute;
+    bottom: 1vh;
+}
+
+.left-line{
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.right-line{
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.sides{
+    background-color: #9BC0AF;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.players-column{
+    top: 2vh;
+    position: absolute;
+    left: 100vh;
+}
+
+.players{
+    font-size: x-large;
+    font-weight: bold;
+    color: #370A08;
+}
+
+.player-image{
+    height: 15vh;
+    margin-right: 15px;
+}
+
+.top-image{
+    width: 8vh;
+    height: 13vh;
+    background-color: rgb(255,255,255);
+}
+
+.square-image{
+    width: 13vh;
+    height: 13vh;
+    background-color: rgb(255,255,255);
+}
+
+.left-image{
+    height: 8vh;
+    width: 13vh;
+    background-color: rgb(255,255,255);
+}
+
+.card-modal-dialog{
+    max-width: 1000px
+}
+
+.card-modal-content{
+    background-color: #52755F;
+}
+
+.card-modal-title{
+    color: #EBDECB; 
+    font-weight: bold; 
+    text-decoration: underline;
+}
+
+.card-modal-subtitle{
+    color: #EBDECB; 
+    font-weight: bold;
+}
+
+.close-card-button{
+    color: #EBDECB;
+    border-color: #EBDECB;
+    font-weight: bold;
+    font-size: x-large;
+    height: 5vh;
+}
+
+.close-card-button:hover{
+    color: #52755F;
+    border-color: #52755F;
+    background-color: #EBDECB;
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.dices{
+    position: absolute;
+    bottom: 7%;
+    left: 100vh;
+}
+
+.dice-image{
+    width: 12vh;
+    height: 12vh;
+    margin: 5px;
+}
+
+.roll-button{
+    background-color: #52755F;
+    font-size: x-large;
+    font-weight: bold;
+    color: white;
+    border: 3px solid #52755F;
+    border-radius: 100px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.roll-button:enabled:hover{
+    background-color: #23442F;
+    color: white;
+}
+
+.roll-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.chat{
+    background-color: #52755F;
+    overflow-y: auto;
+    width: 30%;
+    position: fixed;
+    margin: 5px;
+    max-height: 75%;
+    overflow: hidden;
+    right:0;
+}
+
+.rules-text{
+    color: #EBDECB;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+
+.send-message{
+    display: flex;
+    justify-content: center;
+}
+
+.send-message-title{
+    font-size: large;
+    margin: 10px;
+    color: #F5CD6C;
+    font-weight: bold;
+}
+
+.input-message{
+    border: none;
+    border: 2px solid #F5CD6C;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: large;
+    color: white;
+}
+
+.input-message:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.send-message-button{
+    color: #F5CD6C;
+    font-weight: bold;
+    font-size: large;
+    background-color: transparent;
+}
+
+.send-message-button:hover{
+    color: #F5CD6C;
+    font-weight: bold;
+    font-size: large;
+    text-decoration: underline;
+}
+
+.send-message-button:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+.message-list{
+    margin: 5px;
+    max-height: calc(75vh - 150px);
+    overflow-y: auto;
+}
+
+.input-propose{
+    border: none;
+    border: 2px solid #EBDECB;
+    background-color: #52755F;
+    border-radius: .25rem;
+    margin: 10px;
+    font-size: x-large;
+    color: #EBDECB;
+    height: 5vh;
+    text-align: center;
+}
+
+.input-propose:focus{
+    outline: none;
+    box-shadow: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
