@@ -30,7 +30,7 @@ namespace Monopoly
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSignalR();
-            services.AddRazorPages().AddRazorRuntimeCompilation();
+            //services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddDbContext<GameRoomContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("GameRoomContext")));
         }
