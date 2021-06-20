@@ -14,13 +14,6 @@ namespace Monopoly
     {
         public static void Main(string[] args)
         {
-            var roomDb = new GameRoomContext();
-            List<Room> rooms = roomDb.Rooms.ToList();
-            foreach(Room r in rooms)
-            {
-               roomDb.Remove(r);
-               roomDb.SaveChanges();
-            }
             CreateHostBuilder(args).Build().Run();
         }
 

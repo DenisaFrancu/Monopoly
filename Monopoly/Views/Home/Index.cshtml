@@ -221,7 +221,7 @@
 
             <div style="margin:10px;color:white;font-size:larger" class="text-center" id="noPrivateRooms" hidden="true">No private rooms available</div>
 
-            <input type="text" id="privateRoomPassword" class="input-message" onkeyup="checkRequiredFieldsPrivateRoom()" hidden="true"/>
+            <input type="password" id="privateRoomPassword" class="input-message" onkeyup="checkRequiredFieldsPrivateRoom()" hidden="true"/>
             <div class="alert alert-danger" role="alert" style="margin:10px;font-weight:bold;color:red" hidden="true" id="wrongPassword">Wrong password!</div>
             <div class="modal-footer" style="justify-content:center">
                 <button type="button" class="btn close-rules-button" onclick="JoinPrivateRoom(`@UserManager.GetUserAsync(User).Result.FirstName`+ ` ` + `@UserManager.GetUserAsync(User).Result.LastName`)" disabled="true" id="joinPrivateRoomButton">Join</button>
@@ -351,6 +351,7 @@
 
                     var selectPublic = document.getElementById('selectPublicRoom');
                     selectPublic.size = selectPublic.length;
+                    $('#noPublicRooms').prop('hidden', true);
                 }else{
                     $('#noPublicRooms').prop('hidden', false);
                     $('#joinPublicRoomButton').prop('hidden', true);
@@ -438,7 +439,7 @@
                             var displayedName = this.roomName + " (" + connectedPlayers + "/" + this.playersNumber + ")";
                             $("#selectPrivateRoom").append('<option style="color:white;font-size:larger" class="select-public-room" value="'+ this.roomId +'">'+ displayedName +'</option>')
                         }
-                        
+                        $('#noPrivateRooms').prop('hidden', true);
                     });
 
                     var selectPrivate = document.getElementById('selectPrivateRoom');

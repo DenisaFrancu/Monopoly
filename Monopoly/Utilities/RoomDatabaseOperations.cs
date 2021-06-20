@@ -27,7 +27,30 @@ namespace Monopoly.Utilities
 
         public void AddPlayerToRoom(int roomId, string player)
         {
+            //remove all connections and rooms for this player
             var gameRoomContext = new GameRoomContext();
+
+            List<Room> rooms = gameRoomContext.Rooms.ToList();
+            List<ConnectionIds> connections = gameRoomContext.ConnectionIds.ToList();
+            foreach(Room r in rooms)
+            {
+                if(r.Player1 == player || r.Player2 == player || r.Player3 == player || r.Player4 == player)
+                {
+                    gameRoomContext.Remove(r);
+                    gameRoomContext.SaveChanges();
+                }
+            }
+
+            foreach(ConnectionIds c in connections)
+            {
+                if(c.PlayerName == player)
+                {
+                    gameRoomContext.Remove(c);
+                    gameRoomContext.SaveChanges();
+                }
+            }
+
+
             Room room = gameRoomContext.Rooms.Where(x => x.RoomId == roomId).FirstOrDefault();
             if(room != null)
             {

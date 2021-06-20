@@ -99,8 +99,8 @@ namespace Monopoly.Hubs
 
         public async Task Banckrupcity(string position, string name)
         {
-            await Clients.Group(GetCurrentGroup()).SendAsync("PlayersBanckrupcity",position,name);
             roomDatabaseOperations.removeConnection(name);
+            await Clients.Group(GetCurrentGroup()).SendAsync("PlayersBanckrupcity",position,name);
         }
 
         public MonopolyUser GetCurrentUser()
