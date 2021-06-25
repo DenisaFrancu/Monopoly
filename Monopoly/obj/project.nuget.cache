@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "fG8Z6UxyyLKDkG19VxTI36lrI4vVW7GtJ3WkSm2VRZYDPsygvoSjUlPPaHg1Wx0d7v8JjiIbRDTpdCfb3xb8NA==",
+  "dgSpecHash": "w66WHrswLSahsEGQrvXYzis/Pnkd9f6FzI+B/jTNksJvwZzx3E6N6PZ0FaQbeFaiRtf6xKclGLCMTGog7HuAUw==",
   "success": true,
   "projectFilePath": "D:\\LICENTA\\Monopoly\\Monopoly\\Monopoly.csproj",
   "expectedPackageFiles": [
@@ -23,8 +23,6 @@
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.http.features\\3.0.0\\microsoft.aspnetcore.http.features.3.0.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\3.1.11\\microsoft.aspnetcore.identity.entityframeworkcore.3.1.11.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.identity.ui\\3.1.11\\microsoft.aspnetcore.identity.ui.3.1.11.nupkg.sha512",
-    "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\3.1.0\\microsoft.aspnetcore.mvc.razor.extensions.3.1.0.nupkg.sha512",
-    "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\3.1.0\\microsoft.aspnetcore.mvc.razor.runtimecompilation.3.1.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.razor\\2.2.0\\microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\3.1.0\\microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
     "C:\\Users\\DFrancu\\.nuget\\packages\\microsoft.aspnetcore.razor.runtime\\2.2.0\\microsoft.aspnetcore.razor.runtime.2.2.0.nupkg.sha512",

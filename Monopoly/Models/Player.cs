@@ -5,5 +5,7 @@ namespace Monopoly.Models
         public string Name { get; set; }
         public int Money { get; set; }
         public string Pawn { get; set; }
+
+        public string PawnPath { get; set; }
     }
 }

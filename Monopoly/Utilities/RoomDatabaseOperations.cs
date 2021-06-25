@@ -141,28 +141,32 @@ namespace Monopoly.Utilities
                 {
                     Name = currentRoom.Player1,
                     Money = 2000,
-                    Pawn = "~/images/pawns/blue.png"
+                    Pawn = "~/images/pawns/blue.png",
+                    PawnPath = "https://i.imgur.com/GJNa5Pc.png"
                 });
             if(currentRoom.Player2 != null)
                 players.Add(new Player
                 {
                     Name = currentRoom.Player2,
                     Money = 2000,
-                    Pawn = "~/images/pawns/green.png"
+                    Pawn = "~/images/pawns/green.png",
+                    PawnPath = "https://i.imgur.com/X0a0MNt.png"
                 });
             if(currentRoom.Player3 != null)
                 players.Add(new Player
                 {
                     Name = currentRoom.Player3,
                     Money = 2000,
-                    Pawn = "~/images/pawns/red.png"
+                    Pawn = "~/images/pawns/red.png",
+                    PawnPath = "https://i.imgur.com/wEkGoqn.png"
                 });
             if(currentRoom.Player4 != null)
                 players.Add(new Player
                 {
                     Name = currentRoom.Player4,
                     Money = 2000,
-                    Pawn = "~/images/pawns/yellow.png"
+                    Pawn = "~/images/pawns/yellow.png",
+                    PawnPath = "https://i.imgur.com/K398MH6.png"
                 });
             
             return players;

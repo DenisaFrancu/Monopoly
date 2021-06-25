@@ -208,14 +208,14 @@
 <div>
     @if(Model.Count() == 4)
     {
-        <img src="~/images/Pawns/yellow.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/yellow.png"/>
+        <img src="https://i.imgur.com/K398MH6.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/yellow.png"/>
     }
     @if(Model.Count() >= 3)
     {
-        <img src="~/images/Pawns/red.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/red.png"/>
+        <img src="https://i.imgur.com/wEkGoqn.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/red.png"/>
     }
-    <img src="~/images/Pawns/green.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/green.png"/>
-    <img src="~/images/Pawns/blue.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/blue.png"/>
+    <img src="https://i.imgur.com/X0a0MNt.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/green.png"/>
+    <img src="https://i.imgur.com/GJNa5Pc.png" style="width:3vw;height:6vh;position:fixed;margin-top:90vh;margin-left:89vh;left:0" id="~/images/pawns/blue.png"/>
 </div>
 
 <div class="players-column">
@@ -224,7 +224,7 @@
         {
             players.Add(player);
             <div style="display: flex;">
-            <img src="@Url.Content(player.Pawn)" class="player-image"/>
+            <img src="@Url.Content(player.PawnPath)" class="player-image"/>
             <div>
                 <p style="text-decoration: underline;">Player:</p>
                 <ul>
