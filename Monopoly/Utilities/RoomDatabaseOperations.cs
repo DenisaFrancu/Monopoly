@@ -20,7 +20,26 @@ namespace Monopoly.Utilities
         
         public void AddRoom(Room room)
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
+            List<Room> rooms = gameRoomContext.Rooms.ToList();
+            List<ConnectionIds> connections = gameRoomContext.ConnectionIds.ToList();
+            foreach (Room r in rooms)
+            {
+                if (r.Player1 == room.Player1 || r.Player2 == room.Player1 || r.Player3 == room.Player1 || r.Player4 == room.Player1)
+                {
+                    gameRoomContext.Remove(r);
+                    gameRoomContext.SaveChanges();
+                }
+            }
+
+            foreach (ConnectionIds c in connections)
+            {
+                if (c.PlayerName == room.Player1)
+                {
+                    gameRoomContext.Remove(c);
+                    gameRoomContext.SaveChanges();
+                }
+            }
             gameRoomContext.Rooms.Add(room);
             gameRoomContext.SaveChanges();
         }
@@ -28,7 +47,7 @@ namespace Monopoly.Utilities
         public void AddPlayerToRoom(int roomId, string player)
         {
             //remove all connections and rooms for this player
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
 
             List<Room> rooms = gameRoomContext.Rooms.ToList();
             List<ConnectionIds> connections = gameRoomContext.ConnectionIds.ToList();
@@ -68,7 +87,7 @@ namespace Monopoly.Utilities
 
         public void RemovePlayerFromRoom(string player)
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             Room room = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).FirstOrDefault();
             if(room != null)
             {
@@ -86,19 +105,19 @@ namespace Monopoly.Utilities
 
         public List<Room> GetPublicRooms()
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             return gameRoomContext.Rooms.Where(x => x.Password == null).OrderBy(o => o.RoomName).ToList();
         }
 
         public List<Room> GetPrivateRooms()
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             return gameRoomContext.Rooms.Where(x => x.Password != null).OrderBy(o => o.RoomName).ToList();
         }
 
         public List<string> GetPlayersFromRoom(string player)
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             Room currentRoom = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).First();
             List<string> players = new List<string>();
             if(currentRoom.Player1 != null)
@@ -114,7 +133,7 @@ namespace Monopoly.Utilities
 
         public List<Player> GetPlayersForGame(int roomId)
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             Room currentRoom = gameRoomContext.Rooms.Where(x => x.RoomId == roomId).FirstOrDefault();
             List<Player> players = new List<Player>();
             if(currentRoom.Player1 != null)
@@ -151,14 +170,14 @@ namespace Monopoly.Utilities
 
         public int GetPlayersCount(string player)
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             Room currentRoom = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).First();
             return currentRoom.PlayersNumber;
         }
 
         public string GetRoomPassword(int roomId)
         {
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             Room room = gameRoomContext.Rooms.Where(x => x.RoomId == roomId).FirstOrDefault();
             return room.Password;
         }
@@ -166,7 +185,7 @@ namespace Monopoly.Utilities
         public void removeConnection(string currentPlayer)
         {
             int roomId = 0;
-            var roomDb = new GameRoomContext();
+            var roomDb = new MonopolyDbContext();
             ConnectionIds connection = roomDb.ConnectionIds.Where(x => x.PlayerName == currentPlayer).FirstOrDefault();
             if(connection != null)
             {
@@ -179,7 +198,7 @@ namespace Monopoly.Utilities
 
         public void checkLastPlayer(int roomId)
         {
-            var roomDb = new GameRoomContext();
+            var roomDb = new MonopolyDbContext();
             List<ConnectionIds> connections = roomDb.ConnectionIds.Where(x => x.RoomId == roomId).ToList();
             List<Room> rooms = roomDb.Rooms.ToList();    
             if(connections.Count() == 1)

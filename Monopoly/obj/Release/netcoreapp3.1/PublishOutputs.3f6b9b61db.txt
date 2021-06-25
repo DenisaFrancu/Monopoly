@@ -89,6 +89,7 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspN
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Identity.UI.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.Services.AppAuthentication.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.SignalR.Common.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.SignalR.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.SignalR.Protocols.dll
@@ -120,11 +121,13 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Exte
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Options.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Primitives.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Identity.Client.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Rest.ClientRuntime.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.VisualStudio.Web.CodeGeneration.Core.dll

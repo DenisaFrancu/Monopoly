@@ -24,16 +24,19 @@ connection.on("RedirectToGame", function (room) {
     document.cookie="Room="+room;
     window.location.href = "Game";
 });
-connection.start().then(function () {
-    connection.invoke('AddToLoby').catch(function (err){
-        console.log(err);
-        connection.invoke('AddToLoby');
-    });
-    if (!performance.navigation.type == performance.navigation.TYPE_RELOAD){
-        connection.invoke("SendJoinedRoomMessage").catch(function (err) {
-            return console.error(err.toString());
-        });
-    }
+connection.start().then(function (){
+    connection.invoke('AddToLoby');
+    connection.invoke("SendJoinedRoomMessage");
+    
+    //connection.invoke('AddToLoby').catch(function (err){
+    //    console.log(err);
+    //    connection.invoke('AddToLoby');
+    //});
+    //if (!performance.navigation.type == performance.navigation.TYPE_RELOAD){
+    //    connection.invoke("SendJoinedRoomMessage").catch(function (err) {
+    //        return console.error(err.toString());
+    //    });
+    //}
 }).catch(function (err) {
     return console.error(err.toString());
 });

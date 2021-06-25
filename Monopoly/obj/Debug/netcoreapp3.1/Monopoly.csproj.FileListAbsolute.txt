@@ -493,3 +493,10 @@ D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Mic
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Razor\Views\Home\WaitingRoom.cshtml.g.cs
 D:\LICENTA\Monopoly\Monopoly\obj\Debug\netcoreapp3.1\Monopoly.csproj.AssemblyReference.cache
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Connections.Client.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.Common.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.Protocols.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.Services.AppAuthentication.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Rest.ClientRuntime.dll

@@ -29,7 +29,8 @@ namespace Monopoly
             services.AddMvc();
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddSignalR();
+            services.AddSignalR().
+                AddAzureSignalR();
             //services.AddRazorPages().AddRazorRuntimeCompilation();
             //services.AddDbContext<GameRoomContext>(options =>
             //    options.UseSqlServer(Configuration.GetConnectionString("GameRoomContext")));
@@ -65,11 +66,6 @@ namespace Monopoly
                 endpoints.MapHub<Chat>("/chat");
                 endpoints.MapHub<Game>("/game");
             });
-
-            // app.UseSignalR(routes => 
-            // {
-            //     routes.MapHub<GameHub>("gameHub");
-            // });
         }
     }
 }

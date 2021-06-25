@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <parameters>
-  <parameter name="IIS Web Application Name" description="" value="MonopolyResource" tags="IisApp">
+  <parameter name="IIS Web Application Name" description="" value="LicentaMonopolyAppService" tags="IisApp">
     <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\LICENTA\\Monopoly\\Monopoly\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="Monopoly.Data.MonopolyDbContext" description="" value="Data Source=tcp:licentamonopolydbserver.database.windows.net,1433;Initial Catalog=Monopoly_db;User Id=denisafrancu@licentamonopolydbserver;Password=Deni010203" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\LICENTA\\Monopoly\\Monopoly\\obj\\Release\\netcoreapp3\.1\\PubTmp\\EFSQLScripts\\Monopoly\.Data\.MonopolyDbContext\.sql$" />
   </parameter>
 </parameters>

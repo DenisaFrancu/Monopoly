@@ -225,6 +225,60 @@ namespace Monopoly.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Monopoly.Data.ConnectionIds", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("PlayerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("connectionId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConnectionIds");
+                });
+
+            modelBuilder.Entity("Monopoly.Data.Room", b =>
+                {
+                    b.Property<int>("RoomId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player1")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player4")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlayersNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RoomName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RoomId");
+
+                    b.ToTable("Rooms");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)

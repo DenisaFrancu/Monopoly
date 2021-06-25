@@ -32,7 +32,7 @@ var pawnsColors = {
     red:
     {
         background: "#EB4034",
-        rgb: "rgb(236, 64, 67)"
+        rgb: "rgb(235, 64, 52)"
     },
     green:
     {
@@ -428,7 +428,6 @@ function reset(){
 function startGame(){
     document.getElementById("rollDiceBtn").hidden = true;
     document.getElementById("endTurnBtn").hidden = true;
-    document.getElementById("bankruptcyBtn").hidden = true;
     document.getElementById("buyProperty").hidden = true;
     document.getElementById("buyHouse").hidden = true;
     document.getElementById("sellHouse").hidden = true;
@@ -441,20 +440,20 @@ function startGame(){
     deletePlayer = true;
 }
 
-function nextPlayer(){
-    if(numberOfPlayers == 1){
+function nextPlayer() {
+    if (numberOfPlayers == 1) {
         openWinnerPopup();
+    } else {
+        playersTurn++;
+        if (playersTurn >= numberOfPlayers) {
+            playersTurn = 0;
+        }
+
+        connection.invoke('StartGame', playersTurn);
     }
-    playersTurn++;
-    if(playersTurn>=numberOfPlayers){
-        playersTurn=0;
-    }
-    
-    connection.invoke('StartGame',playersTurn);
-    
 }
 
-async function movePawnByDice(pawn, expectedHeight, expectedWidth){
+async function movePawnByDice(pawn, expectedHeight, expectedWidth) {
     var actualWidth = document.getElementById(pawn).style.marginLeft.slice(0,-2);
     var actualHeight = document.getElementById(pawn).style.marginTop.slice(0,-2);
     while(actualHeight != expectedHeight || actualWidth != expectedWidth){
@@ -843,7 +842,7 @@ function checkBanckrupcity(position, cost){
         openBanckrupcityPopup();
         var playerName = pawn + " name";
         var name = document.getElementById(playerName).innerHTML;
-        connection.invoke('Banckrupcity', position, name);        
+        connection.invoke('Banckrupcity', position, name);
     }
 }
 
@@ -874,12 +873,12 @@ async function changePropertiesStatus(position){
                 properties[`${key}`].rent = properties[`${key}`].basicRent;
                 properties[`${key}`].houses = 0;
                 properties[`${key}`].buyEnabled = false;
-                if(`${key}` != "p2" && `${key}` != "p5" && `${key}` != "p7" && `${key}` != "p15" && `${key}` != "p17" && `${key}` != "p25" &&
-                `${key}` != "p27" && `${key}` != "p33" && `${key}` != "p35" &&`${key}` != "p36"){
-                    var houseName1 = (clickedProperty + 1).toString();
-                    var houseName2 = (clickedProperty + 2).toString();
-                    var houseName3 = (clickedProperty + 3).toString();
-                    var houseName4 = (clickedProperty + 4).toString();
+                if(`${key}` != "p2" && `${key}` != "p4" && `${key}` != "p5" && `${key}` != "p7" && `${key}` != "p12" && `${key}` != "p15" &&
+                    `${key}` != "p17" && `${key}` != "p22" && `${key}` != "p25" && `${key}` != "p28" && `${key}` != "p33" && `${key}` != "p35" && `${key}` != "p36" && `${key}` != "p38") {
+                    var houseName1 = (properties[`${key}`].name + 1).toString();
+                    var houseName2 = (properties[`${key}`].name + 2).toString();
+                    var houseName3 = (properties[`${key}`].name + 3).toString();
+                    var houseName4 = (properties[`${key}`].name + 4).toString();
                     document.getElementById(houseName1).hidden = true;
                     document.getElementById(houseName2).hidden = true;
                     document.getElementById(houseName3).hidden = true;
@@ -893,7 +892,7 @@ async function changePropertiesStatus(position){
     document.getElementById(pawn).hidden = true;
 }
 
-function openBanckrupcityPopup(){
+function openBanckrupcityPopup() {
     $('#banckrupcityModal').modal('show');
 }
 

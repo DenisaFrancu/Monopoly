@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Monopoly.Data;
 using Monopoly.Models;
 
 namespace Monopoly.Utilities
@@ -12,7 +13,7 @@ namespace Monopoly.Utilities
 
         public async Task AddRoom(ConnectionIds room)
         {
-            var connectionIdsContext = new GameRoomContext();
+            var connectionIdsContext = new MonopolyDbContext();
             connectionIdsContext.ConnectionIds.Add(room);
             connectionIdsContext.SaveChanges();
         }
@@ -20,7 +21,7 @@ namespace Monopoly.Utilities
         public List<string> GetRoomConnections(int roomId)
         {
             List<string> connectionsIds = new List<string>();
-            var connectionIdsContext = new GameRoomContext();
+            var connectionIdsContext = new MonopolyDbContext();
             List<ConnectionIds> connections = connectionIdsContext.ConnectionIds.Where(x => x.RoomId == roomId).ToList();
             foreach(ConnectionIds connection in connections)
             {
@@ -31,7 +32,7 @@ namespace Monopoly.Utilities
 
         public int GetRoomId(string connection)
         {
-            var connectionIdsContext = new GameRoomContext();
+            var connectionIdsContext = new MonopolyDbContext();
             ConnectionIds room = connectionIdsContext.ConnectionIds.Where(x => x.connectionId == connection).FirstOrDefault();
             return room.RoomId;
         }
@@ -39,7 +40,7 @@ namespace Monopoly.Utilities
         public string getConnectionForPlayer(string playerName, int roomId)
         {
             List<string> connectionsIds = new List<string>();
-            var connectionIdsContext = new GameRoomContext();
+            var connectionIdsContext = new MonopolyDbContext();
             return connectionIdsContext.ConnectionIds.Where(x => x.RoomId == roomId && x.PlayerName == playerName).FirstOrDefault().connectionId;
         }
     }

@@ -42,7 +42,6 @@
 
 .left-line{
     background-color: white;
-
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -73,6 +72,7 @@
     top: 2vh;
     position: absolute;
     left: 100vh;
+    width: 35vh;
 }
 
 .players{
@@ -104,8 +104,8 @@
     background-color: rgb(255,255,255);
 }
 
-.card-modal-dialog{
-    max-width: 1000px
+.card-modal-dialog {
+    max-width: 1000px;
 }
 
 .card-modal-content{
@@ -175,12 +175,12 @@
 .chat{
     background-color: #52755F;
     overflow-y: auto;
-    width: 30%;
     position: fixed;
     margin: 5px;
     max-height: 75%;
     overflow: hidden;
     right:0;
+    left: 135vh;
 }
 
 .rules-text{

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Primitives;
 using Monopoly.Areas.Identity.Data;
+using Monopoly.Data;
 using Monopoly.Models;
 using Monopoly.Utilities;
 
@@ -99,8 +100,8 @@ namespace Monopoly.Hubs
 
         public async Task Banckrupcity(string position, string name)
         {
-            roomDatabaseOperations.removeConnection(name);
             await Clients.Group(GetCurrentGroup()).SendAsync("PlayersBanckrupcity",position,name);
+            roomDatabaseOperations.removeConnection(name);
         }
 
         public MonopolyUser GetCurrentUser()
@@ -112,7 +113,7 @@ namespace Monopoly.Hubs
         {
             MonopolyUser user = _userManager.FindByEmailAsync(Context.User.Identity.Name).Result;
             string player = user.FirstName + " " + user.LastName;
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             string group = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).First().RoomId.ToString();
             return group;
         }

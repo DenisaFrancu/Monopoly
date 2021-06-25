@@ -7,6 +7,7 @@ using Monopoly.Areas.Identity.Data;
 using Monopoly.Utilities;
 using Monopoly.Models;
 using System.Collections.Generic;
+using Monopoly.Data;
 
 namespace Monopoly.Hubs
 {
@@ -43,7 +44,7 @@ namespace Monopoly.Hubs
         public void CheckRedirectToGame()
         {
             string group =  GetCurrentGroup();
-            var roomDb = new GameRoomContext();
+            var roomDb = new MonopolyDbContext();
             Room currentRoom = roomDb.Rooms.Where(x => x.RoomId == Int32.Parse(group)).FirstOrDefault();
             int playersNumber = 0;
             if(currentRoom.Player1!=null)
@@ -100,7 +101,7 @@ namespace Monopoly.Hubs
         {
             MonopolyUser user = _userManager.FindByEmailAsync(Context.User.Identity.Name).Result;
             string player = user.FirstName + " " + user.LastName;
-            var gameRoomContext = new GameRoomContext();
+            var gameRoomContext = new MonopolyDbContext();
             List<Room> group = gameRoomContext.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).ToList();
             return group.Last().RoomId.ToString();
         }     
