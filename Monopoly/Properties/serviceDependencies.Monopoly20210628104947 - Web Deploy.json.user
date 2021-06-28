@@ -2,33 +2,33 @@
   "dependencies": {
     "signalr1": {
       "restored": true,
-      "restoreTime": "2021-06-20T20:18:40.3582745Z"
+      "restoreTime": "2021-06-28T07:51:53.0881579Z"
     },
     "mssql1": {
       "restored": true,
-      "restoreTime": "2021-06-20T20:17:42.784343Z"
+      "restoreTime": "2021-06-28T07:55:12.794819Z"
     }
   },
   "parameters": {
     "signalr1.resourceGroupName": {
       "Name": "signalr1.resourceGroupName",
       "Type": "resourceGroup",
-      "Value": "licentaResourceGroup"
+      "Value": "monopolyResource"
     },
     "mssql1.subscriptionId": {
       "Name": "mssql1.subscriptionId",
       "Type": "subscription",
-      "Value": "cbcdbf1f-c387-437e-8aca-1095c5cc9344"
-    },
-    "signalr1.subscriptionId": {
-      "Name": "signalr1.subscriptionId",
-      "Type": "subscription",
-      "Value": "cbcdbf1f-c387-437e-8aca-1095c5cc9344"
+      "Value": "125a63b5-39f2-40a5-b7bc-f87714c6a714"
     },
     "mssql1.resourceGroupName": {
       "Name": "mssql1.resourceGroupName",
       "Type": "resourceGroup",
-      "Value": "licentaResourceGroup"
+      "Value": "DefaultResourceGroup-CUS"
+    },
+    "signalr1.subscriptionId": {
+      "Name": "signalr1.subscriptionId",
+      "Type": "subscription",
+      "Value": "125a63b5-39f2-40a5-b7bc-f87714c6a714"
     }
   }
 }

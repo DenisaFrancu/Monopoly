@@ -233,6 +233,9 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\Monopoly.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\Monopoly.pdb
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\Monopoly.genruntimeconfig.cache
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\Monopoly.csproj.AssemblyReference.cache
-D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Microsoft.Azure.Services.AppAuthentication.dll
-D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Microsoft.Rest.ClientRuntime.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Azure.Core.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Azure.Identity.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Release\netcoreapp3.1\System.Memory.Data.dll

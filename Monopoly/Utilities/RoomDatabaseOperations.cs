@@ -207,7 +207,6 @@ namespace Monopoly.Utilities
             List<Room> rooms = roomDb.Rooms.ToList();    
             if(connections.Count() == 1)
             {
-                // roomDb.Remove(roomDb.ConnectionIds.Where(x => x.RoomId == roomId));
                 foreach(ConnectionIds connection in connections)
                 {
                     if(connection.RoomId == roomId)
@@ -216,8 +215,7 @@ namespace Monopoly.Utilities
                         roomDb.SaveChanges();
                     }
                 }
-                // roomDb.Remove(roomDb.Rooms.Where(x => x.RoomId == roomId));
-                // roomDb.SaveChanges();
+
                 foreach(Room room in rooms)
                 {
                     if(room.RoomId == roomId)
@@ -226,6 +224,33 @@ namespace Monopoly.Utilities
                         roomDb.SaveChanges();
                     }
                 }
+            }
+        }
+
+        public void PlayerLeavesGame(string player)
+        {
+            int roomId = 0;
+            var roomDb = new MonopolyDbContext();
+            ConnectionIds connection = roomDb.ConnectionIds.Where(x => x.PlayerName == player).FirstOrDefault();
+            if (connection != null)
+            {
+                roomId = roomDb.ConnectionIds.Where(x => x.PlayerName == player).FirstOrDefault().RoomId;
+                roomDb.Remove(connection);
+                roomDb.SaveChanges();
+            }
+
+            Room room = roomDb.Rooms.Where(x => x.Player1 == player || x.Player2 == player || x.Player3 == player || x.Player4 == player).FirstOrDefault();
+            if (room != null)
+            {
+                if (room.Player1 == player)
+                    room.Player1 = null;
+                else if (room.Player2 == player)
+                    room.Player2 = null;
+                else if (room.Player3 == player)
+                    room.Player3 = null;
+                else if (room.Player4 == player)
+                    room.Player4 = null;
+                roomDb.SaveChanges();
             }
         }
     }

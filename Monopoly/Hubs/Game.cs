@@ -71,6 +71,23 @@ namespace Monopoly.Hubs
             await Clients.Group(GetCurrentGroup()).SendAsync("BuysProperty", color);
         }
 
+        public async Task RemoveLastPlayer()
+        {
+            int roomId = Int32.Parse(GetCurrentGroup());
+            roomDatabaseOperations.checkLastPlayer(roomId);
+            await Clients.Group(GetCurrentGroup()).SendAsync("Winner");
+        }
+
+        public async Task PlayerLeavesGame()
+        {
+            MonopolyUser currentPlayer = GetCurrentUser();
+            string player = currentPlayer.FirstName + " " + currentPlayer.LastName;
+            int roomId = Int32.Parse(GetCurrentGroup());
+            string pawn = roomDatabaseOperations.GetPlayersForGame(roomId).Where(x => x.Name == player).FirstOrDefault().Pawn;
+            await Clients.Group(GetCurrentGroup()).SendAsync("LeavesGame", pawn);
+            roomDatabaseOperations.PlayerLeavesGame(GetCurrentPlayerName());
+        }
+
         public async Task PlayerBuysHouse(string clickedProperty)
         {
             await Clients.Group(GetCurrentGroup()).SendAsync("DisplayPlayerBuysHouse", clickedProperty);

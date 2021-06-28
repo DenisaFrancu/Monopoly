@@ -30,7 +30,7 @@ namespace Monopoly.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlServer(@"Data Source=tcp:licentamonopolydbserver.database.windows.net,1433;Initial Catalog=Monopoly_db;User Id=denisafrancu@licentamonopolydbserver;Password=Deni010203");
+        protected override void OnConfiguring(DbContextOptionsBuilder options) => options.UseSqlServer(@"Data Source=tcp:monopolydbserver.database.windows.net,1433;Initial Catalog=Monopoly_db;User Id=denisafrancu@monopolydbserver;Password=Deni010203");
 
         public DbSet<Room> Rooms { get; set; }
         public DbSet<ConnectionIds> ConnectionIds { get; set; }

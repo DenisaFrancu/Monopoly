@@ -853,6 +853,39 @@ connection.on("PlayersBanckrupcity", function(position, name) {
     });
 });
 
+document.getElementById("leaveGameBtn").addEventListener("click", function (event) {
+    window.location.href = 'Index';
+    connection.invoke('PlayerLeavesGame', pawn);
+});
+
+connection.on("LeavesGame", function (pawn) {
+    console.log(pawn);
+    numberOfPlayers--;
+});
+
+function removePlayersProperties(pawn) {
+    for (const [key, value] of Object.entries(properties)) {
+        if (`${value.owned}` == "true" && document.getElementById(`${value.name}`).style.backgroundColor == backgroundColorPawn) {
+            properties[`${key}`].owned = false;
+            properties[`${key}`].rent = properties[`${key}`].basicRent;
+            properties[`${key}`].houses = 0;
+            properties[`${key}`].buyEnabled = false;
+            if (`${key}` != "p2" && `${key}` != "p4" && `${key}` != "p5" && `${key}` != "p7" && `${key}` != "p12" && `${key}` != "p15" &&
+                `${key}` != "p17" && `${key}` != "p22" && `${key}` != "p25" && `${key}` != "p28" && `${key}` != "p33" && `${key}` != "p35" && `${key}` != "p36" && `${key}` != "p38") {
+                var houseName1 = (properties[`${key}`].name + 1).toString();
+                var houseName2 = (properties[`${key}`].name + 2).toString();
+                var houseName3 = (properties[`${key}`].name + 3).toString();
+                var houseName4 = (properties[`${key}`].name + 4).toString();
+                document.getElementById(houseName1).hidden = true;
+                document.getElementById(houseName2).hidden = true;
+                document.getElementById(houseName3).hidden = true;
+                document.getElementById(houseName4).hidden = true;
+            }
+            document.getElementById(`${value.name}`).style.backgroundColor = "rgb(255,255,255)";
+        }
+    }
+}
+
 async function changePropertiesStatus(position){
     var pawnColor = pawn.replace('~/images/pawns/','');
     pawnColor = pawnColor.replace('.png','');

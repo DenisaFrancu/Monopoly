@@ -81,6 +81,8 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\libman.json
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Monopoly.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Monopoly.runtimeconfig.json
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Monopoly.pdb
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Core.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Azure.Identity.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Http.Connections.Client.dll
@@ -89,10 +91,10 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspN
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Identity.UI.Views.V4.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Identity.UI.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.AspNetCore.Razor.Language.dll
-D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.Services.AppAuthentication.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.SignalR.Common.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.SignalR.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Azure.SignalR.Protocols.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
@@ -121,7 +123,7 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Exte
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Options.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Extensions.Primitives.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Identity.Client.dll
-D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.Identity.Client.Extensions.Msal.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
@@ -152,6 +154,7 @@ D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Composi
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
+D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Memory.Data.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Net.WebSockets.WebSocketProtocol.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Runtime.Caching.dll
 D:\LICENTA\Monopoly\Monopoly\obj\Release\netcoreapp3.1\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll

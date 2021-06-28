@@ -497,6 +497,9 @@ D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.C
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.Common.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.SignalR.Protocols.dll
-D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Azure.Services.AppAuthentication.dll
-D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Clients.ActiveDirectory.dll
 D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Rest.ClientRuntime.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Azure.Core.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Azure.Identity.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\LICENTA\Monopoly\Monopoly\bin\Debug\netcoreapp3.1\System.Memory.Data.dll

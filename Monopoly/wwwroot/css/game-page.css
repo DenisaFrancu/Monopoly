@@ -128,7 +128,7 @@
     border-color: #EBDECB;
     font-weight: bold;
     font-size: x-large;
-    height: 5vh;
+    height: auto;
 }
 
 .close-card-button:hover{
